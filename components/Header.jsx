@@ -5,7 +5,6 @@ import { Button } from "@mui/material";
 
 export default function Header() {
   const { data: session } = useSession();
-
   return (
     <div>
       {session ? (
