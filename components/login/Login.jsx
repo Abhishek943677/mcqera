@@ -26,15 +26,15 @@ export default function Login() {
 
   const handleGoogle = async () => {
     handleClose();
-    signIn("google", { callbackUrl: "http://localhost:3000" });
+    signIn("google", { callbackUrl: process.env.APP_URL });
   };
   const handleFacebook = async () => {
     handleClose();
-    signIn("facebook", { callbackUrl: "http://localhost:3000" });
+    signIn("facebook", { callbackUrl: process.env.APP_URL });
   };
   const handleGithub = async () => {
     handleClose();
-    signIn("github", { callbackUrl: "http://localhost:3000" });
+    signIn("github", { callbackUrl: process.env.APP_URL });
   };
 
   return (
