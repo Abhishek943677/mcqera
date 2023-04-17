@@ -1,28 +1,28 @@
-const fs = require("fs");
+import { promises as fs } from 'fs';
 import path from "path";
 
 export default async (req, res) => {
 
-  const postsDirectory = path.join(process.cwd());
+  const postsDirectory = path.join(process.cwd(),'content');
   console.log(postsDirectory)
-  // E:\websites\nextjs-mcq-site\mcq
+  // E:\websites\nextjs-mcq-site\mcq\content
 
   if (req.method === "POST") {
-    fs.access(`${postsDirectory}/content`,(error)=>{
-      console.log("not accees")
-      if(error){
-        fs.mkdir(`${postsDirectory}/content`,(error)=>{
-          console.log("file made")
-        })
-      }
-    })
+    // fs.access(`${postsDirectory}/content`,(error)=>{
+    //   console.log("not accees")
+    //   if(error){
+    //     fs.mkdir(`${postsDirectory}/content`,(error)=>{
+    //       console.log("file made")
+    //     })
+    //   }
+    // })
       try {
       // read the file
-      const path = `${postsDirectory}/content/${req.body.trade}`;
+      const path = `${postsDirectory}/${req.body.trade}`;
 
       console.log(path)
       // 'E:\\websites\\nextjs-mcq-site\\mcq/content/[trade]'
-      fs.readFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
+      await fs.readFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
           if (err) {
 
             console.log(`Error reading file from disk: ${err}`);
@@ -53,12 +53,12 @@ export default async (req, res) => {
                 });
               } else {
                 //folder already exists so we checks the existence of file
-                fs.access(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,(err) => {
+                fs.access(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,(err) => {
                     if (err) {
                       //if file does not exist then we will create a file and save the data
                       console.log("The file does not exist.");
 
-                      var writeStream = fs.createWriteStream(`${path}/${req.body.subject}.json`);
+                      var writeStream =fs.createWriteStream(`${path}/${req.body.subject}.json`);
                       writeStream.write(`[${JSON.stringify(req.body.que)}]`);
                       writeStream.end();
 
