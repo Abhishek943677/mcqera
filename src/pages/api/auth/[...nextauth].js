@@ -5,7 +5,7 @@ import FacebookProvider from "next-auth/providers/facebook";
 import CredentialsProvider from "next-auth/providers/credentials"
 
 const options = {
-  site: process.env.NEXTAUTH_URL,
+  site: process.env.APP_URL,
   providers: [
     GithubProvider({
         clientId: process.env.GITHUB_ID,
