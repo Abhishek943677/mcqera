@@ -1,11 +1,16 @@
 const fs = require("fs");
+import path from "path";
 
 export default async (req, res) => {
+  const postsDirectory = path.join(process.cwd());
   if (req.method === "POST") {
+    console.log("post")
+    console.log(postsDirectory)
     try {
       // read the file
-      const path = `./content/${req.body.trade}`;
-      fs.readFile(`./content/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
+      const path = `${postsDirectory}/content/${req.body.trade}`;
+      console.log({path:path})
+      fs.readFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
           if (err) {
 
             console.log(`Error reading file from disk: ${err}`);
@@ -18,6 +23,7 @@ export default async (req, res) => {
                 // then create it
                 fs.mkdir(path, (error) => {
                   if (error) {
+                    console.log("error at line 25")
                     console.log(error);
                   } else {
                     //make file along with folder and save the data from client
@@ -35,7 +41,7 @@ export default async (req, res) => {
                 });
               } else {
                 //folder already exists so we checks the existence of file
-                fs.access(`./content/${req.body.trade}/${req.body.subject}.json`,(err) => {
+                fs.access(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,(err) => {
                     if (err) {
                       //if file does not exist then we will create a file and save the data
                       console.log("The file does not exist.");
@@ -72,7 +78,7 @@ export default async (req, res) => {
             databases.push({...req.body.que,id:req.body.id,author:req.body.author});
 
             // write new data back to the file
-            fs.writeFile(`./content/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
+            fs.writeFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
                 if (err) {
                   console.log(`Error writing file: ${err}`);
                 }
