@@ -2,14 +2,26 @@ const fs = require("fs");
 import path from "path";
 
 export default async (req, res) => {
+
   const postsDirectory = path.join(process.cwd());
+  console.log(postsDirectory)
+  // E:\websites\nextjs-mcq-site\mcq
+
   if (req.method === "POST") {
-    console.log("post")
-    console.log(postsDirectory)
-    try {
+    fs.access(`${postsDirectory}/content`,(error)=>{
+      console.log("not accees")
+      if(error){
+        fs.mkdir(`${postsDirectory}/content`,(error)=>{
+          console.log("file made")
+        })
+      }
+    })
+      try {
       // read the file
       const path = `${postsDirectory}/content/${req.body.trade}`;
-      console.log({path:path})
+
+      console.log(path)
+      // 'E:\\websites\\nextjs-mcq-site\\mcq/content/[trade]'
       fs.readFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
           if (err) {
 
