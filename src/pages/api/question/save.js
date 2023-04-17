@@ -1,21 +1,13 @@
 import { promises as fs } from 'fs';
 import path from "path";
 
-export default async (req, res) => {
+export default async function handler(req, res) {
 
-  const postsDirectory = path.join(process.cwd(),'content');
+  const postsDirectory =path.join(process.cwd(),'content');
   console.log(postsDirectory)
   // E:\websites\nextjs-mcq-site\mcq\content
 
   if (req.method === "POST") {
-    // fs.access(`${postsDirectory}/content`,(error)=>{
-    //   console.log("not accees")
-    //   if(error){
-    //     fs.mkdir(`${postsDirectory}/content`,(error)=>{
-    //       console.log("file made")
-    //     })
-    //   }
-    // })
       try {
       // read the file
       const path = `${postsDirectory}/${req.body.trade}`;
@@ -106,7 +98,7 @@ export default async (req, res) => {
         }
       );
     } catch (error) {
-      res.json({error:"error occured at end line"},postsDirectory);
+      res.json({error:"error occured at end line",postsDirectory:postsDirectory});
       return res.end();
     }
   }
