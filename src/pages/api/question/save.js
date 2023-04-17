@@ -22,24 +22,24 @@ export default async (req, res) => {
 
       console.log(path)
       // 'E:\\websites\\nextjs-mcq-site\\mcq/content/[trade]'
-      await fs.readFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,"utf8",(err, data) => {
+      await fs.readFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,"utf8",async (err, data) => {
           if (err) {
 
             console.log(`Error reading file from disk: ${err}`);
             
-            fs.access(path, (error) => {
+            await fs.access(path, async (error) => {
               // To check if the given directory
               // already exists or not
               if (error) {
                 // If current directory does not exist
                 // then create it
-                fs.mkdir(path, (error) => {
+                await fs.mkdir(path,async (error) => {
                   if (error) {
                     console.log("error at line 25")
                     console.log(error);
                   } else {
                     //make file along with folder and save the data from client
-                    var writeStream = fs.createWriteStream(`${path}/${req.body.subject}.json`);
+                    var writeStream =await fs.createWriteStream(`${path}/${req.body.subject}.json`);
                     writeStream.write(`[${JSON.stringify(req.body.que)}]`);
                     writeStream.end();
 
@@ -53,12 +53,12 @@ export default async (req, res) => {
                 });
               } else {
                 //folder already exists so we checks the existence of file
-                fs.access(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,(err) => {
+              await fs.access(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,async(err) => {
                     if (err) {
                       //if file does not exist then we will create a file and save the data
                       console.log("The file does not exist.");
 
-                      var writeStream =fs.createWriteStream(`${path}/${req.body.subject}.json`);
+                      var writeStream =await fs.createWriteStream(`${path}/${req.body.subject}.json`);
                       writeStream.write(`[${JSON.stringify(req.body.que)}]`);
                       writeStream.end();
 
@@ -84,13 +84,13 @@ export default async (req, res) => {
               // parse JSON string to JSON object
             // console.log(data);
             
-            const databases = JSON.parse(data);
+            const databases = await JSON.parse(data);
 
             // add a new record
             databases.push({...req.body.que,id:req.body.id,author:req.body.author});
 
             // write new data back to the file
-            fs.writeFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
+            await fs.writeFile(`${postsDirectory}/content/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
                 if (err) {
                   console.log(`Error writing file: ${err}`);
                 }
