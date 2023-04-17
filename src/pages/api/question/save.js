@@ -63,7 +63,7 @@ export default async function handler(req, res) {
                       //if file exists but server is unable to store the data then we gir error message to client
                       console.log("The file exists.");
 
-                      res.json({error:"error occured at 74"})
+                      res.json({error:"error occured at 74",msg:error})
                       return res.end()
 
                     }
@@ -91,14 +91,14 @@ export default async function handler(req, res) {
               }
             );
             } catch (error) {
-              res.json({error:"error occured at server 102 line"})
+              res.json({error:"error occured at server 102 line",msg:error})
               return res.end()
             }
           }
         }
       );
     } catch (error) {
-      res.json({error:"error occured at end line",postsDirectory:postsDirectory});
+      res.json({error:"error occured at end line",postsDirectory:postsDirectory,msg:error});
       return res.end();
     }
   }
