@@ -71,7 +71,7 @@ export default async (req, res) => {
                       //if file exists but server is unable to store the data then we gir error message to client
                       console.log("The file exists.");
 
-                      res.json({error:"error occured"})
+                      res.json({error:"error occured at 74"})
                       return res.end()
 
                     }
@@ -99,14 +99,14 @@ export default async (req, res) => {
               }
             );
             } catch (error) {
-              res.json({error:"error occured at server"})
+              res.json({error:"error occured at server 102 line"})
               return res.end()
             }
           }
         }
       );
     } catch (error) {
-      res.json({error:"error occured"});
+      res.json({error:"error occured at end line"},postsDirectory);
       return res.end();
     }
   }
