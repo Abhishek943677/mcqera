@@ -88,7 +88,7 @@ export default async function handler(req, res) {
                 if (err) {
                   console.log(`Error writing file: ${err}`);
                 }
-                res.json({ok:"saved"});
+                res.json({ok:"saved",databases});
                 return res.end();
               }
             );

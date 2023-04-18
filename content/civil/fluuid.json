@@ -1,0 +1,20 @@
+[
+    {
+        "question": "this is question",
+        "trueOpt": "this ans is true",
+        "falseOpt1": " sorry wrong",
+        "falseOpt2": "weong ans",
+        "falseOpt3": "oh no",
+        "detail": "<p>wow details is amazing</p>"
+    },
+    {
+        "question": "this is question",
+        "trueOpt": "this ans is true",
+        "falseOpt1": " sorry wrong",
+        "falseOpt2": "weong ans",
+        "falseOpt3": "oh no",
+        "detail": "<p>wow details is amazing</p>",
+        "id": "993cfead-a882-44ed-9e9b-cafa19180ff3",
+        "author": "ak4838960@gmail.com"
+    }
+]
