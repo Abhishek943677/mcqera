@@ -14,7 +14,7 @@ export default async function handler(req, res) {
       console.log(path)
       // 'E:\\websites\\nextjs-mcq-site\\mcq/content/[trade]'
 
-      fs.readFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,"utf8", (err, data) => {
+       fs.readFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,"utf8",async (err, data) => {
         // console.log("line18")
         // console.log(data)
           if (err) {
@@ -84,9 +84,12 @@ export default async function handler(req, res) {
             databases.push({...req.body.que,id:req.body.id,author:req.body.author});
 
             // write new data back to the file
-             fs.writeFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
+              fs.writeFile(`${postsDirectory}/${req.body.trade}/${req.body.subject}.json`,JSON.stringify(databases, null, 4),(err) => {
                 if (err) {
                   console.log(`Error writing file: ${err}`);
+                  res.json({error:"error occured at end line",msg:err});
+                  return res.end();
+
                 }
                 res.json({ok:"saved",databases});
                 return res.end();
