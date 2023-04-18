@@ -13,17 +13,17 @@ export default function Home({courseObj}) {
 
 export async function getServerSideProps({ req }) {
   const session = await getSession({ req });
-  // if (!session) {
-  //   return {
-  //     redirect: {
-  //       destination: "/api/auth/signin",
-  //       permanent: false,
-  //     },
-  //   };
-  // }
+  if (!session) {
+    return {
+      redirect: {
+        destination: "/api/auth/signin",
+        permanent: false,
+      },
+    };
+  }
   try {
-    // const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:session.user.email})
-    const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:"ak4838960@gmail.com"})
+    const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:session.user.email})
+    // const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:"ak4838960@gmail.com"})
     if(!data){
       return {
         redirect: {
