@@ -54,7 +54,7 @@ export default function AddQuestion({ courseObj }) {
   const handleSave = () => {
     axios.post("/api/question/save", { que, trade, subject,id:uuidv4(),author:session.user.email }).then((p) => {
       setSent(false)
-      console.log("this is data")
+      console.log("this is data") 
       console.log(p.data)
       if(p.data.ok){
         setOpenSuccessSnack(true)

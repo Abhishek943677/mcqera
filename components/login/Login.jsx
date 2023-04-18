@@ -48,20 +48,18 @@ export default function Login() {
         aria-labelledby="modal-modal-title"
         aria-describedby="modal-modal-description"
       >
-        <Box sx={style}>
+        <Box sx={style} className="make-com-dark">
           <p className="text-lg text-center m-3 p-2">Login</p>
           <button onClick={handleGoogle}>
-            <GoogleIcon />
-            &nbsp; login using google
+            <GoogleIcon />&nbsp; Login using google
           </button>
           <br /> <br />
           <button onClick={handleFacebook}>
-            <FacebookIcon /> &nbsp; login using facebook
+            <FacebookIcon />&nbsp; Login using facebook
           </button>
           <br /> <br />
           <button onClick={handleGithub}>
-            <GitHubIcon />
-            &nbsp; login using github
+            <GitHubIcon />&nbsp; Login using github
           </button>
         </Box>
       </Modal>
