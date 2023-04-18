@@ -23,7 +23,6 @@ export async function getServerSideProps({ req }) {
   }
   try {
     const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:session.user.email})
-    // const {data} =await axios.post(`${process.env.APP_URL}/api/auth/admin`,{email:"ak4838960@gmail.com"})
     if(!data){
       return {
         redirect: {

@@ -96,40 +96,77 @@ export default function Page({questions,noOfPageForPagination,UserBlogPage,cours
 }
 
 
-export async function getStaticPaths() {
-  var path =[];
-  const courseObj = await loadCourseObj();
-  // console.log(courseObj)
-  /* [
-    {
-      id: 1,
-      trade: 'electrical',
-      subjects: [ 'network', 'power system' ]
-    },
-    {
-      id: 2,
-      trade: 'civil',
-      subjects: [ 'mos', 'dos', 'fluuid', 'concrete' ]
-    }
-   ] */
+// export async function getStaticPaths() {
+//   var path =[];
+//   const courseObj = await loadCourseObj();
+//   // console.log(courseObj)
+//   /* [
+//     {
+//       id: 1,
+//       trade: 'electrical',
+//       subjects: [ 'network', 'power system' ]
+//     },
+//     {
+//       id: 2,
+//       trade: 'civil',
+//       subjects: [ 'mos', 'dos', 'fluuid', 'concrete' ]
+//     }
+//    ] */
    
-  //making paths for pre gerenated url  
-  courseObj.forEach(element => {
-    element.subjects.forEach((ele)=>{
-      path.push({ params: { route:[element.trade,ele] } })
-    })
-  });
+//   //making paths for pre gerenated url  
+//   courseObj.forEach(element => {
+//     element.subjects.forEach((ele)=>{
+//       path.push({ params: { route:[element.trade,ele] } })
+//     })
+//   });
 
-  // console.log(path)
-  // [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','power system'] } }]
+//   // console.log(path)
+//   // [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','power system'] } }]
 
-  return {
-    paths: path,
-    fallback: 'blocking',
-  }
-}
+//   return {
+//     paths: path,
+//     fallback: 'blocking',
+//   }
+// }
 
-export async function getStaticProps(context){
+// export async function getStaticProps(context){
+
+//   var questions , noOfPageForPagination ,courseObj;
+//   var UserBlogPage=1;
+//   try {
+//     courseObj = await loadCourseObj()
+
+//     if(context.params.route[2]){
+//       UserBlogPage = context.params.route[2];
+//     };
+
+//     const {parsedFileContent} = await getContent({context})
+//     noOfPageForPagination = Math.ceil(parsedFileContent.length / 10 );
+
+//     const start = (UserBlogPage - 1) * 10;
+//     const end = UserBlogPage * 10;
+
+//     questions = parsedFileContent.slice(start, end);
+//     // console.log(questions); // lists array of questions with 10 objects
+
+//   return {
+//     props:{questions,noOfPageForPagination,
+//       UserBlogPage,courseObj}
+//   }
+
+// } catch (error) {
+//   courseObj=await loadCourseObj()
+//   // console.log(error)
+//   return{
+//     props:{questions:[],courseObj,noOfPageForPagination:1}
+//   }
+// }
+// }
+
+
+
+
+export async function getServerSideProps(context){
 
   var questions , noOfPageForPagination ,courseObj;
   var UserBlogPage=1;
@@ -162,5 +199,3 @@ export async function getStaticProps(context){
   }
 }
 }
-
-
