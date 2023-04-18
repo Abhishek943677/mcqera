@@ -14,7 +14,7 @@ import SuccessSnackBar from "../widgets/SuccessSnackBar";
 import FailureSnackBar from "../widgets/FailureSnackBar";
 
 export default function AddQuestion({ courseObj }) {
-  const { data: session } = useSession();
+  // const { data: session } = useSession();
 
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
@@ -52,7 +52,8 @@ export default function AddQuestion({ courseObj }) {
   }, []);
 
   const handleSave = () => {
-    axios.post("/api/question/save", { que, trade, subject,id:uuidv4(),author:session.user.email }).then((p) => {
+    // axios.post("/api/question/save", { que, trade, subject,id:uuidv4(),author:session.user.email }).then((p) => {
+    axios.post("/api/question/save", { que, trade, subject,id:uuidv4() }).then((p) => {
       setSent(false)
       console.log("this is data") 
       console.log(p.data)
