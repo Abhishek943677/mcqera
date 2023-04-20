@@ -93,18 +93,21 @@ export default function AddQuestion({ courseObj }) {
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
+<div className="w-2/4 m-auto">
+
       <ChangeTrade
         trade={trade}
         courses={courses}
         setTrade={setTrade}
         setSubject={setSubject}
         setSubjects={setSubjects}
-      />
+        />
       <ChangeSubject
         subject={subject}
         subjects={subjects}
         setSubject={setSubject}
-      />
+        />
+        </div>
 
       <InputField
         label="Question"

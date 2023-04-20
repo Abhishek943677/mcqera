@@ -10,7 +10,7 @@ export default function FailureSnackBar({open,setOpen}) {
       };   
   return (
         <Snackbar open={open} autoHideDuration={10000} onClose={handleClose}
-        anchorOrigin={{vertical: "bottom", horizontal: "center" }}
+        anchorOrigin={{vertical: "top", horizontal: "center" }}
         >
         <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
           failed to save saved data!

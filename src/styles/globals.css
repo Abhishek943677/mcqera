@@ -26,8 +26,8 @@ textarea {
   resize: none;
 }
 .active{
-  @apply bg-green-300 cursor-pointer;
+  @apply bg-green-600 cursor-pointer;
 }
 .not-active{
-  @apply bg-red-500 cursor-pointer;
+  @apply bg-red-600 cursor-pointer;
 }

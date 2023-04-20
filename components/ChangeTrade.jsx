@@ -1,22 +1,38 @@
-import { MenuItem, Select } from '@mui/material';
-import React from 'react'
+import { MenuItem, Select, Typography } from "@mui/material";
+import React from "react";
 
-export default function ChangeTrade({trade,courses,setSubject,setSubjects,setTrade}) {
+export default function ChangeTrade({
+  trade,
+  courses,
+  setSubject,
+  setSubjects,
+  setTrade,
+}) {
   return (
-        <Select
+    <div className=" flex w-full my-auto justify-evenly">
+      <Typography variant="h5" className="w-2/4 my-auto text-gray-900 pt-[0.8rem]">
+        {`Trade:`}
+      </Typography>
+      <Select
         name="trade"
-        className="my-2 w-full"
+        variant="outlined"
+        className="my-auto w-full h-12"
         value={trade}
         onChange={(e) => {
           setTrade(e.target.value);
           const getSubjects = courses.filter((p) => p.trade === e.target.value);
           setSubjects(getSubjects[0].subjects);
-          setSubject(getSubjects[0].subjects[0])
+          setSubject(getSubjects[0].subjects[0]);
         }}
       >
         {courses.map((p, i) => {
-          return <MenuItem key={i} value={p.trade}>{p.trade}</MenuItem>;
+          return (
+            <MenuItem key={i} value={p.trade}>
+              {p.trade}
+            </MenuItem>
+          );
         })}
       </Select>
-  )
+    </div>
+  );
 }

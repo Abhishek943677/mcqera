@@ -10,7 +10,7 @@ export default function SuccessSnackBar({open,setOpen}) {
       };    
   return (
     <div>
-      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{vertical: "bottom", horizontal: "center" }}
+      <Snackbar open={open} autoHideDuration={5000} onClose={handleClose} anchorOrigin={{vertical: "top", horizontal: "center" }}
 >
         <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
           successfully saved data!

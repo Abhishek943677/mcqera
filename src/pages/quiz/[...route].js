@@ -4,7 +4,7 @@ import PaginationModal from "../../../components/Pagination";
 import ChangeSubject from "../../../components/ChangeSubject";
 import { useRouter } from "next/router";
 import ChangeTrade from "../../../components/ChangeTrade";
-import { Button } from "@mui/material";
+import { Button, Typography } from "@mui/material";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { mongoConnect } from "../../../lib/mongoConnect";
 
@@ -39,6 +39,7 @@ export default function Page({
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [courses, setCourses] = useState([]);
+
   const router = useRouter();
 
   useEffect(() => {
@@ -60,25 +61,34 @@ export default function Page({
 
   return (
     <div>
-      <div className="w-2/4 mx-auto px-4 justify-center">
-        <ChangeTrade
-          trade={trade}
-          courses={courses}
-          setTrade={setTrade}
-          setSubject={setSubject}
-          setSubjects={setSubjects}
-        />
-        <ChangeSubject
-          subject={subject}
-          subjects={subjects}
-          setSubject={setSubject}
-        />
+      <div className="w-1/4 mx-auto px-4 justify-center"> {/* div for trade and subject*/}
+        {/* html for change trade */}          
+          <ChangeTrade
+            className="my-auto"
+            trade={trade}
+            courses={courses}
+            setTrade={setTrade}
+            setSubject={setSubject}
+            setSubjects={setSubjects}
+          />
+
+        {/* html for change subject */}
+          <ChangeSubject
+            subject={subject}
+            subjects={subjects}
+            setSubject={setSubject}
+          />
+
+        {/* change subject button */}
         <Button
           variant="contained"
           color="success"
-          className="w-full p-2 mx-2"
+          className="w-full mx-2"
           onClick={() => {
-            router.push(`/quiz/${trade}/${subject}/1`);
+            // router.push(`/quiz/${trade}/${subject}/1`);
+            window.location.href = `/quiz/${encodeURIComponent(
+              trade
+            )}/${encodeURIComponent(subject)}/1`;
           }}
         >
           change subject
@@ -92,6 +102,7 @@ export default function Page({
       ) : (
         <AllQuestions questions={questions} />
       )}
+
       <PaginationModal
         noOfPageForPagination={noOfPageForPagination}
         currentPage={UserBlogPage}
@@ -131,12 +142,12 @@ export async function getServerSideProps(context) {
 
     //pagination work
     noOfPageForPagination = Math.ceil(totalLengthOfCollection / 10);
-    noOfPageForPagination ===0 ? noOfPageForPagination=1 : "" // if there is no documents then set pagination at 1
-    // console.log(noOfPageForPagination); 
+    noOfPageForPagination === 0 ? (noOfPageForPagination = 1) : ""; // if there is no documents then set pagination at 1
+    // console.log(noOfPageForPagination);
 
     stringifiedQuestion = JSON.stringify(questions); // if questions in not strigified the it it giving error at getServerSideprops
 
-    stringifiedQuestion.length===2 ? stringifiedQuestion=[] : "" // if there is no question then stringifiedQuestion.length=2
+    stringifiedQuestion.length === 2 ? (stringifiedQuestion = []) : ""; // if there is no question then stringifiedQuestion.length=2
     // console.log(stringifiedQuestion); // lists array in string of questions with 10 objects
 
     return {
@@ -150,6 +161,11 @@ export async function getServerSideProps(context) {
   } catch (error) {
     courseObj = await loadCourseObj();
     // console.log(error)
+
+    res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=100, stale-while-revalidate=300"
+    );
     return {
       props: { questions: [], courseObj, noOfPageForPagination: 1 },
     };
