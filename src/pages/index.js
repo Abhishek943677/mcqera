@@ -69,7 +69,7 @@ export default function Home({ courseObj }) {
         {console.log(courseObj)}
         {courseObj.map((element, index) => {
           return (
-            <div className="w-fit">
+            <div className="w-fit" key={index}>
               <Paper
                 elevation={3}
                 className="flex w-fit h-fit flex-col p-4 border border-red-700 m-3"
@@ -77,7 +77,7 @@ export default function Home({ courseObj }) {
                 <p className="mx-2 text-xl text-center">{element.trade}</p>
                 {element.subjects.map((ele, i) => {
                   return (
-                    <p className="text-lg text-black">
+                    <p className="text-lg text-black" key={i}>
                       <Link
                         href={`/quiz/${element.trade}/${ele}/1`}
                         target="_blank"

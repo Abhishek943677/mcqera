@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { v4 as uuidv4 } from 'uuid';
+import { v4 as uuidv4 } from "uuid";
 import "react-quill/dist/quill.snow.css";
 import Editor from "../editor/Editor";
 import { useSession } from "next-auth/react";
@@ -20,17 +20,17 @@ export default function AddQuestion({ courseObj }) {
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
   const [courses, setCourses] = useState([]);
-  const [sent,setSent] =useState(false);
-  const [openSuccessSnack,setOpenSuccessSnack] =useState(false)
-  const [openFailureSnack,setOpenFailureSnack] =useState(false)
+  const [sent, setSent] = useState(false);
+  const [openSuccessSnack, setOpenSuccessSnack] = useState(false);
+  const [openFailureSnack, setOpenFailureSnack] = useState(false);
 
   const [que, setQue] = useState({
-    question: "this is question",
-    trueOpt: "this ans is true",
-    falseOpt1: " sorry wrong",
-    falseOpt2: "weong ans",
-    falseOpt3: "oh no",
-    detail: "wow details is amazing",
+    question: "",
+    trueOpt: "",
+    falseOpt1: "",
+    falseOpt2: "",
+    falseOpt3: "",
+    detail: "",
   });
 
   useEffect(() => {
@@ -52,17 +52,24 @@ export default function AddQuestion({ courseObj }) {
   }, []);
 
   const handleSave = () => {
-    axios.post("/api/question/save", { que, trade, subject,author:session.user.email }).then((p) => {
-    // axios.post("/api/question/save", { que, trade, subject,id:uuidv4() }).then((p) => {
-      setSent(false)
-      console.log("this is data") 
-      console.log(p.data)
-      if(p.data.ok){
-        setOpenSuccessSnack(true)
-      }else{
-        setOpenFailureSnack(true)
-      }
-    });
+    axios
+      .post("/api/question/save", {
+        que,
+        trade,
+        subject,
+        author: session.user.email,
+      })
+      .then((p) => {
+        // axios.post("/api/question/save", { que, trade, subject,id:uuidv4() }).then((p) => {
+        setSent(false);
+        console.log("this is data");
+        console.log(p.data);
+        if (p.data.ok) {
+          setOpenSuccessSnack(true);
+        } else {
+          setOpenFailureSnack(true);
+        }
+      });
     // console.log(que);
     localStorage.setItem("tradeAdmin", trade);
     localStorage.setItem("subjectAdmin", subject);
@@ -90,24 +97,25 @@ export default function AddQuestion({ courseObj }) {
 
   return (
     <div className="flex my-6 flex-col p-4 h-full mx-auto w-full">
+
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
-<div className="w-2/4 m-auto">
-
-      <ChangeTrade
-        trade={trade}
-        courses={courses}
-        setTrade={setTrade}
-        setSubject={setSubject}
-        setSubjects={setSubjects}
-        />
-      <ChangeSubject
-        subject={subject}
-        subjects={subjects}
-        setSubject={setSubject}
-        />
-        </div>
+      <form>
+      <div className="w-2/4 mx-auto">
+        <ChangeTrade
+          trade={trade}
+          courses={courses}
+          setTrade={setTrade}
+          setSubject={setSubject}
+          setSubjects={setSubjects}S
+          />
+        <ChangeSubject
+          subject={subject}
+          subjects={subjects}
+          setSubject={setSubject}
+          />
+      </div>
 
       <InputField
         label="Question"
@@ -118,7 +126,7 @@ export default function AddQuestion({ courseObj }) {
         label="correct answer"
         value={que.trueOpt}
         handleChange={handleChangeT}
-      />
+        />
       <InputField
         label="Wrong Answer 1"
         value={que.falseOpt1}
@@ -133,31 +141,38 @@ export default function AddQuestion({ courseObj }) {
         label="Wrong Answer 3"
         value={que.falseOpt3}
         handleChange={handleChangeF3}
-      />
+        />
 
-      <Editor label="write the details of the question" value={que.detail} handleChange={handleChangeD}/>
+      <Editor
+        label="write the details of the question"
+        value={que.detail}
+        handleChange={handleChangeD}
+        />
 
-      <div className="h-fit mx-auto my-2">
+      <div className="h-fit mx-auto my-2 w-full flex justify-center">
         <Button
           type="submit"
           variant="contained"
           color="success"
-          className="w-40"
+          className="w-40 mx-auto"
           disabled={sent}
           onClick={(e) => {
-            setSent(()=>true)
+            setSent(() => true);
             e.preventDefault();
             handleSave();
           }}
-        >
+          >
           {/* save question */}
           {sent ? <Spinner /> : "save question"}
         </Button>
       </div>
+      </form>
+
       <div
         dangerouslySetInnerHTML={{ __html: que.detail }}
-        className="border border-red-800"
+        id="article"
       />
+
     </div>
   );
 }
