@@ -28,7 +28,6 @@ export default function PreviousYearMenu() {
                 return (
                   <div key={index}>
                     <Link
-                      key={index}
                       href={`/previous-year/${i.examname}/${i.branch}`}
                       >
                       {/*this display branch name */}
