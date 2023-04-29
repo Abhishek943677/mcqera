@@ -26,7 +26,7 @@ export default function PreviousYearMenu() {
               <details className="ml-5 p-2"><summary className=" cursor-pointer">{element[0].examname}</summary>{/*this displays examname */}
               {element.map((i, index) => {
                 return (
-                  <div>
+                  <div key={index}>
                     <Link
                       key={index}
                       href={`/previous-year/${i.examname}/${i.branch}`}
