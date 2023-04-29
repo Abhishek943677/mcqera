@@ -7,9 +7,9 @@ import ChangeTrade from "../../../components/ChangeTrade";
 import { Button, LinearProgress, Typography } from "@mui/material";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { mongoConnect } from "../../../lib/mongoConnect";
-import Loading from "../../../components/loading";
-import Spinner from "../../../components/widgets/Spinner";
-import LinearLoading from "../../../components/widgets/LinearLoading";
+// import Loading from "../../../components/loading";
+// import Spinner from "../../../components/widgets/Spinner";
+// import LinearLoading from "../../../components/widgets/LinearLoading";
 
 export default function Page({
   questions,
