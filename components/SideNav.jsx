@@ -3,6 +3,7 @@ import PreviousYearMenu from "./PreviousYearMenu";
 import Footer from "./Footer";
 import { BiMenu } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
+import Scrolltotop from "./widgets/ScrolltoTop";
 
 export default function SideNav({ children }) {
   const [open, setOpen] = useState(false);

@@ -40,12 +40,18 @@ export default function Header() {
     <div className="flex flex-row justify-between w-full">
       {/* left side header icons */}
       <div className="flex w-24 justify-between mx-4">
-        <BiHome onClick={() => router.push("/")} className="w-8 h-fit cursor-pointer" />
-        <RiArrowGoBackFill onClick={() => router.back()} className="w-8 h-fit cursor-pointer" />
+        <BiHome
+          onClick={() => router.push("/")}
+          className="w-8 h-fit cursor-pointer"
+        />
+        <RiArrowGoBackFill
+          onClick={() => router.back()}
+          className="w-8 h-fit cursor-pointer"
+        />
       </div>
 
       {/* right side header icons */}
-      <div className="mr-3">
+      <div className="mr-3 flex ">
         {/* login and sign in things */}
         {session ? (
           <Button variant="contained" size="small" onClick={() => signOut()}>
@@ -56,9 +62,9 @@ export default function Header() {
             <Login />
           </div>
         )}
-       
+
         {/* dark theme button */}
-      <DarkthemeSwitch
+        <DarkthemeSwitch
           checked={!dark}
           onChange={(e) => {
             setDark((p) => !p);

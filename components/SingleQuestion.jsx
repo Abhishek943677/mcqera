@@ -36,11 +36,11 @@ export default function SingleQuestion({
       className="my-3 rounded-md make-com-dark m-2 p-3 shadow-xl"
     >
       <div className="flex">
-      <p>
+      <p className="lg:text-lg sm:textsm">
       {`${index}.`} 
       </p>
       &nbsp;
-      <p>
+      <p className="lg:text-lg sm:textsm">
       {question}
 
       </p>
@@ -105,7 +105,7 @@ export default function SingleQuestion({
           {details.length > 0 ?
           <div
           dangerouslySetInnerHTML={{ __html: details }}
-          className=" cursor-text"
+          className=" cursor-text sm:text-sm lg:text-lg"
           />
         :
           <span>Explantion not available</span>
