@@ -1,23 +1,27 @@
-import React from 'react'
+import React, { useEffect } from "react";
 
-export default function OptionButton({text,trueOpt,setShowDetails}) {
+export default function OptionButton({ text, trueOpt, setShowDetails }) {
+
   return (
     <div>
-        <p 
-        className='my-2 mx-1 px-3 py-2 cursor-pointer border border-gray-500 rounded-md '
-        variant='text'
-         onClick={(e)=>{
-          setShowDetails(true)
-            if(text===trueOpt){
-              // console.log("true")
-              e.target.classList.add('active')
-            }
-            else{
-              // console.log("not true")
-              e.target.classList.add('not-active')
-  
-            }
-        }}>{text}</p>
+      <p
+        className="my-2 mx-1 px-3 py-2 cursor-pointer border border-gray-500 rounded-md option" //option class is important
+        variant="text"
+        onClick={(e) => {
+          setShowDetails(true);
+          if (text === trueOpt) {
+            // console.log("true")
+            // e.target.classList.add('active')
+            e.target.style.backgroundColor = "green";
+          } else {
+            // console.log("not true")
+            e.target.style.backgroundColor = "red";
+            // e.target.classList.add('not-active')
+          }
+        }}
+      >
+        {text}
+      </p>
     </div>
-  )
+  );
 }

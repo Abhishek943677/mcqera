@@ -10,9 +10,9 @@ export default function ChangeTrade({
 }) {
   return (
     <div className=" flex w-full my-auto justify-evenly">
-      <Typography variant="h5" className="w-2/4 my-auto text-gray-900 pt-[0.8rem]">
+     <p className="w-2/4 text-xl my-auto text-gray-900 pt-[0.5rem]">
         {`Trade:`}
-      </Typography>
+      </p>
       <Select
         name="trade"
         variant="outlined"

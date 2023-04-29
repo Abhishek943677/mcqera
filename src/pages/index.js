@@ -5,6 +5,7 @@ import ChangeTrade from "../../components/ChangeTrade";
 import ChangeSubject from "../../components/ChangeSubject";
 import { loadCourseObj } from "../../logics/loadCourseObj";
 import Link from "next/link";
+import client from "../../lib/sanityConnect";
 
 export default function Home({ courseObj }) {
   const [trade, setTrade] = useState("");
@@ -34,7 +35,7 @@ export default function Home({ courseObj }) {
 
   return (
     <div>
-      <header className="flex my-6 flex-col p-4 h-full mx-auto w-4/12">
+      <header className="flex mt-14 flex-col p-4 h-full mx-auto sm:w-3/4 lg:w-4/12">
         <ChangeTrade
           trade={trade}
           courses={courses}
@@ -65,7 +66,7 @@ export default function Home({ courseObj }) {
         </Button>
       </header>
 
-      <main className="flex w-3/4 justify-center">
+      {/* <main className="flex w-3/4 justify-center">
         {console.log(courseObj)}
         {courseObj.map((element, index) => {
           return (
@@ -91,7 +92,7 @@ export default function Home({ courseObj }) {
             </div>
           );
         })}
-    </main>
+    </main> */}
       </div>
   );
 }

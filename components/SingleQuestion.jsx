@@ -33,7 +33,7 @@ export default function SingleQuestion({
     <div
       elevation={4}
       id="wrapper"
-      className="my-3 rounded-md make-com-dark m-2 p-4 shadow-xl"
+      className="my-3 rounded-md make-com-dark m-2 p-3 shadow-xl"
     >
       <div className="flex">
       <p>
@@ -47,7 +47,6 @@ export default function SingleQuestion({
       </div>
 
       <OptionButton
-      className="bg-red-400"
         text={Object.values(opt[0])[0]}
         trueOpt={trueOpt}
         setShowDetails={setShowDetails}
@@ -100,7 +99,7 @@ export default function SingleQuestion({
         <div className="p-1">
           <p className="text-sm">
             {`Correct Answer is `}
-            <span className="text-lg dark:text-green-300 text-green-900 ">{`${trueOpt}`}</span>
+            <span className="text-lg dark:text-green-300 text-green-500 font-bold">{`${trueOpt}`}</span>
           </p>
           {/* check if details not available */}
           {details.length > 0 ?

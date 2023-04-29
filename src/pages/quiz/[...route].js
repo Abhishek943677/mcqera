@@ -4,9 +4,12 @@ import PaginationModal from "../../../components/Pagination";
 import ChangeSubject from "../../../components/ChangeSubject";
 import { useRouter } from "next/router";
 import ChangeTrade from "../../../components/ChangeTrade";
-import { Button, Typography } from "@mui/material";
+import { Button, LinearProgress, Typography } from "@mui/material";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { mongoConnect } from "../../../lib/mongoConnect";
+import Loading from "../../../components/loading";
+import Spinner from "../../../components/widgets/Spinner";
+import LinearLoading from "../../../components/widgets/LinearLoading";
 
 export default function Page({
   questions,
@@ -14,6 +17,8 @@ export default function Page({
   UserBlogPage,
   courseObj,
 }) {
+  const [progress, setProgress] = useState(false);
+  const [prevLocation, setPrevLocation] = useState("");
   // console.log(questions)
   /*
   [
@@ -43,6 +48,8 @@ export default function Page({
   const router = useRouter();
 
   useEffect(() => {
+    setPrevLocation(router.asPath)
+
     setTrade(router.query.route[0]);
     setSubject(router.query.route[1]);
     setCourses(courseObj);
@@ -59,25 +66,51 @@ export default function Page({
     }
   }, []);
 
-  return (
+  //if questions change then reset all the options with no background color
+  useEffect(() => {
+    // console.log(questions)
+    setPrevLocation(router.asPath);
+    setProgress(false);
+    
+    if (document.getElementsByClassName("option")) {
+      const allOptionsButton = document.getElementsByClassName("option");
+      // console.log(ele);
+      for (let index = 0; index < allOptionsButton.length; index++) {
+        const element = allOptionsButton[index];
+        element.style.backgroundColor = "";
+        // element.classList.remove("active","no-active")
+      }
+    }
+
+  }, [questions,router]);
+
+return (
     <div>
-      <div className="w-1/4 mx-auto px-4 justify-center"> {/* div for trade and subject*/}
-        {/* html for change trade */}          
-          <ChangeTrade
-            className="my-auto"
-            trade={trade}
-            courses={courses}
-            setTrade={setTrade}
-            setSubject={setSubject}
-            setSubjects={setSubjects}
-          />
+      {progress? 
+          <p className="w-full h-2 fixed top-[0px] shadow-xl bg-red-700 animate-pulse"></p>
+      : (
+        ""
+      )}
+      <div className="sm:w-3/4 lg:w-4/12 mx-auto mt-20 px-4 justify-center">
+
+        {/* {" "} */}
+        {/* div for trade and subject*/}
+        {/* html for change trade */}
+        <ChangeTrade
+          className="my-auto"
+          trade={trade}
+          courses={courses}
+          setTrade={setTrade}
+          setSubject={setSubject}
+          setSubjects={setSubjects}
+        />
 
         {/* html for change subject */}
-          <ChangeSubject
-            subject={subject}
-            subjects={subjects}
-            setSubject={setSubject}
-          />
+        <ChangeSubject
+          subject={subject}
+          subjects={subjects}
+          setSubject={setSubject}
+        />
 
         {/* change subject button */}
         <Button
@@ -85,10 +118,11 @@ export default function Page({
           color="success"
           className="w-full mx-2"
           onClick={() => {
-            // router.push(`/quiz/${trade}/${subject}/1`);
-            window.location.href = `/quiz/${encodeURIComponent(
-              trade
-            )}/${encodeURIComponent(subject)}/1`;
+            setProgress(true)
+            router.push(`/quiz/${trade}/${subject}/1`);
+            // window.location.href = `/quiz/${encodeURIComponent(
+            // trade
+            // )}/${encodeURIComponent(subject)}/1`;
           }}
         >
           change subject
@@ -97,7 +131,7 @@ export default function Page({
 
       {questions && questions.length === 0 ? (
         <div className="">
-          <p className="text-lg text-center p-3">{`Bhosdik kuchh na h yha`}</p>
+          <p className="text-lg text-center p-1">{`Bhosdik kuchh na h yha`}</p>
         </div>
       ) : (
         <AllQuestions questions={questions} />
@@ -112,7 +146,6 @@ export default function Page({
 }
 
 // this code runs on server
-
 export async function getServerSideProps(context) {
   var noOfPageForPagination, courseObj, stringifiedQuestion;
   var UserBlogPage = 1;
@@ -126,7 +159,7 @@ export async function getServerSideProps(context) {
     const skip = (UserBlogPage - 1) * 10; // how many question should skip from database for pagination purpose
 
     // get data from database
-    const db = await mongoConnect();
+    const db = await mongoConnect(); // mongoConnect is a function which returns db
     const collection = db.collection(context.params.route[0]); //accessing collection of trade
 
     const questions = await collection
@@ -148,8 +181,12 @@ export async function getServerSideProps(context) {
     stringifiedQuestion = JSON.stringify(questions); // if questions in not strigified the it it giving error at getServerSideprops
 
     stringifiedQuestion.length === 2 ? (stringifiedQuestion = []) : ""; // if there is no question then stringifiedQuestion.length=2
-    // console.log(stringifiedQuestion); // lists array in string of questions with 10 objects
+    // console.log(stringifiedQuestion); // lists array in string of questions with 10 objects 
 
+    context.res.setHeader(
+      "Cache-Control",
+      "public, s-maxage=100, stale-while-revalidate=300"
+    );
     return {
       props: {
         questions: stringifiedQuestion,
@@ -159,13 +196,9 @@ export async function getServerSideProps(context) {
       },
     };
   } catch (error) {
+    console.log(error)
     courseObj = await loadCourseObj();
     // console.log(error)
-
-    res.setHeader(
-      "Cache-Control",
-      "public, s-maxage=100, stale-while-revalidate=300"
-    );
     return {
       props: { questions: [], courseObj, noOfPageForPagination: 1 },
     };

@@ -8,10 +8,10 @@ export default function AllQuestions({ questions }) {
   // console.log(question)
 
   return (
-    <div className="flex mx-auto lg:w-7/12 md:w-10/12 sm:11/12 flex-col px-4 py-2">
+    <div className="flex mx-auto lg:w-9/12 md:w-10/12 sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
       {questions
         ? JSON.parse(questions).map((i, index) => {
-          console.log(i)
+          // console.log(i)
             return (
               <SingleQuestion
                 key={index}

@@ -4,9 +4,9 @@ import React from "react";
 export default function ChangeSubject({ setSubject, subject, subjects }) {
   return (
     <div className=" flex w-full my-auto justify-evenly">
-      <Typography variant="h5" className="w-2/4 my-auto text-gray-900 pt-[1.1rem]">
+      <p className="w-2/4 text-xl my-auto text-gray-900 pt-[0.17rem]">
         {`Subject:`}
-     </Typography>
+      </p>
       <Select
         variant="outlined"
         name="subjects"

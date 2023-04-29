@@ -6,7 +6,9 @@ import {useRouter } from "next/router";
 export default function PaginationModal({noOfPageForPagination,currentPage}) {
   const router = useRouter();
   const handleChange = (event, value) => {
-    window.location.href = `${encodeURIComponent(value)}`
+    // window.location.href = `${encodeURIComponent(value)}`
+    router.push(`/quiz/${router.query.route[0]}/${router.query.route[1]}/${value}`);
+
   };
   
   return (
