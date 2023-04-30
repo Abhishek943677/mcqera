@@ -6,6 +6,8 @@ import { loadCourseObj } from "../../../logics/loadCourseObj";
 
 export default function Home({courseObj}) {
   const { data: session } = useSession();
+  // console.log(session)
+  
   return (
     <div className={`w-full lg:w-2/3 md:w-2/3 px-3 mx-auto`}> <AddQuestion courseObj={courseObj} /></div>
   );

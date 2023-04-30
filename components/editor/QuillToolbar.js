@@ -138,4 +138,4 @@ export const QuillToolbar = () => (
   </div>
 );
 
-export default QuillToolbar;
+export default {QuillToolbar};

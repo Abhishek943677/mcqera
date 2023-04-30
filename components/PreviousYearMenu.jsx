@@ -4,15 +4,30 @@ import client from "../lib/sanityConnect";
 import Link from "next/link";
 import Spinner from "./widgets/Spinner";
 import { Divider } from "@mui/material";
+import { ContactsOutlined } from "@mui/icons-material";
 
 export default function PreviousYearMenu() {
-  const [data, setData] = useState([]);
+  const [data, setData] = useState([[
+    {
+        "branch": "computer science",
+        "examname": "ssc"
+    },
+    {
+        "branch": "mechanical",
+        "examname": "ssc"
+    },
+    {
+        "branch": "electrical",
+        "examname": "ssc"
+    },
+]]);
 
   useEffect(() => {
-    client.fetch(`*[_type=="exams"]{branch,examname}`).then((data) => {
-      const furnished = getPreviousYearData(data, "branch");
-      setData(() => furnished);
-    });
+    // client.fetch(`*[_type=="exams"]{branch,examname}`).then((data) => {
+    //   const furnished = getPreviousYearData(data, "branch");
+    //   setData(() => furnished);
+    // });
+// uncomment it when published
   }, [data]);
 
   return (

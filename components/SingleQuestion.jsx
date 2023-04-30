@@ -36,16 +36,18 @@ export default function SingleQuestion({
       className="my-3 rounded-md make-com-dark m-2 p-3 shadow-xl"
     >
       <div className="flex">
+        {/* index of question */}
       <p className="lg:text-lg sm:textsm">
       {`${index}.`} 
       </p>
       &nbsp;
       <p className="lg:text-lg sm:textsm">
-      {question}
+      {/* question is displayed here */}
+      <div dangerouslySetInnerHTML={{__html:question}}/>
 
       </p>
       </div>
-
+{/* option buttons here */}
       <OptionButton
         text={Object.values(opt[0])[0]}
         trueOpt={trueOpt}
@@ -99,7 +101,10 @@ export default function SingleQuestion({
         <div className="p-1">
           <p className="text-sm">
             {`Correct Answer is `}
-            <span className="text-lg dark:text-green-300 text-green-500 font-bold">{`${trueOpt}`}</span>
+            <span className="text-lg dark:text-green-300 text-green-500 font-bold">
+              {/* {`${trueOpt}`} */}
+              <div dangerouslySetInnerHTML={{__html:trueOpt}}/>
+              </span>
           </p>
           {/* check if details not available */}
           {details.length > 0 ?
