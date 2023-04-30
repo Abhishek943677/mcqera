@@ -61,8 +61,7 @@ export default function AddQuestion({ courseObj }) {
       })
       .then((p) => {
         setSent(false);
-        console.log("this is data");
-        console.log(p.data);
+        
         if (p.data.ok) {
           setOpenSuccessSnack(true);
         } else {
