@@ -15,9 +15,10 @@ export default function SingleQuestion({
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
+    setShowDetails(false)
     const sorted = options.sort(() => Math.random() - 0.5);
     setOpt(sorted);
-  }, []);
+  }, [options]);
 
   // do stuffs links loader or white modal for each question
   if (opt.length === 0) {

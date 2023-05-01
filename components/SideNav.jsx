@@ -1,12 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import PreviousYearMenu from "./PreviousYearMenu";
 import Footer from "./Footer";
 import { BiMenu } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
-import Scrolltotop from "./widgets/ScrolltoTop";
+import getPreviousYearData from "../logics/getPreviousYearData";
 
 export default function SideNav({ children }) {
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    getPreviousYearData().then((data) => {
+      setData(data);
+    });
+  }, []);
+
   const handlesidebar = () => {
     setOpen(!open);
   };
@@ -28,22 +36,25 @@ export default function SideNav({ children }) {
 
         {/* div for sidebar and its content */}
         <div
-          className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 ${open ? "hidden": "w-[20%]"} `}
+          className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 ${
+            open ? "hidden" : "w-[20%]"
+          } `}
         >
-          <PreviousYearMenu />
+          <PreviousYearMenu data={data} />
         </div>
 
-        <div className={` overflow-y-auto m-auto   ${open?"w-full ml-0":"ml-[20%] w-full"}`}>
+        <div
+          className={` overflow-y-auto m-auto   ${
+            open ? "w-full ml-0" : "ml-[20%] w-full"
+          }`}
+        >
           {children}
           <Footer />
         </div>
       </div>
 
-
-
       {/* for smaller devices */}
       <div className="flex max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden relative">
-
         {/* hamburger icon and its logic */}
         <div className="absolute top-10 right-4">
           <p onClick={handlesidebar} className="cursor-pointer">
@@ -55,7 +66,6 @@ export default function SideNav({ children }) {
           </p>
         </div>
 
-
         {/* div for sidebar and its content */}
         <div
           className={`bg-slate-600 top-0 overflow-x-auto ${
@@ -64,9 +74,8 @@ export default function SideNav({ children }) {
               : "hidden"
           }`}
         >
-          <PreviousYearMenu />
+          <PreviousYearMenu data={data} />
         </div>
-
 
         {/* for footer and children */}
         <div className={` overflow-y-auto m-auto w-full`}>

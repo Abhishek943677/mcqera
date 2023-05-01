@@ -71,15 +71,16 @@ export default function Page({
     
     if (document.getElementsByClassName("option")) {
       const allOptionsButton = document.getElementsByClassName("option");
-      // console.log(ele);
+
       for (let index = 0; index < allOptionsButton.length; index++) {
         const element = allOptionsButton[index];
+        console.log(element.textContent)
         element.style.backgroundColor = "";
         // element.classList.remove("active","no-active")
       }
     }
 
-  }, [questions,router]);
+  }, []);
 
 return (
     <div>
@@ -116,6 +117,7 @@ return (
           className="w-full mx-2"
           onClick={() => {
             setProgress(true)
+            console.log("clicked")
             router.push(`/quiz/${trade}/${subject}/1`);
             // window.location.href = `/quiz/${encodeURIComponent(
             // trade

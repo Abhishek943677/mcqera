@@ -1,4 +1,9 @@
-export default function getPreviousYearData(data, branch) {
+import {clientPreviousYear} from "../lib/sanityConnect";
+
+export default async function getPreviousYearData() {
+  
+const data =await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`);
+
   const sorted = data.sort((a, b) => a.examname.length - b.examname.length);
   // console.log(sorted);
 

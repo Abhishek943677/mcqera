@@ -1,24 +1,12 @@
 import React, { useEffect, useState } from "react";
-import getPreviousYearData from "../logics/getPreviousYearData";
-import client from "../lib/sanityConnect";
 import Link from "next/link";
 import Spinner from "./widgets/Spinner";
 import { Divider } from "@mui/material";
 
-export default function PreviousYearMenu() {
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    client.fetch(`*[_type=="exams"]{branch,examname}`).then((data) => {
-      const furnished = getPreviousYearData(data, "branch");
-      setData(() => furnished);
-    });
-  }, [data]);
-
-  return (
+export default function PreviousYearMenu({data}) {
+ return (
     <div>
       <h1 className="text-xl">Previous year Papers</h1>
-
       {data.length !== 0 ? (
         data.map((element, i) => {
           return (

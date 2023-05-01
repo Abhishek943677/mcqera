@@ -1,6 +1,6 @@
 import React from "react";
-import client from "../../../lib/sanityConnect";
 import SingleQuestion from "../../../components/SingleQuestion";
+import { clientPreviousYear } from "../../../lib/sanityConnect";
 
 export default function Exam({ data }) {
   console.log(data)
@@ -33,7 +33,7 @@ export default function Exam({ data }) {
 
 export async function getServerSideProps(context) {
 
-  const data = await client.fetch(`*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions}[0]`);
+  const data = await clientPreviousYear.fetch(`*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions}[0]`);
 
   // console.log(data)
   context.res.setHeader(

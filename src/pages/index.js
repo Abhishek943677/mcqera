@@ -57,9 +57,11 @@ export default function Home({ courseObj }) {
             localStorage.setItem("tradeHome", trade);
             localStorage.setItem("subjectHome", subject);
             localStorage.setItem("subjectsHome", JSON.stringify(subjects));
-            window.location.href = `/quiz/${encodeURIComponent(
-              trade
-            )}/${encodeURIComponent(subject)}/1`;
+            // window.location.href = `/quiz/${encodeURIComponent(
+            //   trade
+            // )}/${encodeURIComponent(subject)}/1`;
+            console.log("hoem ")
+            router.push(`/quiz/${trade}/${subject}/1`);
           }}
         >
           start quiz

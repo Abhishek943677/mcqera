@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import client from "../../../lib/sanityConnect";
+import { clientPreviousYear } from "../../../lib/sanityConnect";
 import Link from "next/link";
 
 export default function Course({ data }) {
@@ -27,7 +27,7 @@ export async function getServerSideProps(context) {
   const branch = context.params.route[1];
 
   const query = `*[_type=="exams" && examname=="${examname}" && branch=="${branch}"]{paper,slug}`;
-  const data = await client.fetch(query);
+  const data = await clientPreviousYear.fetch(query);
 
   return {
     props: {
