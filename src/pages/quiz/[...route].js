@@ -127,7 +127,7 @@ export async function getStaticPaths() {
   return {
     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
     paths: path,
-    fallback: 'blocking',
+    fallback: true,
   }
 }
 
