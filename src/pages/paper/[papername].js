@@ -3,7 +3,6 @@ import SingleQuestion from "../../../components/SingleQuestion";
 import { clientPreviousYear } from "../../../lib/sanityConnect";
 
 export default function Exam({ data }) {
-  console.log(data)
   if(!data){
     return <div>Not found</div>
   }
@@ -15,7 +14,7 @@ export default function Exam({ data }) {
             <SingleQuestion
               key={index}
               question={i.question}
-              details=""
+              details={i.details}
               trueOpt={i.sahianswer}
               options={[
                 { trueOpt: i.sahianswer },
@@ -36,6 +35,7 @@ export async function getServerSideProps(context) {
   const data = await clientPreviousYear.fetch(`*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions}[0]`);
 
   // console.log(data)
+
   context.res.setHeader(
     "Cache-Control",
     "public, s-maxage=200, stale-while-revalidate=500"

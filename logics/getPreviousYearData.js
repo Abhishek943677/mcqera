@@ -1,10 +1,15 @@
-import {clientPreviousYear} from "../lib/sanityConnect";
+import { clientPreviousYear } from "../lib/sanityConnect";
 
 export default async function getPreviousYearData() {
-  
-const data =await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`);
+  // const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`);
+  // const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`, { next: { revalidate: 600 } });//60*10 == 10min
+  // var data=[];
 
-  const sorted = data.sort((a, b) => a.examname.length - b.examname.length);
+  // const { result } = await fetch("https://ltxionfe.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22exams%22%5D%7Bbranch%2Cexamname%7D",{ next: { revalidate: 6000 } })
+  // .then((res) => res.json());
+  
+  const result = [];
+  const sorted = result.sort((a, b) => a.examname.length - b.examname.length);
   // console.log(sorted);
 
   function removeDuplicates(books) {

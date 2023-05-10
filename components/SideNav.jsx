@@ -8,7 +8,9 @@ import getPreviousYearData from "../logics/getPreviousYearData";
 export default function SideNav({ children }) {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
+  
 
+  
   useEffect(() => {
     getPreviousYearData().then((data) => {
       setData(data);

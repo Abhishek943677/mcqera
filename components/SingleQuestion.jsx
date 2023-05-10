@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import OptionButton from "./OptionButton";
 import FavoriteBorderSharpIcon from "@mui/icons-material/FavoriteBorderSharp";
 import ReportGmailerrorredSharpIcon from "@mui/icons-material/ReportGmailerrorredSharp";
-import { Box, Button, Paper, Tooltip } from "@mui/material";
+import { Box, Button, Divider, Paper, Tooltip } from "@mui/material";
+import PortableText from "react-portable-text";
 
 export default function SingleQuestion({
   question,
@@ -15,16 +16,15 @@ export default function SingleQuestion({
   const [showDetails, setShowDetails] = useState(false);
 
   useEffect(() => {
-    setShowDetails(false)
+    setShowDetails(false);
     const sorted = options.sort(() => Math.random() - 0.5);
     setOpt(sorted);
-  }, [options]);
+  }, [index]);
 
   // do stuffs links loader or white modal for each question
   if (opt.length === 0) {
     return (
       <>
-        hey its waiting
         <br />
       </>
     );
@@ -34,21 +34,19 @@ export default function SingleQuestion({
     <div
       elevation={4}
       id="wrapper"
-      className="my-3 rounded-md make-com-dark m-2 p-3 shadow-xl"
+      className="my-3 rounded-md make-com-dark m-2 px-2 py-3 shadow-xl"
     >
       <div className="flex">
         {/* index of question */}
-      <p className="lg:text-lg sm:textsm">
-      {`${index}.`} 
-      </p>
-      &nbsp;
-      <p className="lg:text-lg sm:textsm">
-      {/* question is displayed here */}
-      <div dangerouslySetInnerHTML={{__html:question}}/>
-
-      </p>
+        <p className="lg:text-sm sm:textsm">{`${index}.`}</p>
+        &nbsp;
+        <p className="lg:text-sm sm:textsm flex">
+          {/* question is displayed here */}
+          <div id="question" dangerouslySetInnerHTML={{ __html: question }} />
+        </p>
       </div>
-{/* option buttons here */}
+
+      {/* option buttons here */}
       <OptionButton
         text={Object.values(opt[0])[0]}
         trueOpt={trueOpt}
@@ -96,30 +94,41 @@ export default function SingleQuestion({
           </Tooltip>
         </div>
       </div>
-
       {/* showing detials on button click or option click */}
       {showDetails ? (
-        <div className="p-1">
-          <p className="text-sm">
+        <div className="p-1 ">
+          <section className="text-sm flex">
             {`Correct Answer is `}
-            <span className="text-lg dark:text-green-300 text-green-500 font-bold">
+            <span className="text-sm dark:text-green-300 text-green-500">
               {/* {`${trueOpt}`} */}
-              <div dangerouslySetInnerHTML={{__html:trueOpt}}/>
-              </span>
-          </p>
+              <div
+                id="question"
+                className="ml-2 font-bold"
+                dangerouslySetInnerHTML={{ __html: trueOpt }}
+              />
+            </span>
+          </section>
+
+          <Divider />
+
           {/* check if details not available */}
-          {details.length > 0 ?
-          <div
-          dangerouslySetInnerHTML={{ __html: details }}
-          className=" cursor-text sm:text-sm lg:text-lg"
-          />
-        :
-          <span>Explantion not available</span>
-        }
+          {details.length > 0 && typeof details === "string" ? (
+            <div
+              id="question"
+              dangerouslySetInnerHTML={{ __html: details }}
+              className=" cursor-text sm:text-sm lg:text-sm flex flex-col justify-center"
+            />
+          ) : typeof details === "object" ? (
+            <div id="question">
+              <PortableText content={details} />
+            </div>
+          ) : (
+            <span>Explantion not available</span>
+          )}
         </div>
-      )
-       : ""
-      }
+      ) : (
+        ""
+      )}
     </div>
   );
 }

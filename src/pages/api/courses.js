@@ -11,6 +11,7 @@ export default async (req, res) => {
     
     const collection = db.collection("courses");
     const findResult = await collection.find({}).toArray();
+    // console.log(findResult);
     res.status(200).json(findResult);
     return res.end();
 

@@ -33,3 +33,13 @@ textarea {
 .not-active{
   @apply bg-red-600 cursor-pointer animate-pulse;
 }
+
+#question li{
+  @apply list-disc ml-7
+}
+#question img{
+  @apply max-w-[20rem] rounded-md
+}
+#question{
+  /* @apply flex  */
+}

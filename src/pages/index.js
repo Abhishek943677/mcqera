@@ -4,8 +4,6 @@ import { Button, Paper } from "@mui/material";
 import ChangeTrade from "../../components/ChangeTrade";
 import ChangeSubject from "../../components/ChangeSubject";
 import { loadCourseObj } from "../../logics/loadCourseObj";
-import Link from "next/link";
-import client from "../../lib/sanityConnect";
 
 export default function Home({ courseObj }) {
   const [trade, setTrade] = useState("");
@@ -60,7 +58,6 @@ export default function Home({ courseObj }) {
             // window.location.href = `/quiz/${encodeURIComponent(
             //   trade
             // )}/${encodeURIComponent(subject)}/1`;
-            console.log("hoem ")
             router.push(`/quiz/${trade}/${subject}/1`);
           }}
         >
@@ -68,33 +65,6 @@ export default function Home({ courseObj }) {
         </Button>
       </header>
 
-      {/* <main className="flex w-3/4 justify-center">
-        {console.log(courseObj)}
-        {courseObj.map((element, index) => {
-          return (
-            <div className="w-fit" key={index}>
-              <Paper
-                elevation={3}
-                className="flex w-fit h-fit flex-col p-4 border border-red-700 m-3"
-              >
-                <p className="mx-2 text-xl text-center">{element.trade}</p>
-                {element.subjects.map((ele, i) => {
-                  return (
-                    <p className="text-lg text-black" key={i}>
-                      <Link
-                        href={`/quiz/${element.trade}/${ele}/1`}
-                        target="_blank"
-                      >
-                        {ele}
-                      </Link>
-                    </p>
-                  );
-                })}
-              </Paper>
-            </div>
-          );
-        })}
-    </main> */}
       </div>
   );
 }
