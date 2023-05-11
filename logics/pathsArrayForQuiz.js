@@ -8,7 +8,7 @@ export async function pathsArrayForQuiz() {
     const courseObj = await loadCourseObj();
     // const db = await mongoConnect();
 
-    const estimatedCount=Array.from({length: 1}, (_, i) => i + 1);
+    const estimatedCount=Array.from({length: 20}, (_, i) => i + 1);
     // console.log(estimatedCount) // [1,2,3,4......,100]
 
     courseObj.forEach((item) => {
