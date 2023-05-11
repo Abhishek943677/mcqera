@@ -127,7 +127,7 @@ export async function getStaticPaths() {
   return {
     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
     paths: path,
-    fallback:"blocking",
+    fallback:false,
   }
 }
 
@@ -183,14 +183,14 @@ export async function getStaticProps(context) {
         UserBlogPage,
         courseObj,
       },
-      revalidate:300,
+      revalidate:60,
     };
   } catch (error) {
     console.log(error)
     courseObj = await loadCourseObj();
     // console.log(error)
     return {
-      props: { questions: [], courseObj, noOfPageForPagination: 1, },
+      props: { questions: [], courseObj, noOfPageForPagination: 1,UserBlogPage},
       revalidate: 60,
     };
   }
