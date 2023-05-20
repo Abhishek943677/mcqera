@@ -7,7 +7,7 @@ import { loadCourseObj } from "../../logics/loadCourseObj";
 import { clientQuickLinks } from "../../lib/sanityConnect";
 import QuickLinks from "../../components/QuickLinks";
 import getQuickLinkData from "../../logics/getQuickLinkData";
-import { mongoConnectUser } from "../../lib/mongoConnectUser";
+// import { mongoConnectUser } from "../../lib/mongoConnectUser";
 
 const Home = ({ courseObj,quicklinks}) => {
 console.log(courseObj)
@@ -81,13 +81,14 @@ export async function getStaticProps() {
   const quicklinks = await getQuickLinkData();
   var courseObj = await loadCourseObj();
 
-const userDb=await mongoConnectUser()
-const collection = userDb.collection("user-list"); //accessing collection of trade
+// const userDb=await mongoConnectUser()
+// const collection = userDb.collection("user-list"); //accessing collection of trade
 
-    const userList = await collection
-      .find({}) // finding data from trade collection with subject name
-      .toArray();
-      console.log(userList)
+//     const userList = await collection
+//       .find({}) // finding data from trade collection with subject name
+//       .toArray();
+//       console.log(userList)
+
   return {
     props: { courseObj, quicklinks },
     revalidate: 60,
