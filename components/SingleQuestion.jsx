@@ -112,7 +112,7 @@ export default function SingleQuestion({
           <Divider />
 
           {/* check if details not available */}
-          {details.length > 0 && typeof details === "string" ? (
+          {details&& details.length > 0 && typeof details === "string" ? (
             <div
               id="question"
               dangerouslySetInnerHTML={{ __html: details }}

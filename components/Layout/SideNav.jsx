@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
-import PreviousYearMenu from "./PreviousYearMenu";
-import Footer from "./Footer";
 import { BiMenu } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
-import getPreviousYearData from "../logics/getPreviousYearData";
+import PreviousYearMenu from "../PreviousYearMenu";
+import Footer from "../Footer";
+import getPreviousYearData from "../../logics/getPreviousYearData";
+import QuickLinks from "../QuickLinks";
 
-export default function SideNav({ children }) {
+// export default function SideNav({ children }) {
+const SideNav = ({ children }) => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState([]);
-  
 
-  
   useEffect(() => {
     getPreviousYearData().then((data) => {
       setData(data);
@@ -45,6 +45,8 @@ export default function SideNav({ children }) {
           <PreviousYearMenu data={data} />
         </div>
 
+        {/* this is the place where all the child components comes in */}
+        
         <div
           className={` overflow-y-auto m-auto   ${
             open ? "w-full ml-0" : "ml-[20%] w-full"
@@ -55,7 +57,11 @@ export default function SideNav({ children }) {
         </div>
       </div>
 
+        
+
+
       {/* for smaller devices */}
+
       <div className="flex max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden relative">
         {/* hamburger icon and its logic */}
         <div className="absolute top-10 right-4">
@@ -87,4 +93,6 @@ export default function SideNav({ children }) {
       </div>
     </div>
   );
-}
+};
+
+export default SideNav;

@@ -4,7 +4,7 @@ import PaginationModal from "../../../components/Pagination";
 import ChangeSubject from "../../../components/ChangeSubject";
 import { useRouter } from "next/router";
 import ChangeTrade from "../../../components/ChangeTrade";
-import { Button, Typography } from "@mui/material";
+import { Button } from "@mui/material";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { mongoConnect } from "../../../lib/mongoConnect";
 import { pathsArrayForQuiz } from "../../../logics/pathsArrayForQuiz";
@@ -59,8 +59,9 @@ export default function Page({
 
   return (
     <div>
-      
-      <div className="sm:w-3/4 lg:w-4/12 mx-auto mt-20 px-4 justify-center">
+
+      {/* <div className="sm:w-3/4 lg:w-4/12 mx-auto mt-20 px-4 justify-center"> */}
+      <div className="sm:w-3/4 lg:w-6/12 mx-auto px-4 justify-center">
 
         {/* {" "} */}
         {/* div for trade and subject*/}
@@ -89,9 +90,7 @@ export default function Page({
           onClick={() => {
             console.log("clicked")
             router.push(`/quiz/${trade}/${subject}/1`);
-            // window.location.href = `/quiz/${encodeURIComponent(
-            // trade
-            // )}/${encodeURIComponent(subject)}/1`;
+
           }}
         >
           change subject
@@ -122,12 +121,12 @@ export default function Page({
 // paths defining 
 export async function getStaticPaths() {
 
- const path=await pathsArrayForQuiz()
+  const path = await pathsArrayForQuiz()
 
   return {
     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
     paths: path,
-    fallback:'blocking',
+    fallback: 'blocking',
   }
 }
 
@@ -137,6 +136,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   var noOfPageForPagination, courseObj, stringifiedQuestion;
   var UserBlogPage = 1;
+  const questionsPerPage = 15;
   try {
     courseObj = await loadCourseObj();
 
@@ -144,7 +144,7 @@ export async function getStaticProps(context) {
     if (context.params.route[2]) {
       UserBlogPage = context.params.route[2];
     }
-    const skip = (UserBlogPage - 1) * 10; // how many question should skip from database for pagination purpose
+    const skip = (UserBlogPage - 1) * questionsPerPage; // how many question should skip from database for pagination purpose
 
     // get data from database
     const db = await mongoConnect(); // mongoConnect is a function which returns db
@@ -152,7 +152,7 @@ export async function getStaticProps(context) {
 
     const questions = await collection
       .find({ subject: context.params.route[1] }) // finding data from trade collection with subject name
-      .limit(10)
+      .limit(questionsPerPage)
       .skip(skip)
       .toArray();
 
@@ -162,7 +162,7 @@ export async function getStaticProps(context) {
     // console.log(totalLengthOfCollection);
 
     //pagination work
-    noOfPageForPagination = Math.ceil(totalLengthOfCollection / 10);
+    noOfPageForPagination = Math.ceil(totalLengthOfCollection / questionsPerPage);
     noOfPageForPagination === 0 ? (noOfPageForPagination = 1) : ""; // if there is no documents then set pagination at 1
     // console.log(noOfPageForPagination);
 
@@ -176,6 +176,7 @@ export async function getStaticProps(context) {
     //   "public, s-maxage=100, stale-while-revalidate=300"
     // );
 
+
     return {
       props: {
         questions: stringifiedQuestion,
@@ -183,14 +184,14 @@ export async function getStaticProps(context) {
         UserBlogPage,
         courseObj,
       },
-      revalidate:60,
+      revalidate: 60,
     };
   } catch (error) {
     console.log(error)
     courseObj = await loadCourseObj();
     // console.log(error)
     return {
-      props: { questions: [], courseObj, noOfPageForPagination: 1,UserBlogPage},
+      props: { questions: [], courseObj, noOfPageForPagination: 1, UserBlogPage },
       revalidate: 60,
     };
   }

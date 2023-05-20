@@ -8,7 +8,7 @@ export default function Course({ data }) {
     return <div className="">Papers Coming soon</div>;
   }
   return (
-    <div>
+    <div className="mt-10">
       {data.map((ele, i) => {
         return (
           <div key={i} className="my-3 mx-auto">
@@ -22,7 +22,27 @@ export default function Course({ data }) {
   );
 }
 
-export async function getServerSideProps(context) {
+
+// paths defining 
+export async function getStaticPaths() {
+  
+  const path = [];
+  const Pathsquery = `*[_type=="exams"]{examname,branch}`;
+  const pathsInitialData = await clientPreviousYear.fetch(Pathsquery);
+
+  pathsInitialData.forEach(({ examname, branch }) => {
+    path.push({ params: { route: [String(examname), String(branch)] } })
+  });
+  
+   return {
+     // paths: [{ params: { route: ['uppcl','network'] } }],
+     paths: path,
+     fallback:'blocking',
+   }
+ }
+
+
+export async function getStaticProps(context) {
   const examname = context.params.route[0];
   const branch = context.params.route[1];
 
@@ -33,5 +53,6 @@ export async function getServerSideProps(context) {
     props: {
       data,
     },
+    revalidate:100,
   };
 }

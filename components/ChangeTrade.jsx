@@ -11,7 +11,7 @@ export default function ChangeTrade({
   return (
     <div className=" flex w-full my-auto justify-evenly">
      <p className="w-2/4 text-xl my-auto text-gray-900 pt-[0.5rem]">
-        {`Trade:`}
+        {`Course:`}
       </p>
       <Select
         name="trade"

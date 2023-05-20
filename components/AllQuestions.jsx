@@ -7,7 +7,8 @@ export default function AllQuestions({ questions }) {
   const router = useRouter();
 
   return (
-    <div className="flex mx-auto lg:w-9/12 md:w-10/12 sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
+    // <div className="flex mx-auto lg:w-9/12 md:w-10/12 sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
+    <div className="flex mx-auto lg:w-full md:w-full sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
       {questions
         ? JSON.parse(questions).map((i, index) => {
             return (
@@ -22,7 +23,7 @@ export default function AllQuestions({ questions }) {
                   { falseOpt2: i.que.falseOpt2 },
                   { falseOpt3: i.que.falseOpt3 },
                 ]}
-                index={index + 1 + (router.query.route[2] - 1) * 10}
+                index={index + 1 + (router.query.route[2] - 1) * 10}// change 10 for correct indexing
               />
             );
           })
