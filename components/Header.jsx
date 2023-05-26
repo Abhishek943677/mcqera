@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Login from "./login/Login";
 import { signOut, useSession } from "next-auth/react";
-import { Button } from "@mui/material";
+import { Avatar, Button, MenuItem, Select } from "@mui/material";
 import DarkthemeSwitch from "./widgets/DarkthemeSwitch";
 import { useRouter } from "next/router";
 import { BiHome } from "react-icons/bi";
@@ -10,6 +10,7 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 export default function Header() {
   const { data: session } = useSession();
   const [dark, setDark] = useState(null);
+  const [showProfile, setShowProfile] = useState(false);
   const router = useRouter();
 
   const toggleDarkMode = (checked) => {
@@ -37,7 +38,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="flex flex-row justify-between w-full">
+    <div className="flex flex-row justify-between w-full flex-wrap">
       {/* left side header icons */}
       <div className="flex w-24 justify-between mx-4">
         <BiHome
@@ -54,15 +55,33 @@ export default function Header() {
       <div className="mr-3 flex ">
         {/* login and sign in things */}
         {session ? (
-          <Button variant="contained" size="small" onClick={() => signOut()}>
-            log out
-          </Button>
+          <div>
+            <Avatar
+              className="cursor-pointer"
+              onClick={() => setShowProfile((pre) => !pre)}
+            />
+            <ul
+              className={`list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-20 bg-slate-700 p-4 ${
+                showProfile ? "block" : "hidden"
+              } rounded`}
+            >
+              <li>{session.user.name}</li>
+              <li>
+                <Button
+                  variant="contained"
+                  size="small"
+                  onClick={() => signOut()}
+                >
+                  log out
+                </Button>
+              </li>
+            </ul>
+          </div>
         ) : (
           <div>
             <Login />
           </div>
         )}
-
         {/* dark theme button */}
         <DarkthemeSwitch
           checked={!dark}

@@ -76,9 +76,9 @@ const SideNav = ({ children }) => {
 
         {/* div for sidebar and its content */}
         <div
-          className={`bg-slate-600 top-0 overflow-x-auto ${
+          className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex flex-wrap ${
             open
-              ? "h-[100vh] fixed left-0 top-0 w-fit px-5 mt-0 pt-6 z-50"
+              ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50"
               : "hidden"
           }`}
         >

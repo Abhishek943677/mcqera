@@ -5,7 +5,7 @@ import { Divider } from "@mui/material";
 
 export default function PreviousYearMenu({data}) {
  return (
-    <div>
+    <div className="">
       <h1 className="text-xl">Previous year Papers</h1>
       {data.length !== 0 ? (
         data.map((element, i) => {

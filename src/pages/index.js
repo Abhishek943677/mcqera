@@ -9,6 +9,7 @@ import QuickLinks from "../../components/QuickLinks";
 import getQuickLinkData from "../../logics/getQuickLinkData";
 // import { mongoConnectUser } from "../../lib/mongoConnectUser";
 
+
 const Home = ({ courseObj,quicklinks}) => {
 console.log(courseObj)
 
@@ -41,8 +42,7 @@ console.log(courseObj)
   return (
     <div>
      
-        {/* <header className="flex mt-14 flex-col p-4 h-full mx-auto sm:w-3/4 lg:w-4/12"> */}
-        <header className="flex flex-col p-4 h-full mx-auto w-7/12">
+        <header className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
           <ChangeTrade
             trade={trade}
             courses={courses}
@@ -76,6 +76,7 @@ console.log(courseObj)
     </div>
   );
 }
+
 
 export async function getStaticProps() {
   const quicklinks = await getQuickLinkData();

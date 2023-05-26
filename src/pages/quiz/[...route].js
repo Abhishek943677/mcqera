@@ -7,14 +7,8 @@ import ChangeTrade from "../../../components/ChangeTrade";
 import { Button } from "@mui/material";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { mongoConnect } from "../../../lib/mongoConnect";
-import { pathsArrayForQuiz } from "../../../logics/pathsArrayForQuiz";
 
-export default function Page({
-  questions,
-  noOfPageForPagination,
-  UserBlogPage,
-  courseObj,
-}) {
+export default function Page({ questions, noOfPageForPagination, UserBlogPage, courseObj }) {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
@@ -23,7 +17,7 @@ export default function Page({
   const router = useRouter();
 
   useEffect(() => {
-
+    console.log("Loading")
     setTrade(router.query.route[0]);
     setSubject(router.query.route[1]);
     setCourses(courseObj);
@@ -32,26 +26,20 @@ export default function Page({
       (ele) => ele.trade === router.query.route[0]
     );
     // console.log(getSubjects.subjects) // ['mos', 'dos', 'fluuid', 'concrete']
-
     if (getSubjects) {
       setSubjects(getSubjects?.subjects);
     } else {
       setSubjects([]);
-    }
-  }, []);
+    };
 
-  //if questions change then reset all the options with no background color
-  useEffect(() => {
-    // console.log(questions)
-
+    //if questions change then reset all the options with no background color
     if (document.getElementsByClassName("option")) {
       const allOptionsButton = document.getElementsByClassName("option");
+      console.log(allOptionsButton[0])
 
       for (let index = 0; index < allOptionsButton.length; index++) {
         const element = allOptionsButton[index];
-        // console.log(element.textContent)
         element.style.backgroundColor = "";
-        // element.classList.remove("active","no-active")
       }
     }
 
@@ -121,7 +109,23 @@ export default function Page({
 // paths defining 
 export async function getStaticPaths() {
 
-  const path = await pathsArrayForQuiz()
+  const courseObj = await loadCourseObj();
+
+  const estimatedCount = Array.from({ length: 1 }, (_, i) => i + 1);  // console.log(estimatedCount) // [1,2,3,4......,100]
+
+  // const url = `api/question/getQuestionLength?subject=network&trade=electrical`;
+  const path = [];
+  courseObj.map((item) => {
+    const { trade, subjects } = item;
+    subjects.map(async (subject) => {
+      estimatedCount.map(async (count) => {
+        path.push({ params: { route: [String(trade), String(subject), String(count)] } })
+      })
+    })
+  });
+
+  console.log("end")
+  console.log(path)
 
   return {
     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
@@ -137,6 +141,7 @@ export async function getStaticProps(context) {
   var noOfPageForPagination, courseObj, stringifiedQuestion;
   var UserBlogPage = 1;
   const questionsPerPage = 15;
+
   try {
     courseObj = await loadCourseObj();
 

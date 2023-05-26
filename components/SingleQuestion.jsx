@@ -14,12 +14,12 @@ export default function SingleQuestion({
 }) {
   const [opt, setOpt] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-
+  
   useEffect(() => {
     setShowDetails(false);
     const sorted = options.sort(() => Math.random() - 0.5);
     setOpt(sorted);
-  }, [index]);
+  }, [index,question,trueOpt]);
 
   // do stuffs links loader or white modal for each question
   if (opt.length === 0) {
@@ -47,6 +47,7 @@ export default function SingleQuestion({
       </div>
 
       {/* option buttons here */}
+
       <OptionButton
         text={Object.values(opt[0])[0]}
         trueOpt={trueOpt}
@@ -67,8 +68,9 @@ export default function SingleQuestion({
         trueOpt={trueOpt}
         setShowDetails={setShowDetails}
       />
+{/* options are here */}
 
-      {/* <SimpleDialogDemo details={details} /> */}
+
       <div className="flex justify-between py-2 px-1">
         <Button
           variant="contained"
@@ -94,6 +96,7 @@ export default function SingleQuestion({
           </Tooltip>
         </div>
       </div>
+
       {/* showing detials on button click or option click */}
       {showDetails ? (
         <div className="p-1 ">

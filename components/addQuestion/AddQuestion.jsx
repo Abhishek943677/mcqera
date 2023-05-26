@@ -104,7 +104,7 @@ export default function AddQuestion({ courseObj }) {
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
       {/* <form> */}
-      <div className="w-2/4 mx-auto">
+        <div className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
         <ChangeTrade
           trade={trade}
           courses={courses}
