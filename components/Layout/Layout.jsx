@@ -41,7 +41,7 @@ export default function Layout({ children }) {
        <LowerHeader /> 
        
         <div className="flex">
-          <div className="mt-20 w-[75%] border border-red-700 max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1">
+          <div className="mt-5 w-[75%] border border-red-700 max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1">
             {children}
 
             {/*ads for smaller screens */}

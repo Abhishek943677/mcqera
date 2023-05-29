@@ -1,1 +1,30 @@
-[{"_id":1,"subjects":["mosambic","dos","material","fluid"],"trade":"civil"},{"_id":2,"subjects":["machie","network","power sytem","electronics"],"trade":"electrical"},{"_id":3,"trade":"cse","subjects":["coding","programibg"]}]
+[
+    {
+        "_id": 1,
+        "subjects": [
+            "mosambic",
+            "dos",
+            "material",
+            "fluid"
+        ],
+        "trade": "civil"
+    },
+    {
+        "_id": 2,
+        "subjects": [
+            "machie",
+            "network",
+            "power sytem",
+            "electronics"
+        ],
+        "trade": "electrical"
+    },
+    {
+        "_id": 3,
+        "trade": "cse",
+        "subjects": [
+            "coding",
+            "programibg"
+        ]
+    }
+]

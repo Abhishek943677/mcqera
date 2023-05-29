@@ -43,3 +43,16 @@ textarea {
 #question{
   /* @apply flex  */
 }
+.blogpost{
+  @apply list-disc px-1
+}
+.blogpost a{
+  @apply text-red-900 font-bold
+}
+
+.blogpost-main-image{
+  @apply w-full my-3 rounded
+}
+.fill-image{
+  @apply w-full h-full fixed top-0 right-0 z-50
+}
