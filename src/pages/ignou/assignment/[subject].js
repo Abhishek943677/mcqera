@@ -61,7 +61,7 @@ export default function Subject({ data }) {
               src={urlFor(image).url()}
 
               placeholder="blur"
-              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(500, 500))}`}
+              blurDataURL={`data:image/svg+xml;base64,${toBase64(shimmer(300, 300))}`}
 
               quality={80}
               height={500}

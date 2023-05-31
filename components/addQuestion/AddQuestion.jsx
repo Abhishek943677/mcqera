@@ -2,16 +2,17 @@ import React, { useEffect, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 import "react-quill/dist/quill.snow.css";
 import Editor from "../editor/Editor";
+import DeleteIcon from "@mui/icons-material/Delete";
 import { useSession } from "next-auth/react";
 import { Button } from "@mui/material";
 
 import ChangeTrade from "../ChangeTrade";
 import ChangeSubject from "../ChangeSubject";
-import InputField from "../InputField";
 import Spinner from "../widgets/Spinner";
 import axios from "axios";
 import SuccessSnackBar from "../widgets/SuccessSnackBar";
 import FailureSnackBar from "../widgets/FailureSnackBar";
+import { useRouter } from "next/router";
 
 export default function AddQuestion({ courseObj }) {
   const { data: session } = useSession();
@@ -23,6 +24,8 @@ export default function AddQuestion({ courseObj }) {
   const [sent, setSent] = useState(false);
   const [openSuccessSnack, setOpenSuccessSnack] = useState(false);
   const [openFailureSnack, setOpenFailureSnack] = useState(false);
+  const [questionId, setQuestionId] = useState("");
+  const router = useRouter();
 
   const [que, setQue] = useState({
     question: "",
@@ -61,14 +64,14 @@ export default function AddQuestion({ courseObj }) {
       })
       .then((p) => {
         setSent(false);
-        
+
         if (p.data.ok) {
           setOpenSuccessSnack(true);
         } else {
           setOpenFailureSnack(true);
         }
       });
-    // console.log(que);
+
     localStorage.setItem("tradeAdmin", trade);
     localStorage.setItem("subjectAdmin", subject);
     localStorage.setItem("subjectsAdmin", JSON.stringify(subjects));
@@ -83,7 +86,7 @@ export default function AddQuestion({ courseObj }) {
   };
   const handleChangeT = (e) => {
     // setQue({ ...que, trueOpt: e.target.value });
-    setQue({ ...que, trueOpt: e});
+    setQue({ ...que, trueOpt: e });
   };
   const handleChangeF1 = (e) => {
     // setQue({ ...que, falseOpt1: e.target.value });
@@ -95,16 +98,16 @@ export default function AddQuestion({ courseObj }) {
   };
   const handleChangeF3 = (e) => {
     // setQue({ ...que, falseOpt3: e.target.value });
-    setQue({ ...que, falseOpt3:e });
+    setQue({ ...que, falseOpt3: e });
   };
 
   return (
-    <div className="flex my-6 flex-col p-4 h-full mx-auto w-full">
+    <div className="flex my-6 flex-col h-full mx-auto w-full">
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
       {/* <form> */}
-        <div className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
+      <div className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
         <ChangeTrade
           trade={trade}
           courses={courses}
@@ -169,7 +172,6 @@ export default function AddQuestion({ courseObj }) {
           {sent ? <Spinner /> : "save question"}
         </Button>
       </div>
-      {/* </form> */}
 
       <div dangerouslySetInnerHTML={{ __html: que.detail }} id="article" />
     </div>

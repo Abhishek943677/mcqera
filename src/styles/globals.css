@@ -56,3 +56,6 @@ textarea {
 .fill-image{
   @apply w-full h-full fixed top-0 right-0 z-50
 }
+.deleted{
+  @apply cursor-wait;
+}

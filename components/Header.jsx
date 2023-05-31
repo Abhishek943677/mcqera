@@ -24,12 +24,9 @@ export default function Header() {
     }
   };
 
-
-
-
-
   useEffect(() => {
-    setShowProfile(false);
+    // setShowProfile(false);
+
     // dark theme logics
     if (
       localStorage.theme === "dark" ||
@@ -44,17 +41,14 @@ export default function Header() {
     }
 
     //profile modal logics
-    window.addEventListener("click", (e) => {
-      if (!document.getElementById("profile").contains(e.target)) {
-        setShowProfile(false);
-      }
-    });
+    // window.addEventListener("click", (e) => {
+    //   if (document.getElementById("profileModal") && !document.getElementById("profileModal").contains(e.target) && !document.getElementById("avatar").contains(e.target)) {
+    //     console.log("bahar hai")
+    //     setShowProfile(false);
+    //   }
+    // });
+
   }, []);
-
-
-
-
-
 
   return (
     <div className="flex flex-row justify-between w-full flex-wrap">
@@ -71,37 +65,42 @@ export default function Header() {
       </div>
 
       {/* right side header icons */}
-      <div className="mr-3 flex " id="profile">
-
+      <div className="mr-3 flex ">
         {/* login and signIn things */}
         {session ? (
           <div>
-            <span
-              className="flex cursor-pointer"
-              onClick={() => setShowProfile((pre) => !pre)}
-            >
-              <Avatar />
-            </span>
-            {/* profile and its modal */}
+            <div className="flex cursor-pointer mr-3">
+              <Avatar
+                className="w-fit"
+                id="avatar"
+                onClick={() => {
+                  setShowProfile(!showProfile);
+                  console.log(showProfile);
+                }}
+              />
+            </div>
+
+            {/* profile modal */}
             <Paper
               elevation={3}
-              className={`list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[5.65rem] p-4 ${
+              id="profileModal"
+              className={` list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 ${
                 showProfile ? "block" : "hidden"
               } rounded make-com-dark`}
             >
-              <li>
-                <p>{session.user.name}</p>
-                <Divider />
-              </li>
-              <li>
-                <Button
-                  variant="contained"
-                  size="small"
-                  onClick={() => signOut()}
-                >
-                  log out
-                </Button>
-              </li>
+                <li>
+                  <p>{session.user.name}</p>
+                  <Divider />
+                </li>
+                <li>
+                  <Button
+                    variant="contained"
+                    size="small"
+                    onClick={() => signOut()}
+                  >
+                    log out
+                  </Button>
+                </li>
             </Paper>
           </div>
         ) : (
@@ -109,7 +108,6 @@ export default function Header() {
             <Login />
           </div>
         )}
-
 
         {/* dark theme button */}
         <DarkthemeSwitch
@@ -119,9 +117,6 @@ export default function Header() {
             toggleDarkMode(e.target.checked);
           }}
         />
-
-
-
       </div>
     </div>
   );
