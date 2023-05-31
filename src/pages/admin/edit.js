@@ -11,7 +11,7 @@ import { Button } from '@mui/material';
 import Spinner from '../../../components/widgets/Spinner';
 import { useRouter } from 'next/router';
 
-export default function edit({ singleQuestion, courseObj }) {
+export default function Edit({ singleQuestion, courseObj }) {
 
     const { data: session } = useSession();
 
@@ -237,7 +237,7 @@ export async function getServerSideProps(context) {
     }
 
     return {
-        props: { courseObj, singleQuestion }
+        props: {session, courseObj, singleQuestion }
     };
 }
 
