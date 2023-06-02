@@ -7,7 +7,9 @@ export default function LowerHeader() {
         <Link href="/ignou">
         <li  className="mx-2 rounded-md">IGNOU Assignment</li>
         </Link>
-        <li  className="mx-2">Learn</li>
+        <Link href="/lessons">
+        <li  className="mx-2 rounded-md">Lessons</li>
+        </Link>
         <li  className="mx-2">Interview</li>
       </nav>
   );

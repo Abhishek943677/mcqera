@@ -2,6 +2,7 @@ import React, { useEffect } from 'react'
 import { clientIgnou } from '../../../lib/sanityConnect';
 import { Paper } from '@mui/material';
 import Link from 'next/link';
+import Head from 'next/head';
 
 const Index = ({ data }) => {
 

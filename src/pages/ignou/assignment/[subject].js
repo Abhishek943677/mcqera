@@ -8,9 +8,7 @@ import { Divider, Paper } from '@mui/material';
 export default function Subject({ data }) {
   const [fillImage, setFillImage] = useState(true)
 
-  useEffect(() => {
-    console.log(data)
-  }, [])
+ 
 // image blur effect with next js
   const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">

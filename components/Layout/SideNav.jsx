@@ -5,6 +5,7 @@ import PreviousYearMenu from "../PreviousYearMenu";
 import Footer from "../Footer";
 import getPreviousYearData from "../../logics/getPreviousYearData";
 import QuickLinks from "../QuickLinks";
+import Image from "next/image";
 
 // export default function SideNav({ children }) {
 const SideNav = ({ children }) => {
@@ -24,6 +25,7 @@ const SideNav = ({ children }) => {
   return (
     // for bigger devices
     <div>
+      {/* logo */}
       <div className="flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex ">
         {/* hamburger icon and its logic */}
         <div className="absolute top-14 right-4">
@@ -38,15 +40,22 @@ const SideNav = ({ children }) => {
 
         {/* div for sidebar and its content */}
         <div
-          className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 ${
+          className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 z-50 ${
             open ? "hidden" : "w-[20%]"
           } `}
         >
+          <Image
+            src={"/transparent-logo.png"}
+            height={100}
+            width={100}
+            className="p-1 m-3"
+          />
+
           <PreviousYearMenu data={data} />
         </div>
 
         {/* this is the place where all the child components comes in */}
-        
+
         <div
           className={` overflow-y-auto m-auto   ${
             open ? "w-full ml-0" : "ml-[20%] w-full"
@@ -56,9 +65,6 @@ const SideNav = ({ children }) => {
           <Footer />
         </div>
       </div>
-
-        
-
 
       {/* for smaller devices */}
 
@@ -76,12 +82,16 @@ const SideNav = ({ children }) => {
 
         {/* div for sidebar and its content */}
         <div
-          className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex flex-wrap ${
-            open
-              ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50"
-              : "hidden"
+          className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex-wrap ${
+            open ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50" : "hidden"
           }`}
         >
+          <Image
+            src={"/transparent-logo.png"}
+            height={100}
+            width={100}
+            className="m-1"
+          />
           <PreviousYearMenu data={data} />
         </div>
 

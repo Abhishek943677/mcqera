@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Login from "./login/Login";
 import { signOut, useSession } from "next-auth/react";
-import { Avatar, Button, Divider, Paper } from "@mui/material";
+import { Avatar, Button, Divider, Paper, Tooltip } from "@mui/material";
 import DarkthemeSwitch from "./widgets/DarkthemeSwitch";
 import { useRouter } from "next/router";
 import { BiHome } from "react-icons/bi";
@@ -10,7 +10,6 @@ import { RiArrowGoBackFill } from "react-icons/ri";
 export default function Header() {
   const { data: session } = useSession();
   const [dark, setDark] = useState(null);
-  const [showProfile, setShowProfile] = useState(false);
   const router = useRouter();
 
   // this function is called inside DarkthemeSwitch
@@ -40,14 +39,6 @@ export default function Header() {
       setDark(true);
     }
 
-    //profile modal logics
-    // window.addEventListener("click", (e) => {
-    //   if (document.getElementById("profileModal") && !document.getElementById("profileModal").contains(e.target) && !document.getElementById("avatar").contains(e.target)) {
-    //     console.log("bahar hai")
-    //     setShowProfile(false);
-    //   }
-    // });
-
   }, []);
 
   return (
@@ -68,26 +59,18 @@ export default function Header() {
       <div className="mr-3 flex ">
         {/* login and signIn things */}
         {session ? (
-          <div>
-            <div className="flex cursor-pointer mr-3">
-              <Avatar
-                className="w-fit"
-                id="avatar"
-                onClick={() => {
-                  setShowProfile(!showProfile);
-                  console.log(showProfile);
-                }}
-              />
+          <div id="avatar-div">
+            <div className="flex cursor-pointer mr-3 ">
+              <Avatar className="w-fit" />
             </div>
 
             {/* profile modal */}
-            <Paper
-              elevation={3}
-              id="profileModal"
-              className={` list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 ${
-                showProfile ? "block" : "hidden"
-              } rounded make-com-dark`}
-            >
+            <div>
+              <Paper
+                elevation={3}
+                id="profileModal"
+                className={` list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 rounded make-com-dark`}
+              >
                 <li>
                   <p>{session.user.name}</p>
                   <Divider />
@@ -101,7 +84,9 @@ export default function Header() {
                     log out
                   </Button>
                 </li>
-            </Paper>
+              </Paper>
+            </div>
+
           </div>
         ) : (
           <div>

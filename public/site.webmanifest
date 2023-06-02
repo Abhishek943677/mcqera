@@ -1,0 +1,42 @@
+{
+    "name": "mcqera",
+    "short_name": "mcqera",
+    "description": "Awesome application that will help you achieve your dreams.",
+    "icons": [
+        {
+            "src": "/android-chrome-192x192.png",
+            "sizes": "192x192",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/android-chrome-512x512.png",
+            "sizes": "512x512",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "any.svg",
+            "sizes": "any",
+            "purpose": "maskable"
+        }
+    ],
+    "categories": [
+        "education",
+        "social"
+    ],
+    "shortcuts": [
+        {
+            "name": "Admin",
+            "url": "/admin",
+            "description": "only for admin"
+        },
+        {
+            "name": "ignou",
+            "url": "/ignou"
+        }
+    ],
+    "theme_color": "#ffffff",
+    "background_color": "#ffffff",
+    "display": "standalone"
+}

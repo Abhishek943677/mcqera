@@ -6,6 +6,7 @@ import { LinearProgress } from "@mui/material";
 import SideNav from "./SideNav";
 import AdsSideBar from "../AdsSideBar";
 import LowerHeader from "../LowerHeader";
+import Seo from "../../lib/seo";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -23,8 +24,9 @@ export default function Layout({ children }) {
 
   return (
     <div className="">
+      {/* <Seo /> */}
       {urlChange ? (
-        <div className=" border-0 rounded-md fixed top-0 w-full">
+        <div className=" border-0 rounded-md fixed top-0 w-full z-50 ">
           <LinearProgress color="primary" sx={{ height: "5px" }} />
         </div>
       ) : (
