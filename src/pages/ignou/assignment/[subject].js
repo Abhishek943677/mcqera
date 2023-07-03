@@ -8,8 +8,8 @@ import { Divider, Paper } from '@mui/material';
 export default function Subject({ data }) {
   const [fillImage, setFillImage] = useState(true)
 
- 
-// image blur effect with next js
+
+  // image blur effect with next js
   const shimmer = (w, h) => `
 <svg width="${w}" height="${h}" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
   <defs>
@@ -42,6 +42,7 @@ export default function Subject({ data }) {
 
   return (
     <main>
+      
       <section className="blogpost">
         <h1 className='text-2xl text-center py-2'>{data.subjectName.toUpperCase()}</h1>
         <h1 className='text-2xl text-center py-2'>Session : {data.session}</h1>

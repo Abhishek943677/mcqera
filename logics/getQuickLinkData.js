@@ -3,8 +3,8 @@ import { clientQuickLinks } from "../lib/sanityConnect";
 export default async function getQuickLinkData() {
 
     const quicklinksUnorganised = await clientQuickLinks.fetch(`*[_type=="quicklinks"]{category,title,slug}`);
-    console.clear()
-    console.log(quicklinksUnorganised)
+    // console.clear()
+    // console.log(quicklinksUnorganised)
     const sorted = quicklinksUnorganised.sort((a, b) => a.category.length - b.category.length);
 
     const gotArrayOfCategory = sorted.map((i, index) => {

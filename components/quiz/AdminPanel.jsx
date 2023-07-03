@@ -22,7 +22,8 @@ export default function AdminPanel({ courseObj }) {
   const [count, setCount] = useState(1);
   const [listData, setListData] = useState([]);
   const router = useRouter();
-  const totalQuestionAtOnce = 4;
+ 
+  const totalQuestionAtOnce = 10; // this is the total number of questions , simultaneously change the number at server (/api/question/questionsByAdmin) 
 
   useEffect(() => {
     if (
@@ -44,7 +45,7 @@ export default function AdminPanel({ courseObj }) {
 
   const handleApi = () => {
     setCount(1);
-    console.log(trade, subject);
+    // console.log(trade, subject);
     axios
       .post("/api/question/questionsByAdmin", {
         trade,
@@ -55,7 +56,7 @@ export default function AdminPanel({ courseObj }) {
       .then(({ data }) => {
         setSent(false);
         if (data.list.length < totalQuestionAtOnce) {
-          console.log("less than 4");
+          console.log("less than given totalQuestionAtOnce");
           setCount(1);
         }
 
@@ -84,7 +85,7 @@ export default function AdminPanel({ courseObj }) {
     axios
       .post("/api/question/deleteQuestion", { trade, subject, id })
       .then(({ data }) => {
-        console.log(data);
+        // console.log(data);
         const filteredList = listData.filter((item) => item._id !== id);
         setListData(filteredList);
       });
@@ -160,7 +161,7 @@ export default function AdminPanel({ courseObj }) {
                   <div
                     className=" py-4"
                     dangerouslySetInnerHTML={{ __html: item.que?.question }}
-                  />
+                    />
                   <div className="flex my-auto ">
                     <Button size="small" onClick={(e)=>e.target.classList.add("deleted")}>
                       <DeleteIcon
@@ -170,7 +171,7 @@ export default function AdminPanel({ courseObj }) {
                         onClick={() => {
                           handleDelete(item._id);
                         }}
-                      />
+                        />
                     </Button>
                     <Link
                       href={`/admin/edit?id=${item._id}&subject=${subject}&trade=${trade}`}
@@ -186,6 +187,7 @@ export default function AdminPanel({ courseObj }) {
                         />
                       </Button>
                     </Link>
+                        <p className="text-center my-auto p-1">{index+1}</p>
                   </div>
                 </div>
                 <Divider />
@@ -197,6 +199,8 @@ export default function AdminPanel({ courseObj }) {
         <div className="mx-auto flex justify-center">
           <Button
             variant="contained"
+            className="w-52"
+            disabled={sentGetMore}
             onClick={() => {
               handleLoadMore(count);
             }}

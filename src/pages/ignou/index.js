@@ -5,7 +5,7 @@ import Link from 'next/link';
 import Head from 'next/head';
 
 const Index = ({ data }) => {
-
+console.log(data);
   return (
     <main>
       {data.map((element, i) => {

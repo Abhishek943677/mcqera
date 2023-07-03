@@ -1,33 +1,38 @@
 import React, { useEffect, useState } from "react";
-import AddQuestion from "../../../components/addQuestion/AddQuestion";
 import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { useRouter } from "next/router";
-import AdminPanel from "../../../components/adminPanel/AdminPanel";
 import { Button } from "@mui/material";
+import AdminPanel from "../../../components/quiz/AdminPanel";
+import AddQuestion from "../../../components/quiz/AddQuestion";
 
 export default function Home({ courseObj }) {
-  const { data: session } = useSession();
-  const [showAdminPanel, setShowAdminAPanel] = useState(false)
-  const router = useRouter();
-    
+  const [showAdminPanel, setShowAdminAPanel] = useState(false);
 
   return (
     <div className={`w-full mx-auto`}>
-      <Button variant="contained" onClick={() => setShowAdminAPanel(pre => !pre)}>{showAdminPanel ? "Add new Question" : "Edit Your Previous Questions"}</Button>
-      {showAdminPanel ?
+
+      <Button
+        variant="contained"
+        onClick={() => setShowAdminAPanel((pre) => !pre)}
+      >
+        {showAdminPanel ? "Add new Question" : "Edit Your Previous Questions"}
+      </Button>
+
+      
+      {showAdminPanel ? (
         <AdminPanel courseObj={courseObj} />
-        :
-        <AddQuestion courseObj={courseObj}  />
-      }
+      ) : (
+        <AddQuestion courseObj={courseObj} />
+      )}
     </div>
   );
 }
 
-
+// ---------------------server auth and admin authentication------------------------
 export async function getServerSideProps(context) {
-
+  // this is user authentication
   const session = await getSession({ req: context.req });
   if (!session) {
     return {
@@ -37,8 +42,12 @@ export async function getServerSideProps(context) {
       },
     };
   }
+
+  // this is admin validation
   try {
-    const { data } = await axios.post(`${process.env.APP_URL}/api/auth/admin`, { email: session.user.email })
+    const { data } = await axios.post(`${process.env.APP_URL}/api/auth/admin`, {
+      email: session.user.email,
+    });
     if (!data) {
       return {
         redirect: {
@@ -56,10 +65,20 @@ export async function getServerSideProps(context) {
     };
   }
 
-  const courseObj = await loadCourseObj();
-    
+  // actual server stuffs
+  try {
+    const courseObj = await loadCourseObj();
 
-  return {
-    props: { session, courseObj }
-  };
+    // retuning data for frontend
+    return {
+      props: { session, courseObj },
+    };
+  } catch (error) {
+    return {
+      redirect: {
+        destination: "/",
+        permanent: false,
+      },
+    };
+  }
 }

@@ -46,12 +46,24 @@ textarea {
 .blogpost{
   @apply list-disc px-1
 }
+.blogpost ul li{
+ @apply list-disc mx-6
+}
+.blogpost ol li{
+ @apply list-decimal mx-6
+}
 .blogpost a{
   @apply text-red-900 font-bold
+}
+.blogpost blockquote{
+  @apply border-l-2 px-2
 }
 
 .blogpost-main-image{
   @apply w-full my-3 rounded
+}
+.blogpost table, th, td{
+  @apply border p-2;
 }
 .fill-image{
   @apply w-full h-full fixed top-0 right-0 z-50

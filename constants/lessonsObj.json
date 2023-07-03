@@ -1,0 +1,40 @@
+[
+  {
+    "course": "electrical",
+    "subjectArray": [
+      {
+        "subject": "machine",
+        "chapterArray": ["transformer", "alternator"]
+      },
+      {
+        "subject": "power system",
+        "chapterArray": ["generation", "trasnmission"]
+      }
+    ]
+  },
+  {
+    "_id": {
+      "$oid": "649d456862d93ef03bce8b24"
+    },
+    "course": "civil",
+    "subjectArray": [
+      {
+        "subject": "mos",
+        "chapterArray": ["gandu", "ghoda"]
+      },
+      {
+        "subject": "dos",
+        "chapterArray": ["loda", "foda"]
+      }
+    ]
+  },
+  {
+    "course": "cse",
+    "subjectArray": [
+      {
+        "subject": "power system",
+        "chapterArray": ["generation", "trasnmission"]
+      }
+    ]
+  }
+]

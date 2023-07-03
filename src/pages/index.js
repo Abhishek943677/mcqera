@@ -12,7 +12,6 @@ import { NextSeo } from "next-seo";
 
 
 const Home = ({ courseObj, quicklinks }) => {
-  console.log(courseObj)
 
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
@@ -42,14 +41,7 @@ const Home = ({ courseObj, quicklinks }) => {
 
   return (
     <div>
-      {/* seo things */}
-      <NextSeo
-        title="mcqera"
-        description={`Discover a comprehensive collection of multiple choice questions on our website. Enhance your knowledge and test your skills with our diverse range of MCQs covering various subjects.  Join our community of learners and gain confidence in tackling multiple choice questions effectively. Start your learning journey today!`}
-      />
-      {/* end seo */}
-      
-      <header className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
+      <section className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
         <ChangeTrade
           trade={trade}
           courses={courses}
@@ -77,7 +69,7 @@ const Home = ({ courseObj, quicklinks }) => {
         >
           start quiz
         </Button>
-      </header>
+      </section>
 
       <QuickLinks data={quicklinks} />
     </div>

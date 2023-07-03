@@ -1,11 +1,22 @@
 import React from 'react'
 import { clientQuickLinks } from '../../../lib/sanityConnect'
 import SingleQuestion from '../../../components/SingleQuestion';
+import { NextSeo } from 'next-seo';
 
-export default function Index({ questions, title }) {
-  console.log(questions)
+export default function Index({ questions, title, category }) {
+  // console.log(category)
+  // console.log(title)
   return (
     <div>
+      {/* SEO... */}
+      <NextSeo
+        title={title}
+        description={`get top question of ${category} of topic ${title} with answers and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
+        canonical={`https://mcqera-db.vercel.app/quicklinks/${category}/${title}`}
+      />
+      {/*...SEO  */}
+
+
       <h1 className='text-xl text-center mb-5'>{title.toUpperCase()}</h1>
       {questions.length > 0 ? JSON.parse(questions).map((i, index) => {
         return (
@@ -57,23 +68,25 @@ export async function getStaticProps(context) {
 
 
   console.log(res)
-  if(!res[0].question){
+  if (!res[0].question) {
     return {
       props: {
         questions: [],
-        title: res[0].title
+        title: res[0].title,
+        category
       },
       revalidate: 60,
     }
   }
 
   const stringifiedRes = JSON.stringify(res[0].question)
-  console.log(stringifiedRes)
+  // console.log(stringifiedRes)
 
   return {
     props: {
       questions: stringifiedRes,
-      title: res[0].title
+      title: res[0].title,
+      category
     },
     revalidate: 60,
   };
