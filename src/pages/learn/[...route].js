@@ -51,14 +51,14 @@ export async function getStaticPaths() {
 
   lessonsObj.map((item) => {
     const { course, subjectArray } = item;
-    subjectArray.map(async (subject) => {
+    subjectArray.map((subject) => {
       path.push({ params: { route: [String(course), String(subject.subject)] } })
       
     })
   });
 
   console.log("end")
-  console.log(path[3].params.route)
+  // console.log(path[3].params.route)
 
   return {
     // paths: [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','network'] } }],
@@ -75,7 +75,7 @@ export const getStaticProps = async (context) => {
 
   const db = await mongoConnectLearn();
   const collectionName="topics"
-  const collection = db.collection(collectionName); //accessing collection of trade
+  const collection = db.collection("topics"); //accessing collection of topics
 
   const dataUnorganised = await collection
     .find({course,subject}) // finding data from trade collection with subject name
