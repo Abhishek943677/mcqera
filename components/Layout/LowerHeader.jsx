@@ -8,14 +8,17 @@ export default function LowerHeader() {
   const [quickLinksData, setQuickLinksData] = useState([]);
   useEffect(() => {
     //getting data for quick links
-    clientQuickLinks
-      .fetch(`*[_type=="quicklinks"]{category,title,slug}`)
-      .then((quicklinksUnorganised) => {
-        quicklinksUnorganised.sort(
+    
+      fetch(`https://tudbzgpd.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22quicklinks%22%5D%7Bcategory%2Ctitle%2Cslug%7D`)
+      .then(response=>response.json())
+
+      .then(({result}) => {
+        console.log(result)
+        result.sort(
           (a, b) => a.category.length - b.category.length
         );
 
-        const gotArrayOfCategory = quicklinksUnorganised.map((i, index) => {
+        const gotArrayOfCategory = result.map((i, index) => {
           return i.category;
         });
 
@@ -25,7 +28,7 @@ export default function LowerHeader() {
 
         for (let i = 0; i < uniqueArrayOfCategory.length; i++) {
           const category = uniqueArrayOfCategory[i];
-          const d = quicklinksUnorganised.filter(
+          const d = result.filter(
             (i) => i.category === category
           );
           const sorted = d.sort((a, b) => b.title.length - a.title.length);

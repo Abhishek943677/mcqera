@@ -1,7 +1,7 @@
 import { clientPreviousYear } from "../lib/sanityConnect";
 
 export default async function getPreviousYearData() {
-  const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`);
+  // const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`);
   // const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`, { next: { revalidate: 600 } });//60*10 == 10min
   // var data=[];
 
