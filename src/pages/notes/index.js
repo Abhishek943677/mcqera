@@ -16,7 +16,7 @@ const Index = ({ data }) => {
 
       {data.map((element, i) => {
         return (
-          <Accordion className="make-com-dark my-4">
+          <Accordion className="make-com-dark my-4" key={i}>
             <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={
@@ -33,7 +33,7 @@ const Index = ({ data }) => {
 
             {element.map((item, index) => {
               return (
-                <AccordionDetails className="w-full">
+                <AccordionDetails className="w-full" key={index}>
                   <div
                     className="hover:opacity-50 cursor-pointer w-full"
                     key={index}

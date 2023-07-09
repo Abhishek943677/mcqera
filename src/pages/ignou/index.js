@@ -36,7 +36,7 @@ const Index = ({ data }) => {
 
             {element.map((item, index) => {
               return (
-                <AccordionDetails className="w-full">
+                <AccordionDetails className="w-full" key={index}>
                   <div
                     className="hover:opacity-50 cursor-pointer w-full"
                     key={index}

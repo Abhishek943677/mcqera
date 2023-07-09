@@ -6,6 +6,7 @@ import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Link from "next/link";
 import Head from "next/head";
 import { clientPreviousYear } from "../../../lib/sanityConnect";
+import Spinner from "../../../components/widgets/Spinner";
 
 const Index = ({ data }) => {
   console.log(data);
