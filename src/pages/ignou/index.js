@@ -19,7 +19,7 @@ const Index = ({ data }) => {
     <main>
       {data.map((element, i) => {
         return (
-          <Accordion className="make-com-dark my-4">
+          <Accordion className="make-com-dark my-4" key={i}>
             <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={

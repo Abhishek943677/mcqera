@@ -19,7 +19,7 @@ const Home = ({ lessonsObj }) => {
 
       {JSON.parse(lessonsObj).map((item, index) => {
         return (
-          <Accordion className="make-com-dark my-4">
+          <Accordion className="make-com-dark my-4" key={index}>
             <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={
@@ -36,7 +36,7 @@ const Home = ({ lessonsObj }) => {
 
             {item.subjectArray.map((subject, index) => {
               return (
-                <AccordionDetails className="w-full">
+                <AccordionDetails className="w-full" key={index}>
                   <div
                     className="hover:opacity-50 cursor-pointer w-full"
                     key={index}

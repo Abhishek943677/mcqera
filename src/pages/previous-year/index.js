@@ -13,6 +13,7 @@ const Index = ({ data }) => {
   return (
     <div className="">
       <h1 className="text-xl text-center">Previous year Papers</h1>
+
       {data.length !== 0 ? (
         data.map((element, i) => {
           return (
@@ -33,10 +34,9 @@ const Index = ({ data }) => {
 
               {element.map((item, index) => {
                 return (
-                  <AccordionDetails className="w-full">
+                  <AccordionDetails className="w-full" key={index}>
                     <div
                       className="hover:opacity-50 cursor-pointer w-full"
-                      key={index}
                     >
                       <Link
                         href={`/previous-year/${item.examname}/${item.branch}`}
