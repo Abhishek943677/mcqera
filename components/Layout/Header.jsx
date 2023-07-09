@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
-import Login from "./login/Login";
 import { signOut, useSession } from "next-auth/react";
 import { Avatar, Button, Divider, Paper, Tooltip } from "@mui/material";
-import DarkthemeSwitch from "./widgets/DarkthemeSwitch";
 import { useRouter } from "next/router";
 import { BiHome } from "react-icons/bi";
 import { RiArrowGoBackFill } from "react-icons/ri";
+import Login from "../login/Login";
+import DarkthemeSwitch from "../widgets/DarkthemeSwitch";
 
 export default function Header() {
   const { data: session } = useSession();

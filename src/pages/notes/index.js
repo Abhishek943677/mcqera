@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
-import { clientIgnou } from "../../../lib/sanityConnect";
+import { Accordion, AccordionDetails, AccordionSummary, Divider, Paper } from "@mui/material";
+import Link from "next/link";
+import Head from "next/head";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
-
-import Link from "next/link";
-import {
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-  Divider,
-} from "@mui/material";
-import Head from "next/head";
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
+import DescriptionRoundedIcon from '@mui/icons-material/DescriptionRounded';
+import { clientNotes } from "../../../lib/sanityConnect";
 
 const Index = ({ data }) => {
   console.log(data);
+
   return (
     <main>
+
       {data.map((element, i) => {
         return (
           <Accordion className="make-com-dark my-4">
@@ -27,8 +24,8 @@ const Index = ({ data }) => {
               }
             >
               <h2 className="text-xl mx-auto">
-                <CalendarMonthRoundedIcon className="mr-3" />
-                {element[0].session}
+                <SchoolIcon className="mr-3" />
+                {element[0].category}
               </h2>
             </AccordionSummary>
 
@@ -41,10 +38,10 @@ const Index = ({ data }) => {
                     className="hover:opacity-50 cursor-pointer w-full"
                     key={index}
                   >
-                    <Link href={`/ignou/assignment/${item.slug.current}`}>
+                    <Link href={`/notes/${item.slug.current}`}>
                       <p className="w-full">
-                        <SchoolIcon className="mr-3" />
-                        {item.subjectName}
+                        <DescriptionRoundedIcon className="mr-3" />
+                        {item.title}
                       </p>
                     </Link>
                   </div>
@@ -59,26 +56,24 @@ const Index = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  const dataUnorganised = await clientIgnou.fetch(
-    `*[_type=="post"]{session,subjectName,slug}`
+  const dataUnorganised = await clientNotes.fetch(
+    `*[_type=="notes"]{category,slug,title}`
   );
   const sorted = dataUnorganised.sort(
-    (a, b) => a.session.length - b.session.length
+    (a, b) => a.category.length - b.category.length
   );
 
   const gotArrayOfSession = sorted.map((i, index) => {
-    return i.session;
+    return i.category;
   });
 
   const uniqueArrayOfSession = [...new Set(gotArrayOfSession)];
   var furnished = [];
 
   for (let i = 0; i < uniqueArrayOfSession.length; i++) {
-    const session = uniqueArrayOfSession[i];
-    const d = dataUnorganised.filter((i) => i.session === session);
-    const sorted = d.sort(
-      (a, b) => b.subjectName.length - a.subjectName.length
-    );
+    const category = uniqueArrayOfSession[i];
+    const d = dataUnorganised.filter((i) => i.category === category);
+    const sorted = d.sort((a, b) => b.title.length - a.title.length);
     furnished.push(sorted);
   }
 

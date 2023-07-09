@@ -73,9 +73,33 @@ textarea {
 }
 #avatar-div:hover #profileModal{
 display: block;
-/* position: relative; */
-/* top: 0px; */
 }
 #profileModal{
   display: none;
 }
+
+/* ------------------dropdown css------------------  */
+.dropbtn {
+  @apply w-fit p-1 cursor-pointer mx-2 hover:text-red-700
+}
+
+.dropdown {
+  display: block;
+}
+
+.dropdown-content {
+  display: none;
+ 
+}
+
+.dropdown:hover .dropdown-content {
+  @apply flex flex-wrap flex-col justify-center absolute right-0  text-white w-full  bg-slate-700 z-50 rounded-lg
+
+}
+.dropdown-content li {
+  @apply mx-1 p-1 my-auto text-sm
+}
+
+/* ------------------dropdown css------------------  */
+
+

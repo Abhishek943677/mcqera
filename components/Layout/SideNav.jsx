@@ -1,26 +1,20 @@
 import React, { useEffect, useState } from "react";
 import { BiMenu } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
-import PreviousYearMenu from "../PreviousYearMenu";
-import Footer from "../Footer";
-import getPreviousYearData from "../../logics/getPreviousYearData";
-import QuickLinks from "../QuickLinks";
+import Footer from "./Footer";
 import Image from "next/image";
+import Link from "next/link";
+import UrlsComponent from "../UrlsComponent";
 
 // export default function SideNav({ children }) {
 const SideNav = ({ children }) => {
   const [open, setOpen] = useState(false);
-  const [data, setData] = useState([]);
-
-  useEffect(() => {
-    getPreviousYearData().then((data) => {
-      setData(data);
-    });
-  }, []);
 
   const handlesidebar = () => {
     setOpen(!open);
   };
+
+  
 
   return (
     // for bigger devices
@@ -38,7 +32,7 @@ const SideNav = ({ children }) => {
           </p>
         </div>
 
-        {/* div for sidebar and its content */}
+        {/* div for sidebar and its content for bigger devices*/}
         <div
           className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 z-50 ${
             open ? "hidden" : "w-[20%]"
@@ -50,8 +44,8 @@ const SideNav = ({ children }) => {
             width={100}
             className="p-1 m-3"
           />
-
-          <PreviousYearMenu data={data} />
+          {/*  links div for multiple pages*/}
+          <UrlsComponent />
         </div>
 
         {/* this is the place where all the child components comes in */}
@@ -80,7 +74,7 @@ const SideNav = ({ children }) => {
           </p>
         </div>
 
-        {/* div for sidebar and its content */}
+        {/* div for sidebar and its content for smaller devices */}
         <div
           className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex-wrap ${
             open ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50" : "hidden"
@@ -92,7 +86,8 @@ const SideNav = ({ children }) => {
             width={100}
             className="m-1"
           />
-          <PreviousYearMenu data={data} />
+          {/*  links div for multiple pages*/}
+          <UrlsComponent />
         </div>
 
         {/* for footer and children */}

@@ -1,13 +1,13 @@
 import React from "react";
-import SingleQuestion from "../../../components/SingleQuestion";
-import { clientPreviousYear } from "../../../lib/sanityConnect";
+import SingleQuestion from "../../../../components/SingleQuestion";
+import { clientPreviousYear } from "../../../../lib/sanityConnect";
 
 export default function Exam({ data }) {
   if (!data) {
     return <div>Not found</div>
   }
   return (
-    <main className="flex mx-auto sm:11/12 flex-col px-2 py-2 mt-20">
+    <main className="flex mx-auto sm:11/12 flex-col px-2 py-2">
       <p className="mx-auto text-lg">{data.paper.toUpperCase()}</p>
       {data.questions ? data.questions.map((i, index) => {
         return (
@@ -50,10 +50,10 @@ export async function getStaticPaths() {
     return { params: { papername: item.slug.current } }
   })
 
-  // console.log(path)
+  console.log(path[0].params)
 // [{ params: { papername: 'drdo-electrical-2001' } },{ params: { papername: 'ssc-je-electrical-2021' } },{ params: { papername: 'uppcl-tg33' } }]
   return {
     paths: path,
-    fallback: 'blocking',
+    fallback: false,
   }
 }

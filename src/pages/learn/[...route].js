@@ -75,7 +75,7 @@ export const getStaticProps = async (context) => {
 
   const db = await mongoConnectLearn();
   const collectionName="topics"
-  const collection = db.collection("topics"); //accessing collection of topics
+  const collection = db.collection(collectionName); //accessing collection of topics
 
   const dataUnorganised = await collection
     .find({course,subject}) // finding data from trade collection with subject name

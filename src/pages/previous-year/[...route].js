@@ -13,7 +13,7 @@ export default function Course({ data }) {
         return (
           <div key={i} className="my-3 mx-auto">
             <p className="text-center">
-              <Link href={`/paper/${ele.slug.current}`}>{ele.paper}</Link>
+              <Link href={`/previous-year/paper/${ele.slug.current}`}>{ele.paper}</Link>
             </p>
           </div>
         );

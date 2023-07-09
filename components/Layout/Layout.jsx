@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
-import Header from "../Header";
+import Header from "./Header";
 import Scrolltotop from "../widgets/ScrolltoTop";
 import { useRouter } from "next/router";
 import { LinearProgress } from "@mui/material";
 import SideNav from "./SideNav";
 import AdsSideBar from "../AdsSideBar";
-import LowerHeader from "../LowerHeader";
 import Seo from "../../lib/seo";
+import LowerHeader from "./LowerHeader";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -22,9 +22,11 @@ export default function Layout({ children }) {
     });
   }, []);
 
+
   return (
     <div className="">
       {/* <Seo /> */}
+
       {urlChange ? (
         <div className=" border-0 rounded-md fixed top-0 w-full z-50 ">
           <LinearProgress color="primary" sx={{ height: "5px" }} />
@@ -36,6 +38,8 @@ export default function Layout({ children }) {
       <Scrolltotop />
 
       <SideNav>
+
+
         <div className="">
           <Header />
         </div>
@@ -57,6 +61,8 @@ export default function Layout({ children }) {
             <AdsSideBar />
           </div>
         </div>
+
+        
       </SideNav>
     </div>
   );
