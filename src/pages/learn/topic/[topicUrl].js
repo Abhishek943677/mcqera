@@ -8,15 +8,10 @@ const Route = ({ data, topicsInChapter, chapter }) => {
 
   return (
     <div>
-
       {/* --------seo stuffs------- */}
-
-
       {/* --------seo stuffs------- */}
-
-
       Chapter : {chapter}
-      <br/>
+      <br />
       {JSON.parse(data).length !== 0 ? (
         JSON.parse(data).map((item, i) => {
           return (
@@ -38,13 +33,16 @@ const Route = ({ data, topicsInChapter, chapter }) => {
           sorry , there is no data available at this url.
         </h1>
       )}
-
       <div className="make-com-dark my-2 p-3 flex flex-col rounded-md">
-      <h1 className="text-2xl underline italic">More topics from {chapter} chapter</h1>
+        <h1 className="text-2xl underline italic">
+          More topics from {chapter} chapter
+        </h1>
         {JSON.parse(topicsInChapter).map((item, index) => {
           return (
             <div key={index}>
-              <Link href={item.url} className=" hover:opacity-50">{item.topicName}</Link>
+              <Link href={item.url} className=" hover:opacity-50">
+                {item.topicName}
+              </Link>
             </div>
           );
         })}
@@ -78,7 +76,7 @@ export async function getStaticPaths() {
 
   return {
     paths: path,
-    fallback: "blocking",
+    fallback: 'blocking',
   };
 }
 
@@ -101,14 +99,14 @@ export async function getStaticProps(context) {
     .find({ chapter })
     .project({ topicName: 1, url: 1 })
     .toArray();
-  // console.log(topicsInChapter);
+  console.log(topicsInChapter);
   return {
     props: {
       data: JSON.stringify(topicData),
       topicsInChapter: JSON.stringify(topicsInChapter),
       chapter,
-      revalidate: 60,
     },
+    revalidate: 60,
   };
 }
 

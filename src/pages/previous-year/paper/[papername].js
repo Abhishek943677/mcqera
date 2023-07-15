@@ -54,6 +54,6 @@ export async function getStaticPaths() {
 // [{ params: { papername: 'drdo-electrical-2001' } },{ params: { papername: 'ssc-je-electrical-2021' } },{ params: { papername: 'uppcl-tg33' } }]
   return {
     paths: path,
-    fallback: false,
+    fallback: "blocking",
   }
 }

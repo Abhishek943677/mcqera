@@ -70,8 +70,8 @@ export const getStaticProps = async () => {
   return {
     props: {
       lessonsObj: JSON.stringify(data),
-      revalidate: 60,
     },
+    revalidate: 60,
   };
 };
 

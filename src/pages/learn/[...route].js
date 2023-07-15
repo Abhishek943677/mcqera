@@ -108,6 +108,7 @@ const sorted = dataUnorganised.sort((a, b) => a.url.length - b.url.length);
       course,
       subject,
     },
+    revalidate:60,
   };
 };
 
