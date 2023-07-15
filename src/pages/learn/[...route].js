@@ -58,7 +58,7 @@ export async function getStaticPaths() {
   });
 
   console.log("end")
-  console.log(path[3])
+  console.log(path)
 
   return {
     // paths: [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','network'] } }],
