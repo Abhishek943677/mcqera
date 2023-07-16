@@ -1,7 +1,7 @@
 import React from 'react'
 import { clientQuickLinks } from '../../../lib/sanityConnect'
-import SingleQuestion from '../../../components/SingleQuestion';
 import { NextSeo } from 'next-seo';
+import SingleQuestion from '../../../components/question/SingleQuestion';
 
 export default function Index({ questions, title, category }) {
   // console.log(category)

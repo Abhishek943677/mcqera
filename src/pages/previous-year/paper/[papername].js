@@ -1,7 +1,7 @@
 import React from "react";
-import SingleQuestion from "../../../../components/SingleQuestion";
 import { clientPreviousYear } from "../../../../lib/sanityConnect";
 import { NextSeo } from "next-seo";
+import SingleQuestion from "../../../../components/question/SingleQuestion";
 
 export default function Exam({ data }) {
   console.log(data);
