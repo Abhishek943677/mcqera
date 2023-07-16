@@ -1,9 +1,10 @@
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
-import { SessionProvider } from "next-auth/react"
+import { SessionProvider } from "next-auth/react";
 import Layout from "../../components/Layout/Layout";
-import { DefaultSeo } from "next-seo";
 import Seo from "../../lib/seo";
+import { TourProvider } from "@reactour/tour";
+import steps from "../../constants/steps";
 
 export default function App({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -21,15 +22,19 @@ export default function App({ Component, pageProps }) {
   } else {
     return (
       <SessionProvider session={pageProps.session}>
-
-        {/* seo */}
+        <TourProvider
+          steps={steps}
+        >
+          {/* seo */}
           <Seo />
 
-        {/* layout */}
-        <Layout >
-          <Component {...pageProps} />
-        </Layout>
+          {/* layout */}
+          <Layout>
+            <Component {...pageProps} />
+          </Layout>
+
+        </TourProvider>
       </SessionProvider>
-    )
+    );
   }
 }

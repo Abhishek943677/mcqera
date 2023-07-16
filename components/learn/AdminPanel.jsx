@@ -1,4 +1,14 @@
-import { Button, Divider, MenuItem, Select } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Divider,
+  MenuItem,
+  Select,
+} from "@mui/material";
 import axios from "axios";
 import { useSession } from "next-auth/react";
 import Link from "next/link";
@@ -10,7 +20,6 @@ import { useEffect } from "react";
 import Spinner from "../widgets/Spinner";
 
 export default function AdminPanel({ data }) {
-
   const [learnObj, setLearnObj] = useState([]);
   const [course, setCourse] = useState("");
   const [subjectArray, setSubjectArray] = useState([]);
@@ -21,15 +30,16 @@ export default function AdminPanel({ data }) {
   const [listData, setListData] = useState([]);
   const { data: session } = useSession();
 
-  useEffect(() => {
+  const [openDeleteDialog, setOpenDeleteDialog] = useState(false);
+  const [toBeDeleted, setTobeDeleted] = useState("");
 
+  useEffect(() => {
     setLearnObj(() => JSON.parse(data));
     setCourse(() => JSON.parse(data)[0].course);
     setSubjectArray(() => JSON.parse(data)[0].subjectArray);
     setSubject(() => JSON.parse(data)[0].subjectArray[0].subject);
     setChapterArray(() => JSON.parse(data)[0].subjectArray[0].chapterArray);
     setChapter(() => JSON.parse(data)[0].subjectArray[0].chapterArray[0]);
-
   }, []);
 
   // to get topics on click
@@ -59,17 +69,56 @@ export default function AdminPanel({ data }) {
   };
 
   // to delete the item from the list
-  const handleDelete = (id) => {
-    // console.log(id);
-    axios.post("/api/learn/deleteTopic", { id }).then(({ data }) => {
-      // console.log(data);
-      const filteredList = listData.filter((item) => item._id !== id);
+  const handleDelete = () => {
+    console.log(toBeDeleted);
+    axios.post("/api/learn/deleteTopic", { toBeDeleted }).then(({ data }) => {
+      const filteredList = listData.filter((item) => item._id !== toBeDeleted);
       setListData(filteredList);
     });
   };
 
+  // delete alert dialog
+  const handleClickOpenDialog = () => {
+    setOpenDeleteDialog(true);
+  };
+
+  const handleClose = () => {
+    setOpenDeleteDialog(false);
+  };
+
   return (
     <div>
+      {/* delete dialog */}
+      <Dialog
+        open={openDeleteDialog}
+        onClose={handleClose}
+        aria-labelledby="alert-dialog-title"
+        aria-describedby="alert-dialog-description"
+      >
+        <DialogTitle id="alert-dialog-title">
+          {"confirmation for deletion of topic"}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText id="alert-dialog-description">
+           Are you sure that you want to delete this topic.
+           This will not be recovered if deleted once.
+          </DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>cancel</Button>
+          <Button
+            onClick={() => {
+              handleDelete();
+              handleClose();
+            }}
+            autoFocus
+          >
+            ok
+          </Button>
+        </DialogActions>
+      </Dialog>
+      {/* ------------------------------- */}
+
       <Select
         variant="outlined"
         name="course"
@@ -170,7 +219,7 @@ export default function AdminPanel({ data }) {
               <div className="px-2 make-com-dark my-1 rounded" key={index}>
                 <div className="flex justify-between">
                   <Link
-                  className=" hover:opacity-50"
+                    className=" hover:opacity-50"
                     href={`/learn/topic/${item.url}`}
                     rel="noopener noreferrer"
                     target="_blank"
@@ -181,14 +230,17 @@ export default function AdminPanel({ data }) {
                   <div className="flex my-auto">
                     <Button
                       size="small"
-                      onClick={(e) => e.target.classList.add("deleted")}
                     >
                       <DeleteIcon
                         fontSize="large"
                         color="error"
                         className="cursor-pointer mx-2 "
-                        onClick={() => {
-                          handleDelete(item._id);
+                        onClick={(e) => {
+                          setTobeDeleted(item._id)
+                          handleClickOpenDialog();
+                          e.target.classList.add("deleted");
+
+                          // handleDelete(item._id);
                         }}
                       />
                     </Button>

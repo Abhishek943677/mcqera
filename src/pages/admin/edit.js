@@ -4,12 +4,12 @@ import React, { useEffect, useState } from "react";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import SuccessSnackBar from "../../../components/widgets/SuccessSnackBar";
 import FailureSnackBar from "../../../components/widgets/FailureSnackBar";
-import ChangeTrade from "../../../components/ChangeTrade";
-import ChangeSubject from "../../../components/ChangeSubject";
 import Editor from "../../../components/editor/Editor";
 import { Button } from "@mui/material";
 import Spinner from "../../../components/widgets/Spinner";
 import { useRouter } from "next/router";
+import ChangeTrade from "../../../components/question/ChangeTrade";
+import ChangeSubject from "../../../components/question/ChangeSubject";
 
 export default function Edit({ singleQuestion, courseObj }) {
   const { data: session } = useSession();

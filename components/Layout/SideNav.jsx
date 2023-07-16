@@ -17,10 +17,10 @@ const SideNav = ({ children }) => {
   
 
   return (
-    // for bigger devices
     <div>
-      {/* logo */}
+      {/* ---------------------------------------------------for bigger devices------------------------------------------------------------ */}
       <div className="flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex ">
+
         {/* hamburger icon and its logic */}
         <div className="absolute top-14 right-4">
           <p onClick={handlesidebar} className="cursor-pointer">
@@ -35,16 +35,18 @@ const SideNav = ({ children }) => {
         {/* div for sidebar and its content for bigger devices*/}
         <div
           className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 z-50 ${
-            open ? "hidden" : "w-[20%]"
+            open ? "hidden" : "w-[18%]"
           } `}
         >
           <Image
             src={"/transparent-logo.png"}
+            alt="logo"
             height={100}
             width={100}
-            className="p-1 m-3"
+            className="p-1 m-2"
           />
           {/*  links div for multiple pages*/}
+          
           <UrlsComponent />
         </div>
 
@@ -52,15 +54,25 @@ const SideNav = ({ children }) => {
 
         <div
           className={` overflow-y-auto m-auto   ${
-            open ? "w-full ml-0" : "ml-[20%] w-full"
+            open ? "w-full ml-0" : "ml-[18%] w-full"
           }`}
         >
           {children}
+          
+          <UrlsComponent alignment="true" />
           <Footer />
         </div>
       </div>
 
-      {/* for smaller devices */}
+
+
+
+
+
+
+
+
+      {/* ---------------------------------for smaller devices -----------------------------*/}
 
       <div className="flex max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden relative">
         {/* hamburger icon and its logic */}
@@ -82,8 +94,8 @@ const SideNav = ({ children }) => {
         >
           <Image
             src={"/transparent-logo.png"}
-            height={100}
-            width={100}
+            height={80}
+            width={80}
             className="m-1"
           />
           {/*  links div for multiple pages*/}
@@ -93,6 +105,7 @@ const SideNav = ({ children }) => {
         {/* for footer and children */}
         <div className={` overflow-y-auto m-auto w-full`}>
           {children}
+          <UrlsComponent alignment="true" />
           <Footer />
         </div>
       </div>

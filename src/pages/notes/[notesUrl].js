@@ -5,6 +5,7 @@ import Image from "next/image";
 import { Button, Divider, Paper } from "@mui/material";
 import { clientNotes } from "../../../lib/sanityConnect";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 export default function NotesPage({ data }) {
   if (!data) return null;
@@ -12,12 +13,27 @@ export default function NotesPage({ data }) {
 
   return (
     <main>
+      {/* seo */}
+      <NextSeo
+        title={`${data.title} | mcqera`}
+        description={`Access comprehensive handwritten notes ${data.title} , providing detailed study materials and resources. Enhance your understanding of ${data.category} exam concepts with visually appealing and well-organized notes of ${data.title}.`}
+        canonical={`https://mcqera.com/notes/${data.slug.current}`}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "Handwritten notes, study materials, notes for exams, exam preparation, subject-wise notes, comprehensive notes, visual notes, study resources, revision notes, hand-drawn diagrams, note-taking techniques, effective study notes, class notes, lecture notes, exam tips and tricks, topic-wise notes, high-quality notes, detailed explanations, visual aids, study guides",
+          },
+        ]}
+      />
+      {/*  seo*/}
+
       <h1 className="text-2xl text-center py-2">{data.title.toUpperCase()}</h1>
-      
+
       <article className="blogpost">
         <PortableText content={data.body} />
       </article>
-      <div className="flex justify-center my-3 rounded"> 
+      <div className="flex justify-center my-3 rounded">
         <iframe
           width="640"
           height="480"
@@ -25,13 +41,13 @@ export default function NotesPage({ data }) {
         ></iframe>
       </div>
 
-     <div className="flex justify-center">
-     <Button variant="contained">
-        <Link href={data.url} target="_blank" >
-          download
-        </Link>
-      </Button>
-     </div>
+      <div className="flex justify-center">
+        <Button variant="contained">
+          <Link href={data.url} target="_blank">
+            download
+          </Link>
+        </Button>
+      </div>
     </main>
   );
 }
@@ -60,6 +76,6 @@ export async function getStaticPaths() {
 
   return {
     paths: path,
-    fallback: 'blocking',
+    fallback: "blocking",
   };
 }

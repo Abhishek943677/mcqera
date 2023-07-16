@@ -2,40 +2,18 @@ import Link from "next/link";
 import React, { useState } from "react";
 import DownArrow from "../widgets/DownArrow";
 import { useEffect } from "react";
+import getQuickLinkData from "../../logics/getQuickLinkData";
 
 export default function LowerHeader() {
   const [quickLinksData, setQuickLinksData] = useState([]);
+
   useEffect(() => {
     //getting data for quick links
     
-      fetch(`https://tudbzgpd.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22quicklinks%22%5D%7Bcategory%2Ctitle%2Cslug%7D`)
-      .then(response=>response.json())
-
-      .then(({result}) => {
-        console.log(result)
-        result.sort(
-          (a, b) => a.category.length - b.category.length
-        );
-
-        const gotArrayOfCategory = result.map((i, index) => {
-          return i.category;
-        });
-
-        const uniqueArrayOfCategory = [...new Set(gotArrayOfCategory)];
-
-        var furnished = [];
-
-        for (let i = 0; i < uniqueArrayOfCategory.length; i++) {
-          const category = uniqueArrayOfCategory[i];
-          const d = result.filter(
-            (i) => i.category === category
-          );
-          const sorted = d.sort((a, b) => b.title.length - a.title.length);
-          furnished.push(sorted);
-        }
-        console.log(furnished);
-        setQuickLinksData(furnished);
-      });
+      // const quickLinksData = getQuickLinkData ().then(data => {
+        // console.log (data);
+        // setQuickLinksData(data)
+      // })
 
     // getting data for previous-papers
   }, []);

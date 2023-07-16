@@ -3,19 +3,19 @@ import Link from "next/link";
 import React from "react";
 
 export default function QuickLinks({ data }) {
+  // console.log(data);
   return (
     <>
-      <h1 className="mx-auto text-center m-3 text-2xl">Quick links</h1>
+      <h1 className="mx-auto text-center m-3 text-2xl">Quick links to MCQs </h1>
 
       <div className="flex flex-row flex-wrap">
         {data.map((element, i) => {
           return (
             <Paper
               key={i}
-              className="p-2 my-1 make-body-dark mx-auto hover:shadow-xl shadow-md rounded-md"
-              // elevation={2}
+              className="p-2  make-body-dark mx-auto hover:shadow-xl shadow-md rounded-md w-[22rem] m-1"
             >
-              <main className="flex flex-wrap w-[20rem] flex-col">
+              <main className="flex flex-wrap flex-col">
                 <h2 className="ml-16 p-1 text-2xl">{element[0].category}</h2>
                 {/*this displays quicklinks */}
                 {element.map((i, index) => {

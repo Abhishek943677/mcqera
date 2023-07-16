@@ -14,12 +14,12 @@ export default function SingleQuestion({
 }) {
   const [opt, setOpt] = useState([]);
   const [showDetails, setShowDetails] = useState(false);
-  
+
   useEffect(() => {
     setShowDetails(false);
     const sorted = options.sort(() => Math.random() - 0.5);
     setOpt(sorted);
-  }, [index,question,trueOpt]);
+  }, [index, question, trueOpt]);
 
   // do stuffs links loader or white modal for each question
   if (opt.length === 0) {
@@ -34,7 +34,7 @@ export default function SingleQuestion({
     <div
       elevation={4}
       id="wrapper"
-      className="my-3 rounded-md make-com-dark m-2 px-2 py-3 shadow-xl"
+      className="rounded-md make-com-dark my-2 px-2 py-3 shadow-xl"
     >
       <div className="flex">
         {/* index of question */}
@@ -68,9 +68,8 @@ export default function SingleQuestion({
         trueOpt={trueOpt}
         setShowDetails={setShowDetails}
       />
-{/* options are here */}
 
-
+      {/* details  */}
       <div className="flex justify-between py-2 px-1">
         <Button
           variant="contained"
@@ -115,7 +114,7 @@ export default function SingleQuestion({
           <Divider />
 
           {/* check if details not available */}
-          {details&& details.length > 0 && typeof details === "string" ? (
+          {details && details.length > 0 && typeof details === "string" ? (
             <div
               id="question"
               dangerouslySetInnerHTML={{ __html: details }}

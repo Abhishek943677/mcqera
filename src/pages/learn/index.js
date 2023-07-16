@@ -10,12 +10,26 @@ import {
   AccordionSummary,
   Divider,
 } from "@mui/material";
+import { NextSeo } from "next-seo";
 
 const Home = ({ lessonsObj }) => {
   // console.log(JSON.parse(lessonsObj));
 
   return (
     <div>
+      {/* seo */}
+      <NextSeo
+        title="learn | mcqera | Comprehensive Learning Resources and Courses"
+        description="Access a wide range of comprehensive learning resources and courses on various subjects. Enhance your knowledge and skills with high-quality educational content."
+        canonical="https://mcqera.com/learn"
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content: "learning resources, courses, education, online learning, knowledge, skills, comprehensive, high-quality, subjects",
+          },
+        ]}
+      />
+      {/* seo */}
 
       {JSON.parse(lessonsObj).map((item, index) => {
         return (

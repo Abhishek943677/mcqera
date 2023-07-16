@@ -1,14 +1,14 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
-import SingleQuestion from "./SingleQuestion";
 import { useRouter } from "next/router";
+import SingleQuestion from "./SingleQuestion";
 
 export default function AllQuestions({ questions }) {
   const router = useRouter();
 
   return (
     // <div className="flex mx-auto lg:w-9/12 md:w-10/12 sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
-    <div className="flex mx-auto lg:w-full md:w-full sm:11/12 flex-col lg:px-4 sm:px-1 py-2">
+    <div className="flex mx-auto lg:w-full md:w-full sm:11/12 flex-col lg:px-1 sm:px-1 py-2">
       {questions
         ? JSON.parse(questions).map((i, index) => {
             return (

@@ -1,36 +1,33 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
   Divider,
+  Paper,
 } from "@mui/material";
 import Link from "next/link";
 import Head from "next/head";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
-import getNotesData from "../../../logics/getNotesData";
+import getQuickLinkData from "../../../logics/getQuickLinkData";
 import { NextSeo } from "next-seo";
 
 const Index = ({ data }) => {
+  console.log(data);
+
   return (
     <main>
       {/* seo */}
       <NextSeo
-        title="Handwritten Notes | Comprehensive Study Materials and Resources | mcqera"
-        description="Explore a wide collection of handwritten notes offering comprehensive study materials and resources. Access well-organized and visually appealing notes to enhance your learning experience."
-        canonical="https://mcqera.com/notes/handwritten"
-        additionalMetaTags={[
-          {
-            name: "keywords",
-            content: "Handwritten notes, study materials, notes for exams, exam preparation, subject-wise notes, comprehensive notes, visual notes, study resources, revision notes, hand-drawn diagrams, note-taking techniques, effective study notes, class notes, lecture notes, exam tips and tricks, topic-wise notes, high-quality notes, detailed explanations, visual aids, study guides",
-          },
-        ]}
+        title="Quick Links to MCQs | Access a Wide Range of Multiple Choice Questions | mcqera"
+        description="Explore a comprehensive collection of quick links to multiple choice questions (MCQs) on various topics. Access a wide range of MCQs to test your knowledge and prepare for exams or assessments. All questions are with detailed answers"
+        canonical="https://mcqera.com/quicklinks"
       />
-      {/*  seo*/}
-
-      <h1>Handwritten Notes</h1>
+      {/* seo */}
+      
+      <h1 className="text-2xl text-center">QuickLinks to MCQs of various category</h1>
       {data.map((element, i) => {
         return (
           <Accordion className="make-com-dark my-4" key={i}>
@@ -55,7 +52,9 @@ const Index = ({ data }) => {
                     className="hover:opacity-50 cursor-pointer w-full"
                     key={index}
                   >
-                    <Link href={`/notes/${item.slug.current}`}>
+                    <Link
+                      href={`/quicklinks/${item.category}/${item.slug.current}`}
+                    >
                       <p className="w-full">
                         <DescriptionRoundedIcon className="mr-3" />
                         {item.title}
@@ -73,9 +72,11 @@ const Index = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  const notesData = await getNotesData();
+  const quickLinkData = await getQuickLinkData();
+  console.log(quickLinkData);
+
   return {
-    props: { data: notesData },
+    props: { data: quickLinkData },
     revalidate: 60,
   };
 }

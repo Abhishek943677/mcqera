@@ -1,13 +1,15 @@
 import { Paper,Box } from '@mui/material'
 import React from 'react'
+import UrlsComponent from '../UrlsComponent'
 
 export default function Footer() {
   return (
     <Box 
     elevation={3}
     class="text-center text-white rounded-md drop-shadow-2xl w-full mx-auto sm:w-full sm:mx-auto">
+      {/* for urls to other pages */}
   <div class="container pt-9 mx-auto sm:mx-auto sm:w-full" >
-    <div class="mb-9 flex justify-center ">
+    <div class="mb-9 flex justify-center "     id="social-media">
       <a href="#!" class="mr-9 text-neutral-800 dark:text-white">
         <svg
           xmlns="http://www.w3.org/2000/svg"

@@ -11,13 +11,14 @@ export default function Index({ questions, title, category }) {
       {/* SEO... */}
       <NextSeo
         title={title}
-        description={`get top question of ${category} of topic ${title} with answers and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
-        canonical={`https://mcqera-db.vercel.app/quicklinks/${category}/${title}`}
+        description={`get top questions of ${category} of topic ${title} with answer and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
+        canonical={`https://mcqera.com/quicklinks/${category}/${title}`}
       />
       {/*...SEO  */}
 
 
       <h1 className='text-xl text-center mb-5'>{title.toUpperCase()}</h1>
+      
       {questions.length > 0 ? JSON.parse(questions).map((i, index) => {
         return (
           <SingleQuestion

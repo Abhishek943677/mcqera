@@ -1,6 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import ChangeTrade from "../ChangeTrade";
-import ChangeSubject from "../ChangeSubject";
 import Spinner from "../widgets/Spinner";
 import { Button, Divider } from "@mui/material";
 import axios from "axios";
@@ -9,6 +7,8 @@ import EditIcon from "@mui/icons-material/Edit";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/router";
 import Link from "next/link";
+import ChangeTrade from "../question/ChangeTrade";
+import ChangeSubject from "../question/ChangeSubject";
 
 export default function AdminPanel({ courseObj }) {
   const { data: session } = useSession();
@@ -127,7 +127,7 @@ export default function AdminPanel({ courseObj }) {
           setSubjects={setSubjects}
           S
         />
-        <ChangeSubject
+        <ChangeSubject  
           subject={subject}
           subjects={subjects}
           setSubject={setSubject}
@@ -159,7 +159,8 @@ export default function AdminPanel({ courseObj }) {
               <div className="px-2 make-com-dark my-1 rounded" key={index}>
                 <div className="flex justify-between">
                   <div
-                    className=" py-4"
+                  id="question"
+                    className=" py-4 "
                     dangerouslySetInnerHTML={{ __html: item.que?.question }}
                     />
                   <div className="flex my-auto ">

@@ -4,8 +4,8 @@ import axios from "axios";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
-import AdminPanel from "../../../components/quiz/AdminPanel";
-import AddQuestion from "../../../components/quiz/AddQuestion";
+import AdminPanel from "../../../components/quiz-admin/AdminPanel";
+import AddQuestion from "../../../components/quiz-admin/AddQuestion";
 
 export default function Home({ courseObj }) {
   const [showAdminPanel, setShowAdminAPanel] = useState(false);

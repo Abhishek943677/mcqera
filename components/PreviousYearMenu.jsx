@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import Link from "next/link";
 import Spinner from "./widgets/Spinner";
 import { Divider } from "@mui/material";
-import Image from "next/image";
 
 export default function PreviousYearMenu({ data }) {
   return (

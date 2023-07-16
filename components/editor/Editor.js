@@ -20,7 +20,7 @@ export const Editor = ({ value, handleChange, label }) => {
 
   
   return (
-    <div className="text-editor w-full my-2 border border-green-600 rounded-md p-3">
+    <div className="text-editor w-full my-2 rounded-md p-1">
       <Typography variant="h6" className="text-center" >{label}</Typography>
       <ReactQuill
         theme="snow"

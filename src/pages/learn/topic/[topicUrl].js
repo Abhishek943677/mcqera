@@ -2,14 +2,28 @@ import React from "react";
 import { Paper } from "@mui/material";
 import { mongoConnectLearn } from "../../../../lib/mongoConnectLearn";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 const Route = ({ data, topicsInChapter, chapter }) => {
-  // console.log(JSON.parse(data));
+  console.log(JSON.parse(data));
 
   return (
     <div>
-      {/* --------seo stuffs------- */}
-      {/* --------seo stuffs------- */}
+      {/* seo */}
+      <NextSeo
+        title={`${JSON.parse(data)[0].topicName} | Understanding the Basics of ${chapter}`}
+        description={`Explore the ${JSON.parse(data)[0].topicName} with our comprehensive introduction. Learn about ${chapter}. Enhance your understanding of ${chapter} chapter with high-quality educational content.`}
+        canonical={`https://mcqera.com/learn/topic/${JSON.parse(data)[0].topicName}`}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content: "Learning resources,Lessons,Topics,Subjects,Exam preparation,Online education,",
+          },
+        ]}
+      />
+      {/* seo */}
+
+      
       Chapter : {chapter}
       <br />
       {JSON.parse(data).length !== 0 ? (

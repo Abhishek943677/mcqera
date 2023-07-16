@@ -22,7 +22,6 @@ export default function Layout({ children }) {
     });
   }, []);
 
-
   return (
     <div className="">
       {/* <Seo /> */}
@@ -37,17 +36,14 @@ export default function Layout({ children }) {
 
       <Scrolltotop />
 
+      {/* this is side nav childs */}
       <SideNav>
 
+        <Header />
+        <LowerHeader />
 
-        <div className="">
-          <Header />
-        </div>
-
-       <LowerHeader /> 
-       
         <div className="flex">
-          <div className="mt-5 w-[75%] border border-red-700 max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1">
+          <div className="mt-5 w-[72%] max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1">
             {children}
 
             {/*ads for smaller screens */}
@@ -57,12 +53,11 @@ export default function Layout({ children }) {
           </div>
 
           {/* ads for larger screen */}
-          <div className="w-[24.8%] mt-5 border border-black px-1 min-h-screen bg-gray-700 max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex">
+          <div className="w-[28%] mt-5 border border-black px-1 min-h-screen bg-gray-700 max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex">
             <AdsSideBar />
           </div>
         </div>
 
-        
       </SideNav>
     </div>
   );

@@ -1,18 +1,35 @@
 import React, { useEffect } from "react";
-import { Accordion, AccordionDetails, AccordionSummary, Divider, Paper } from "@mui/material";
+import {
+  Accordion,
+  AccordionDetails,
+  AccordionSummary,
+  Divider,
+  Paper,
+} from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Link from "next/link";
 import Head from "next/head";
-import { clientPreviousYear } from "../../../lib/sanityConnect";
 import Spinner from "../../../components/widgets/Spinner";
+import getPreviousYearData from "../../../logics/getPreviousYearData";
+import { NextSeo } from "next-seo";
 
 const Index = ({ data }) => {
-  console.log(data);
-
   return (
     <div className="">
+      {/* seo */}
+      <NextSeo
+        title="Previous Year MCQ Papers | mcqera"
+        description="Access a wide collection of previous year MCQ papers for comprehensive exam preparation. Practice with real exam questions, test your knowledge, and enhance your exam readiness with these valuable resources."
+        canonical="https://mcqera.com/previous-year"
+        additionalLinkTags={{
+          name: "keywords",
+          content:"Previous year MCQ papers, exam preparation resources, practice papers, exam question bank, mock tests, exam practice, test your knowledge, exam readiness, question papers with answers, exam pattern, exam syllabus, practice quizzes, exam simulation, exam practice questions, exam revision, exam tips and tricks, exam strategies, exam study materials, online test series, exam success tips"
+        }}
+      />
+      {/* seo */}
+
       <h1 className="text-xl text-center">Previous year Papers</h1>
 
       {data.length !== 0 ? (
@@ -36,9 +53,7 @@ const Index = ({ data }) => {
               {element.map((item, index) => {
                 return (
                   <AccordionDetails className="w-full" key={index}>
-                    <div
-                      className="hover:opacity-50 cursor-pointer w-full"
-                    >
+                    <div className="hover:opacity-50 cursor-pointer w-full">
                       <Link
                         href={`/previous-year/${item.examname}/${item.branch}`}
                       >
@@ -63,52 +78,10 @@ const Index = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  const data = await clientPreviousYear.fetch(
-    `*[_type=="exams"]{branch,examname}`
-  );
-  // const data = await clientPreviousYear.fetch(`*[_type=="exams"]{branch,examname}`, { next: { revalidate: 600 } });//60*10 == 10min
-  // var data=[];
-
-  const { result } = await fetch(
-    "https://ltxionfe.api.sanity.io/v1/data/query/production?query=*%5B_type%3D%3D%22exams%22%5D%7Bbranch%2Cexamname%7D",
-    { next: { revalidate: 6000 } }
-  ).then((res) => res.json());
-  // const result=[]
-
-  // console.log(result)
-
-  // const result = [];
-  const sorted = result.sort((a, b) => a.examname.length - b.examname.length);
-  // console.log(sorted);
-
-  function removeDuplicates(books) {
-    const jsonObject = books.map(JSON.stringify);
-
-    const uniqueSet = [...new Set(jsonObject)];
-    const uniqueArray = Array.from(uniqueSet).map(JSON.parse);
-
-    return uniqueArray;
-  }
-  const uniqueArray = removeDuplicates(sorted);
-  // console.table(uniqueArray);
-
-  const gotArrayOfExamname = uniqueArray.map((i, index) => {
-    return i.examname;
-  });
-  const uniqueArrayOfExamname = [...new Set(gotArrayOfExamname)];
-  //   console.log(uniqueArrayOfExamname);
-
-  var furnished = [];
-
-  for (let i = 0; i < uniqueArrayOfExamname.length; i++) {
-    const examname = uniqueArrayOfExamname[i];
-    const d = uniqueArray.filter((i) => i.examname === examname);
-    const sorted = d.sort((a, b) => b.branch.length - a.branch.length);
-    furnished.push(sorted);
-  }
+  const previousYeaData = await getPreviousYearData();
 
   return {
-    props: { data: furnished },
+    props: { data: previousYeaData },
     revalidate: 60,
   };
 }

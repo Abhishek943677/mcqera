@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { clientIgnou } from "../../../lib/sanityConnect";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 
@@ -11,12 +10,26 @@ import {
   Divider,
 } from "@mui/material";
 import Head from "next/head";
-import CalendarMonthRoundedIcon from '@mui/icons-material/CalendarMonthRounded';
+import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
+import getIgnouData from "../../../logics/getIgnouData";
+import { NextSeo } from "next-seo";
 
 const Index = ({ data }) => {
-  console.log(data);
+  // console.log(data);
+
   return (
     <main>
+      {/* SEO .... */}
+      <NextSeo
+        title={`Online IGNOU Assignments | Download IGNOU Solved Assignments`}
+        description={`Get high-quality IGNOU solved assignments for various courses. Get reliable and well-crafted IGNOU assignment. Download solved assignments for various courses to ensure your academic success.`}
+        canonical={`https://mcqera.com/ignou-assignments`}
+      />
+      {/* ....SEO */}
+
+
+
+
       {data.map((element, i) => {
         return (
           <Accordion className="make-com-dark my-4" key={i}>
@@ -59,31 +72,10 @@ const Index = ({ data }) => {
 };
 
 export async function getStaticProps() {
-  const dataUnorganised = await clientIgnou.fetch(
-    `*[_type=="post"]{session,subjectName,slug}`
-  );
-  const sorted = dataUnorganised.sort(
-    (a, b) => a.session.length - b.session.length
-  );
-
-  const gotArrayOfSession = sorted.map((i, index) => {
-    return i.session;
-  });
-
-  const uniqueArrayOfSession = [...new Set(gotArrayOfSession)];
-  var furnished = [];
-
-  for (let i = 0; i < uniqueArrayOfSession.length; i++) {
-    const session = uniqueArrayOfSession[i];
-    const d = dataUnorganised.filter((i) => i.session === session);
-    const sorted = d.sort(
-      (a, b) => b.subjectName.length - a.subjectName.length
-    );
-    furnished.push(sorted);
-  }
+  const ignouData = await getIgnouData();
 
   return {
-    props: { data: furnished },
+    props: { data: ignouData },
     revalidate: 60,
   };
 }

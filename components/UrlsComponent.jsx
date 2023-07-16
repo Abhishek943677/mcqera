@@ -3,9 +3,9 @@ import React from 'react'
 import LaunchIcon from "@mui/icons-material/Launch";
 
 
-export default function UrlsComponent() {
+export default function UrlsComponent({alignment}) {
     return (
-        <div className=" list-none">
+        <div className={`list-none ${alignment==="true" ? "flex" : ""} flex-wrap`}>
           <Link href="/ignou">
             <li className="mx-2 rounded-md text-lg my-2 hover:opacity-50">
               IGNOU Assignment
@@ -20,7 +20,13 @@ export default function UrlsComponent() {
           </Link>
           <Link href="/previous-year">
             <li className="mx-2 rounded-md text-lg my-2 hover:opacity-50">
-              PYQ
+              Previous Year Papers
+              <LaunchIcon className="mx-2" />
+            </li>
+          </Link>
+          <Link href="/quicklinks">
+            <li className="mx-2 rounded-md text-lg my-2 hover:opacity-50">
+              Quicklinks
               <LaunchIcon className="mx-2" />
             </li>
           </Link>

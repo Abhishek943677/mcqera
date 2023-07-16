@@ -33,24 +33,60 @@ textarea {
 .not-active{
   @apply bg-red-600 cursor-pointer animate-pulse;
 }
-
-#question li{
+/* ---------------question styling------------- */
+#question ul li{
   @apply list-disc ml-7
 }
+#question ol li{
+  @apply list-decimal ml-7
+}
+
 #question img{
-  @apply max-w-[20rem] rounded-md
+  @apply w-[20rem] min-w-[10rem] rounded-md max-h-[20rem]
 }
-#question{
-  /* @apply flex  */
+#question a{
+  @apply text-red-900 font-bold
 }
+
+#question blockquote{
+  @apply border-l-2 px-1
+}
+
+#question pre{
+  @apply bg-black text-white p-2 rounded-md my-1
+}
+
+#question code{
+  @apply bg-black text-white p-2 rounded-md my-1
+}
+
+#question h1{
+  @apply text-2xl
+}
+#question h2{
+  @apply text-xl
+}
+#question h3{
+  @apply text-lg
+}
+#question h4{
+  @apply text-base
+}
+#question h5{
+  @apply text-sm
+}
+#question h6{
+  @apply text-xs
+}
+/* -------------------blogpost styling------------------ */
 .blogpost{
   @apply list-disc px-1
 }
 .blogpost ul li{
- @apply list-disc mx-6
+ @apply list-disc ml-6
 }
 .blogpost ol li{
- @apply list-decimal mx-6
+ @apply list-decimal ml-6
 }
 .blogpost a{
   @apply text-red-900 font-bold
@@ -65,18 +101,47 @@ textarea {
 .blogpost table, th, td{
   @apply border p-2;
 }
+
+.blogpost h1{
+  @apply text-2xl
+}
+.blogpost h2{
+  @apply text-xl
+}
+.blogpost h3{
+  @apply text-lg
+}
+.blogpost h4{
+  @apply text-base
+}
+.blogpost h5{
+  @apply text-sm
+}
+.blogpost h6{
+  @apply text-xs
+}
+
+/* fill image */
 .fill-image{
   @apply w-full h-full fixed top-0 right-0 z-50
 }
+
+
+/* -------------wait for deleting -------- */
 .deleted{
   @apply cursor-wait;
 }
+
+
+/* -----------avatar or profile styling------------- */
 #avatar-div:hover #profileModal{
 display: block;
 }
 #profileModal{
   display: none;
 }
+
+
 
 /* ------------------dropdown css------------------  */
 .dropbtn {
@@ -99,7 +164,5 @@ display: block;
 .dropdown-content li {
   @apply mx-1 p-1 my-auto text-sm
 }
-
-/* ------------------dropdown css------------------  */
 
 

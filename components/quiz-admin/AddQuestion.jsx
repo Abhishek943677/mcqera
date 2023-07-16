@@ -5,14 +5,13 @@ import Editor from "../editor/Editor";
 import DeleteIcon from "@mui/icons-material/Delete";
 import { useSession } from "next-auth/react";
 import { Button } from "@mui/material";
-
-import ChangeTrade from "../ChangeTrade";
-import ChangeSubject from "../ChangeSubject";
 import Spinner from "../widgets/Spinner";
 import axios from "axios";
 import SuccessSnackBar from "../widgets/SuccessSnackBar";
 import FailureSnackBar from "../widgets/FailureSnackBar";
 import { useRouter } from "next/router";
+import ChangeTrade from "../question/ChangeTrade";
+import ChangeSubject from "../question/ChangeSubject";
 
 export default function AddQuestion({ courseObj }) {
   const { data: session } = useSession();
@@ -173,7 +172,8 @@ export default function AddQuestion({ courseObj }) {
         </Button>
       </div>
 
-      <div dangerouslySetInnerHTML={{ __html: que.detail }} id="article" />
+      <p className="text-center">Details written in details section appears same as here</p>
+      <div dangerouslySetInnerHTML={{ __html: que.detail }} id="question" className="border rounded-lg lg:w-[80%] md:w-full sm:w-full mx-auto p-2"/>
     </div>
   );
 }
