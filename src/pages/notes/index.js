@@ -6,7 +6,6 @@ import {
   Divider,
 } from "@mui/material";
 import Link from "next/link";
-import Head from "next/head";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";

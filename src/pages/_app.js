@@ -3,8 +3,6 @@ import { useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import Layout from "../../components/Layout/Layout";
 import Seo from "../../lib/seo";
-import { TourProvider } from "@reactour/tour";
-import steps from "../../constants/steps";
 
 export default function App({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -22,9 +20,7 @@ export default function App({ Component, pageProps }) {
   } else {
     return (
       <SessionProvider session={pageProps.session}>
-        <TourProvider
-          steps={steps}
-        >
+        
           {/* seo */}
           <Seo />
 
@@ -33,7 +29,6 @@ export default function App({ Component, pageProps }) {
             <Component {...pageProps} />
           </Layout>
 
-        </TourProvider>
       </SessionProvider>
     );
   }

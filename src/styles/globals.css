@@ -145,11 +145,13 @@ display: block;
 
 /* ------------------dropdown css------------------  */
 .dropbtn {
-  @apply w-fit p-1 cursor-pointer mx-2 hover:text-red-700
+  @apply w-fit p-1 cursor-pointer mx-2
 }
-
 .dropdown {
   display: block;
+  position: relative;
+  /* to make full width dropdown don't use posion relative */
+  @apply hover:bg-white hover:text-black
 }
 
 .dropdown-content {
@@ -158,11 +160,11 @@ display: block;
 }
 
 .dropdown:hover .dropdown-content {
-  @apply flex flex-wrap flex-col justify-center absolute right-0  text-white w-full  bg-slate-700 z-50 rounded-lg
+  @apply flex flex-col justify-center absolute top-7  text-white w-fit  bg-slate-700 z-50 ml-0 mt-1
+  /* @apply flex flex-col justify-center absolute right-0 w-full  text-white  bg-slate-700 z-50 rounded-lg */ 
+  /* the above code make full width dropdown */
 
 }
-.dropdown-content li {
-  @apply mx-1 p-1 my-auto text-sm
-}
+
 
 

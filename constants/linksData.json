@@ -1,0 +1,26 @@
+[
+    {
+        "name":"Quiz | MCQs",
+        "path":"/quiz"
+    },
+    {
+        "name":"Previous Year Papers",
+        "path":"/previous-year"
+    },
+    {
+        "name":"Learn Topics",
+        "path":"/learn"
+    },
+    {
+        "name":"Quicklinks",
+        "path":"/quicklinks"
+    },
+    {
+        "name":"IGNOU Assignment",
+        "path":"/ignou"
+    },
+    {
+        "name":"Handwritten Notes",
+        "path":"/notes"
+    }
+]

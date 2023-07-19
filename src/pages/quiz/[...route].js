@@ -96,6 +96,12 @@ export default function Page({
         </Button>
       </div>
 
+      <h1 className="text-xl p-1 mt-2">{subject.charAt(0).toUpperCase() + subject.slice(1)} MCQ Question with answer</h1>
+      <PaginationModal
+        noOfPageForPagination={noOfPageForPagination}
+        currentPage={UserBlogPage}
+      />
+
       {questions && questions.length === 0 ? (
         <div className="">
           <p className="text-lg text-center p-1">{` kuchh na h yha`}</p>

@@ -3,28 +3,39 @@ import { BiMenu } from "react-icons/bi";
 import { CgClose } from "react-icons/cg";
 import Footer from "./Footer";
 import Image from "next/image";
-import Link from "next/link";
 import UrlsComponent from "../UrlsComponent";
+import { useRouter } from "next/router";
 
-// export default function SideNav({ children }) {
 const SideNav = ({ children }) => {
-  const [open, setOpen] = useState(false);
+  const router = useRouter();
+  const [openBig, setOpenBig] = useState(false);
+  const [openSmall, setOpenSmall] = useState(false);
 
-  const handlesidebar = () => {
-    setOpen(!open);
+  const handlesidebarBig = () => {
+    setOpenBig(!openBig);
   };
+  const handlesidebarSmall = () => {
+    setOpenSmall(!openSmall);
+  };
+ 
 
-  
+  useEffect(() => {
+    router.events.on("routeChangeStart", () => {
+      setOpenSmall(false)
+    });
+    
+  }, []);
+
 
   return (
     <div>
       {/* ---------------------------------------------------for bigger devices------------------------------------------------------------ */}
       <div className="flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex ">
 
-        {/* hamburger icon and its logic */}
+        {/* hamburger icon and its logic */}  
         <div className="absolute top-14 right-4">
-          <p onClick={handlesidebar} className="cursor-pointer">
-            {!open ? (
+          <p onClick={handlesidebarBig} className="cursor-pointer">
+            {!openBig ? (
               <BiMenu className="w-10 h-10" />
             ) : (
               <CgClose className="w-10 h-10" />
@@ -35,7 +46,7 @@ const SideNav = ({ children }) => {
         {/* div for sidebar and its content for bigger devices*/}
         <div
           className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 z-50 ${
-            open ? "hidden" : "w-[18%]"
+            openBig ? "hidden" : "w-[18%]"
           } `}
         >
           <Image
@@ -54,7 +65,7 @@ const SideNav = ({ children }) => {
 
         <div
           className={` overflow-y-auto m-auto   ${
-            open ? "w-full ml-0" : "ml-[18%] w-full"
+            openBig ? "w-full ml-0" : "ml-[18%] w-full"
           }`}
         >
           {children}
@@ -66,19 +77,13 @@ const SideNav = ({ children }) => {
 
 
 
-
-
-
-
-
-
-      {/* ---------------------------------for smaller devices -----------------------------*/}
+      {/* ---------------------------------------------------for smaller devices -----------------------------------------------------*/}
 
       <div className="flex max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden relative">
         {/* hamburger icon and its logic */}
         <div className="absolute top-10 right-4">
-          <p onClick={handlesidebar} className="cursor-pointer">
-            {!open ? (
+          <p onClick={handlesidebarSmall} className="cursor-pointer">
+            {!openSmall ? (
               <BiMenu className="w-10 h-10" />
             ) : (
               <CgClose className="w-10 h-10" />
@@ -89,7 +94,7 @@ const SideNav = ({ children }) => {
         {/* div for sidebar and its content for smaller devices */}
         <div
           className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex-wrap ${
-            open ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50" : "hidden"
+            openSmall ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50" : "hidden"
           }`}
         >
           <Image
