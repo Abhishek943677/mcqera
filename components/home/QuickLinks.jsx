@@ -22,8 +22,9 @@ export default function QuickLinks({ data }) {
                   return (
                     <Link
                         href={`/quicklinks/${i.category}/${i.slug.current}`}
+                        key={index}
                       >
-                    <li key={index} className="px-1 py-1 hover:opacity-50">
+                    <li  className="px-1 py-1 hover:opacity-50">
                         {i.title} {/*this display branch name */}
                     </li>
                       </Link>
