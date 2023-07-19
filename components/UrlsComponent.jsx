@@ -8,8 +8,8 @@ export default function UrlsComponent({ alignment }) {
     <div
       className={`list-none ${alignment === "true" ? "flex" : ""} flex-wrap`}
     >
-      {linksData.map((link) => (
-        <Link href={link.path}>
+      {linksData.map((link,index) => (
+        <Link href={link.path} key={index}>
           <li className="mx-2 rounded-md text-lg my-2 hover:opacity-50">
             {link.name}
             <span  className={`${alignment === "true" ? "" : ""} ml-1`}>
