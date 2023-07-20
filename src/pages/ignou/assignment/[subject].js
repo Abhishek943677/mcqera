@@ -8,7 +8,7 @@ import { NextSeo } from "next-seo";
 
 export default function Subject({ data }) {
   const [fillImage, setFillImage] = useState(true);
-  console.log(data);
+  // console.log(data);
 
   // image blur effect with next js
   const shimmer = (w, h) => `
@@ -129,7 +129,7 @@ export async function getStaticProps(context) {
     props: {
       data: data[0],
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

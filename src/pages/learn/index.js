@@ -19,7 +19,7 @@ const Home = ({ lessonsObj }) => {
     <div>
       {/* seo */}
       <NextSeo
-        title="learn | mcqera | Comprehensive Learning Resources and Courses"
+        title="Learn | mcqera | Comprehensive Learning Resources and Courses"
         description="Access a wide range of comprehensive learning resources and courses on various subjects. Enhance your knowledge and skills with high-quality educational content."
         canonical="https://mcqera.com/learn"
         additionalMetaTags={[
@@ -85,7 +85,7 @@ export const getStaticProps = async () => {
     props: {
       lessonsObj: JSON.stringify(data),
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 };
 

@@ -11,7 +11,7 @@ export default function Index({ questions, title, category }) {
       {/* SEO... */}
       <NextSeo
         title={title}
-        description={`get top questions of ${category} of topic ${title} with answer and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
+        description={`Get top questions of ${category} of topic ${title} with answer and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
         canonical={`https://mcqera.com/quicklinks/${category}/${title}`}
       />
       {/*...SEO  */}
@@ -68,7 +68,7 @@ export async function getStaticProps(context) {
   const res = await clientQuickLinks.fetch(`*[_type=="quicklinks" && category=="${category}" && slug.current=="${slug}"]{question,title}`)
 
 
-  console.log(res)
+  // console.log(res)
   if (!res[0].question) {
     return {
       props: {
@@ -76,7 +76,7 @@ export async function getStaticProps(context) {
         title: res[0].title,
         category
       },
-      revalidate: 60,
+      revalidate: 600,
     }
   }
 
@@ -89,6 +89,6 @@ export async function getStaticProps(context) {
       title: res[0].title,
       category
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }

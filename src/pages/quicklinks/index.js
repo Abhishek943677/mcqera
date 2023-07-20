@@ -109,11 +109,11 @@ const Index = ({ data }) => {
 
 export async function getStaticProps() {
   const quickLinkData = await getQuickLinkData();
-  console.log(quickLinkData);
+  // console.log(quickLinkData);
 
   return {
     props: { data: quickLinkData },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

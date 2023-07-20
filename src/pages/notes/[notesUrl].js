@@ -9,13 +9,14 @@ import { NextSeo } from "next-seo";
 
 export default function NotesPage({ data }) {
   if (!data) return null;
-  console.log(data);
+
+  // console.log(data);
 
   return (
     <main>
       {/* seo */}
       <NextSeo
-        title={`${data.title} | mcqera`}
+        title={`${data.title} | Mcqera`}
         description={`Access comprehensive handwritten notes ${data.title} , providing detailed study materials and resources. Enhance your understanding of ${data.category} exam concepts with visually appealing and well-organized notes of ${data.title}.`}
         canonical={`https://mcqera.com/notes/${data.slug.current}`}
         additionalMetaTags={[
@@ -33,6 +34,7 @@ export default function NotesPage({ data }) {
       <article className="blogpost">
         <PortableText content={data.body} />
       </article>
+      
       <div className="flex justify-center my-3 rounded">
         <iframe
           width="640"
@@ -61,7 +63,7 @@ export async function getStaticProps(context) {
     props: {
       data: data[0],
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

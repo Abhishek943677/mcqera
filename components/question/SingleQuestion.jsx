@@ -71,15 +71,6 @@ export default function SingleQuestion({
 
       {/* details  */}
       <div className="flex justify-between py-2 px-1">
-        <Button
-          variant="contained"
-          size="small"
-          className="p-2 cursor-pointer w-fit border border-blue-300"
-          onClick={() => setShowDetails((p) => !p)}
-        >
-          details
-        </Button>
-
         {/* side bar button */}
         <div className="flex">
           <Tooltip title="save question">
@@ -94,6 +85,16 @@ export default function SingleQuestion({
             </p>
           </Tooltip>
         </div>
+
+        {/* details button */}
+        <Button
+          variant="contained"
+          size="small"
+          className="p-2 cursor-pointer w-fit border border-blue-300"
+          onClick={() => setShowDetails((p) => !p)}
+        >
+          details
+        </Button>
       </div>
 
       {/* showing detials on button click or option click */}

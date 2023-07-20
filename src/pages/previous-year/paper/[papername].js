@@ -4,7 +4,8 @@ import { NextSeo } from "next-seo";
 import SingleQuestion from "../../../../components/question/SingleQuestion";
 
 export default function Exam({ data }) {
-  console.log(data);
+  // console.log(data);
+
   if (!data) {
     return <div>Not found</div>;
   }
@@ -54,7 +55,7 @@ export async function getStaticProps(context) {
     props: {
       data: data,
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 
@@ -64,7 +65,7 @@ export async function getStaticPaths() {
     return { params: { papername: item.slug.current } };
   });
 
-  console.log(path[0].params);
+  // console.log(path[0].params);
   // [{ params: { papername: 'drdo-electrical-2001' } },{ params: { papername: 'ssc-je-electrical-2021' } },{ params: { papername: 'uppcl-tg33' } }]
   return {
     paths: path,

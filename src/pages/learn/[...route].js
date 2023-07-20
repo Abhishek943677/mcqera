@@ -5,7 +5,7 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 const Route = ({ data, course, subject }) => {
-  console.log(JSON.parse(data));
+  // console.log(JSON.parse(data));
 
   return (
     <div>
@@ -74,8 +74,8 @@ export async function getStaticPaths() {
     });
   });
 
-  console.log("end");
-  console.log(path);
+  // console.log("end");
+  // console.log(path);
 
   return {
     // paths: [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','network'] } }],
@@ -124,7 +124,7 @@ export const getStaticProps = async (context) => {
       course,
       subject,
     },
-    revalidate: 300,
+    revalidate: 600,
   };
 };
 

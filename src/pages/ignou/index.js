@@ -76,7 +76,7 @@ export async function getStaticProps() {
 
   return {
     props: { data: ignouData },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

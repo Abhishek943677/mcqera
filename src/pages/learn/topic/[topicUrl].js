@@ -5,7 +5,7 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 const Route = ({ data, topicsInChapter, chapter }) => {
-  console.log(JSON.parse(data));
+  // console.log(JSON.parse(data));
 
   return (
     <div>
@@ -113,14 +113,14 @@ export async function getStaticProps(context) {
     .find({ chapter })
     .project({ topicName: 1, url: 1 })
     .toArray();
-  console.log(topicsInChapter);
+  // console.log(topicsInChapter);
   return {
     props: {
       data: JSON.stringify(topicData),
       topicsInChapter: JSON.stringify(topicsInChapter),
       chapter,
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

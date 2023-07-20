@@ -36,6 +36,7 @@
     "react-icons": "^4.8.0",
     "react-portable-text": "^0.6.0",
     "react-quill": "^2.0.0",
+    "react-share-social": "^0.1.55",
     "suneditor": "^2.45.1",
     "suneditor-react": "^3.6.1",
     "swiper": "^9.2.0",

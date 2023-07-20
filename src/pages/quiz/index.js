@@ -26,7 +26,6 @@ const Index = ({ data }) => {
   useEffect(() => {
     document.getElementById(router.query.section) && document.getElementById(router.query.section).scrollIntoView({behavior:"smooth"})
     setExpanded(router.query.section);
-    console.log(router.query.section)
   }, [router]);
 
   return (
@@ -97,12 +96,13 @@ const Index = ({ data }) => {
   );
 };
 
+// --------------------server side---------------------------
+
 export async function getStaticProps() {
   const quizData = await loadCourseObj();
-  console.log(quizData);
   return {
     props: { data: quizData },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

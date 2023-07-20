@@ -4,7 +4,7 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 export default function Course({ data, examname, branch }) {
-  console.log(examname);
+
   if (data.length === 0) {
     return <div className="">Papers Coming soon</div>;
   }
@@ -13,7 +13,7 @@ export default function Course({ data, examname, branch }) {
       
       {/* seo */}
       <NextSeo
-        title={`previous year papers of  ${examname} ${branch} `}
+        title={`Previous year papers of ${examname} ${branch} `}
         description={`Access a comprehensive collection of previous year papers for ${examname} ${branch}. Practice with authentic exam questions, test your knowledge, and enhance your exam readiness with these valuable resources.`}
         canonical={`https://mcqera.com/previous-year-papers/${examname}/${branch}`}
       />
@@ -64,6 +64,6 @@ export async function getStaticProps(context) {
       examname: examname,
       branch: branch,
     },
-    revalidate: 60,
+    revalidate: 600,
   };
 }

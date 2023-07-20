@@ -5,8 +5,8 @@ import { useRouter } from "next/router";
 import { LinearProgress } from "@mui/material";
 import SideNav from "./SideNav";
 import AdsSideBar from "../AdsSideBar";
-import Seo from "../../lib/seo";
 import LowerHeader from "./LowerHeader";
+import Share from "../Share";
 
 export default function Layout({ children }) {
   const router = useRouter();
@@ -38,7 +38,6 @@ export default function Layout({ children }) {
 
       {/* this is side nav childs */}
       <SideNav>
-
         <Header />
         <LowerHeader />
 
@@ -58,6 +57,7 @@ export default function Layout({ children }) {
           </div>
         </div>
 
+        <Share url={router.asPath}/>
       </SideNav>
     </div>
   );

@@ -82,7 +82,7 @@ export async function getStaticProps() {
 
   return {
     props: { data: previousYeaData },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

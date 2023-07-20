@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Button, Paper } from "@mui/material";
 import { loadCourseObj } from "../../logics/loadCourseObj";
 import getQuickLinkData from "../../logics/getQuickLinkData";
-import { mongoConnectUser } from "../../lib/mongoConnectUser";
+// import { mongoConnectUser } from "../../lib/mongoConnectUser";
 import QuickLinks from "../../components/home/QuickLinks";
 import ChangeTrade from "../../components/question/ChangeTrade";
 import ChangeSubject from "../../components/question/ChangeSubject";
@@ -80,17 +80,17 @@ export async function getStaticProps() {
   const quicklinks = await getQuickLinkData();
   const courseObj = await loadCourseObj();
 
-  const userDb = await mongoConnectUser();
-  const collection = userDb.collection("user-list"); //accessing collection of trade
+  // const userDb = await mongoConnectUser();
+  // const collection = userDb.collection("user-list"); //accessing collection of trade
 
-  const userList = await collection
-    .find({}) // finding data from trade collection with subject name
-    .toArray();
-  console.log(userList);
+  // const userList = await collection
+  //   .find({}) // finding data from trade collection with subject name
+  //   .toArray();
+  // console.log(userList);
 
   return {
     props: { courseObj, quicklinks },
-    revalidate: 60,
+    revalidate: 600,
   };
 }
 

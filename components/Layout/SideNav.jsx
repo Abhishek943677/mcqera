@@ -5,6 +5,7 @@ import Footer from "./Footer";
 import Image from "next/image";
 import UrlsComponent from "../UrlsComponent";
 import { useRouter } from "next/router";
+import Share from "../Share";
 
 const SideNav = ({ children }) => {
   const router = useRouter();
@@ -69,7 +70,6 @@ const SideNav = ({ children }) => {
           }`}
         >
           {children}
-          
           <UrlsComponent alignment="true" />
           <Footer />
         </div>

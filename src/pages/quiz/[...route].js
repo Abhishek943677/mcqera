@@ -23,7 +23,7 @@ export default function Page({
   const router = useRouter();
 
   useEffect(() => {
-    console.log(courseObj)
+    console.log(JSON.parse(questions))
 
     setTrade(router.query.route[0]);
     setSubject(router.query.route[1]);
@@ -56,9 +56,9 @@ export default function Page({
     <div>
       {/* SEO .... */}
       <NextSeo
-        title={`questions of ${trade} ${subject} at page ${UserBlogPage} | mcqera | MCQs`}
-        description={`get top question of ${trade} - ${subject} question at page ${UserBlogPage} with answers and detailed solutions. Engage with interactive quizzes on various topics of ${trade} ${subject} and challenge yourself to improve your understanding and retention of key concepts.`}
-        canonical={`https://mcqera.com/quiz/${trade}/${subject}/${UserBlogPage}`}
+        title={`Questions of ${JSON.parse(questions)[0].trade} ${JSON.parse(questions)[0].subject} at page ${UserBlogPage} | Mcqera | MCQs`}
+        description={`get top question of ${JSON.parse(questions)[0].trade} - ${JSON.parse(questions)[0].subject} question at page ${UserBlogPage} with answers and detailed solutions. Engage with interactive quizzes on various topics of ${JSON.parse(questions)[0].trade} ${JSON.parse(questions)[0].subject} and challenge yourself to improve your understanding and retention of key concepts.`}
+        canonical={`https://mcqera.com/quiz/${JSON.parse(questions)[0].trade}/${JSON.parse(questions)[0].subject}/${UserBlogPage}`}
       />
       {/* ....SEO */}
 
@@ -96,7 +96,8 @@ export default function Page({
         </Button>
       </div>
 
-      <h1 className="text-xl p-1 mt-2">{subject.charAt(0).toUpperCase() + subject.slice(1)} MCQ Question with answer</h1>
+      <h1 className="text-xl p-1 mt-2">{JSON.parse(questions)[0].subject.charAt(0).toUpperCase() + JSON.parse(questions)[0].subject.slice(1)} MCQ Question with answer</h1>
+
       <PaginationModal
         noOfPageForPagination={noOfPageForPagination}
         currentPage={UserBlogPage}
@@ -151,7 +152,7 @@ export async function getStaticPaths() {
 export async function getStaticProps(context) {
   var noOfPageForPagination, courseObj, stringifiedQuestion;
   var UserBlogPage = 1;
-  const questionsPerPage = 15;
+  const questionsPerPage = 10;
 
   try {
     courseObj = await loadCourseObj();
@@ -197,7 +198,7 @@ export async function getStaticProps(context) {
         UserBlogPage,
         courseObj,
       },
-      revalidate: 60,
+      revalidate: 600,
     };
   } catch (error) {
     // console.log(error)
@@ -210,7 +211,7 @@ export async function getStaticProps(context) {
         noOfPageForPagination: 1,
         UserBlogPage,
       },
-      revalidate: 60,
+      revalidate: 600,
     };
   }
 }
