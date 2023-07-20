@@ -1,8 +1,8 @@
 import "@/styles/globals.css";
 import { useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
-import Layout from "../../components/layout/Layout";
 import Seo from "../../lib/seo";
+import Layout from "../../components/layout/Layout";
 
 export default function App({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
