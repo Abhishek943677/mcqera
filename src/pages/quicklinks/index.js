@@ -28,7 +28,8 @@ const Index = ({ data }) => {
     document.getElementById(router.query.section) &&
       document
         .getElementById(router.query.section)
-        .scrollIntoView({ behavior: "smooth" });
+        .scrollIntoView({ behavior: "smooth" })
+       
 
     setExpanded(router.query.section);
   }, [router]);
@@ -49,9 +50,9 @@ const Index = ({ data }) => {
       
       <div className="flex justify-end">
         {expanded === "" || expanded === false  ? (
-          <Button variant="outlined" color="warning" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+          <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
         ) : (
-          <Button variant="outlined" color="error" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+          <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
         )}
       </div>
 

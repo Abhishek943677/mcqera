@@ -10,10 +10,10 @@ export default function LowerHeader() {
 
   useEffect(() => {
     //getting data for quick links
-    const quickLinksData = getQuickLinkData ().then(data => {
-      console.log (data);
-      setQuickLinksData(data)
-    })
+    // const quickLinksData = getQuickLinkData ().then(data => {
+    //   console.log (data);
+    //   setQuickLinksData(data)
+    // })
     // getting data for previous-papers
   }, []);
 
