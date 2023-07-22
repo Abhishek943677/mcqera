@@ -48,13 +48,13 @@ const Index = ({ data }) => {
         QuickLinks to MCQs of various category
       </h1>
       
-      <div className="flex justify-end">
-        {expanded === "" || expanded === false  ? (
-          <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
-        ) : (
-          <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
-        )}
-      </div>
+        <div className="flex justify-end">
+          {expanded === "" || expanded === false  ? (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+          ) : (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+          )}
+        </div>
 
       {data.map((element, i) => {
         return (

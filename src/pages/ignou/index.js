@@ -1,21 +1,39 @@
 import React, { useEffect } from "react";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
-
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import Link from "next/link";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Divider,
 } from "@mui/material";
-import Head from "next/head";
 import CalendarMonthRoundedIcon from "@mui/icons-material/CalendarMonthRounded";
 import getIgnouData from "../../../logics/getIgnouData";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Index = ({ data }) => {
-  // console.log(data);
+  const router = useRouter();
+  const [expanded, setExpanded] = useState("");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  useEffect(() => {
+    document.getElementById(router.query.section) &&
+      document
+        .getElementById(router.query.section)
+        .scrollIntoView({ behavior: "smooth" })
+       
+
+    setExpanded(router.query.section);
+  }, [router]);
 
   return (
     <main>
@@ -27,12 +45,27 @@ const Index = ({ data }) => {
       />
       {/* ....SEO */}
 
-
+      <div className="flex justify-end">
+        {expanded === "" || expanded === false  ? (
+          <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+        ) : (
+          <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+        )}
+      </div>
 
 
       {data.map((element, i) => {
         return (
-          <Accordion className="make-com-dark my-4" key={i}>
+          <Accordion
+            className="make-com-dark my-4"
+            key={i}
+            defaultExpanded={true}
+            id={element[0].session}
+            onChange={handleChange(element[0].session)}
+            expanded={
+              expanded === element[0].session || expanded === undefined
+            }
+          >
             <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={
@@ -44,9 +77,7 @@ const Index = ({ data }) => {
                 {element[0].session}
               </h2>
             </AccordionSummary>
-
             <Divider className=" bg-white" />
-
             {element.map((item, index) => {
               return (
                 <AccordionDetails className="w-full" key={index}>

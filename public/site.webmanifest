@@ -1,6 +1,6 @@
 {
-    "name": "mcqera",
-    "short_name": "mcqera",
+    "name": "Mcqera",
+    "short_name": "Mcqera",
     "description": "Awesome application that will help you achieve your dreams.",
     "icons": [
         {
@@ -16,7 +16,19 @@
             "purpose": "maskable"
         },
         {
-            "src": "any.svg",
+            "src": "/favicon-16x16.png",
+            "sizes": "16x16",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/favicon-32x32.png",
+            "sizes": "32x32",
+            "type": "image/png",
+            "purpose": "maskable"
+        },
+        {
+            "src": "/favicon.ico",
             "sizes": "any",
             "purpose": "maskable"
         }
@@ -32,8 +44,16 @@
             "description": "only for admin"
         },
         {
-            "name": "ignou",
-            "url": "/ignou"
+            "name": "Handwritten notes",
+            "url": "/notes"
+        },
+        {
+            "name": "PYG",
+            "url": "/previous-year"
+        },
+        {
+            "name": "Quiz",
+            "url": "/quiz"
         }
     ],
     "theme_color": "#ffffff",

@@ -4,16 +4,19 @@ import { ShareSocial } from "react-share-social";
 
 export default function Share({ url, title, description }) {
   const [linkCopied, setLinkCopied] = useState(false);
+
   const shareData = {
     title: title || "Mcqera | Practice MCQs",
     text:
       description ||
-      "Discover a comprehensive collection of multiple choice questions (MCQs) on our Mcqera.com.",
+      "Discover a comprehensive collection of multiple choice questions (MCQs) on our Mcqera",
     url: `https://mcqera-db.vercel.app${url}`,
   };
 
   return (
-    <div className=" flex flex-row h-fit ml-1">
+    <div className=" flex flex-row h-fit ml-1 flex-wrap">
+
+      {/* share social main component */}
       <ShareSocial
         url={`https://mcqera-db.vercel.app${url}`}
         socialTypes={[
@@ -43,19 +46,19 @@ export default function Share({ url, title, description }) {
 
       {/* getlink button */}
       <div className={`my-auto mx-1 cursor-pointer hover:z-50 relative `}>
+        {linkCopied && <p className="absolute bottom-10">Copied</p>}
 
-        {linkCopied && <p className=" absolute bottom-10">Link Copied</p>}
-
+        {/* icon button div */}
         <div
-        className="  bg-red-700 rounded-full p-1"
+          className="bg-red-700 rounded-full p-[0.15rem]"
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(
-                `https://mcqera-db.vercel${url}`
+                `https://mcqera-db.vercel.com${url}`
               );
-              setLinkCopied(true)
+              setLinkCopied(true);
               setTimeout(() => {
-                setLinkCopied(false)
+                setLinkCopied(false);
               }, 2000);
             } catch (err) {}
           }}
@@ -67,7 +70,7 @@ export default function Share({ url, title, description }) {
       {/* this is custom share button with navigator api */}
       {navigator.canShare && (
         <div
-          className={`my-auto mx-1 cursor-pointer hover:z-50 bg-lime-700 rounded-full p-[0.6rem]`}
+          className={`my-auto mx-1 cursor-pointer hover:z-50 bg-lime-700 rounded-full p-[0.5rem]`}
           onClick={async () => {
             try {
               await navigator.share(shareData);

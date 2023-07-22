@@ -3,19 +3,42 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Divider,
   Paper,
 } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import Link from "next/link";
 import Head from "next/head";
 import Spinner from "../../../components/widgets/Spinner";
 import getPreviousYearData from "../../../logics/getPreviousYearData";
 import { NextSeo } from "next-seo";
+import { useRouter } from "next/router";
+import { useState } from "react";
 
 const Index = ({ data }) => {
+  const router = useRouter();
+  const [expanded, setExpanded] = useState("");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  useEffect(() => {
+    document.getElementById(router.query.section) &&
+      document
+        .getElementById(router.query.section)
+        .scrollIntoView({ behavior: "smooth" })
+       
+
+    setExpanded(router.query.section);
+  }, [router]);
+
+
   return (
     <div className="">
       {/* seo */}
@@ -32,10 +55,27 @@ const Index = ({ data }) => {
 
       <h1 className="text-xl text-center">Previous year Papers</h1>
 
+      <div className="flex justify-end">
+          {expanded === "" || expanded === false  ? (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+          ) : (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+          )}
+        </div>
+
       {data.length !== 0 ? (
         data.map((element, i) => {
           return (
-            <Accordion className="make-com-dark my-4" key={i}>
+            <Accordion
+            className="make-com-dark my-4"
+            key={i}
+            defaultExpanded={true}
+            id={element[0].examname}
+            onChange={handleChange(element[0].examname)}
+            expanded={
+              expanded === element[0].examname || expanded === undefined
+            }
+          >
               <AccordionSummary
                 className="flex justify-center align-middle"
                 expandIcon={

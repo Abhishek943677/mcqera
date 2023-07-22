@@ -3,9 +3,12 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Divider,
 } from "@mui/material";
 import Link from "next/link";
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import QuizIcon from "@mui/icons-material/Quiz";
@@ -24,10 +27,14 @@ const Index = ({ data }) => {
   };
 
   useEffect(() => {
-    document.getElementById(router.query.section) && document.getElementById(router.query.section).scrollIntoView({behavior:"smooth"})
+    document.getElementById(router.query.section) &&
+      document
+        .getElementById(router.query.section)
+        .scrollIntoView({ behavior: "smooth" })
+       
+
     setExpanded(router.query.section);
   }, [router]);
-
   return (
     <main>
       {/* seo */}
@@ -49,14 +56,27 @@ const Index = ({ data }) => {
         Practice carefully crafted questions with detailed solutions covering
         many subjects for competitive exams.....
       </h1>
+
+      <div className="flex justify-end">
+          {expanded === "" || expanded === false  ? (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+          ) : (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+          )}
+        </div>
+
+
+
       {data.map((element, i) => {
         return (
           <Accordion
             className="make-com-dark my-4"
             id={element.trade}
             key={i}
-            expanded={expanded === element.trade}
             onChange={handleChange(element.trade)}
+            expanded={
+              expanded === element.trade || expanded === undefined
+            }
           >
             <AccordionSummary
               className="flex justify-center align-middle"

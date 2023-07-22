@@ -3,17 +3,37 @@ import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
+import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
+import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
+  Button,
   Divider,
 } from "@mui/material";
 import { NextSeo } from "next-seo";
+import { useEffect } from "react";
+import { useRouter } from "next/router";
 
 const Home = ({ lessonsObj }) => {
-  // console.log(JSON.parse(lessonsObj));
+  const router = useRouter();
+  const [expanded, setExpanded] = useState("");
+
+  const handleChange = (panel) => (event, newExpanded) => {
+    setExpanded(newExpanded ? panel : false);
+  };
+
+  useEffect(() => {
+    document.getElementById(router.query.section) &&
+      document
+        .getElementById(router.query.section)
+        .scrollIntoView({ behavior: "smooth" })
+       
+
+    setExpanded(router.query.section);
+  }, [router]);
 
   return (
     <div>
@@ -31,10 +51,28 @@ const Home = ({ lessonsObj }) => {
       />
       {/* seo */}
 
+
+      <div className="flex justify-end">
+          {expanded === "" || expanded === false  ? (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
+          ) : (
+            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
+          )}
+        </div>
+
       {JSON.parse(lessonsObj).map((item, index) => {
         return (
-          <Accordion className="make-com-dark my-4" key={index}>
-            <AccordionSummary
+          <Accordion
+            className="make-com-dark my-4"
+            key={index}
+            defaultExpanded={true}
+            id={item.course}
+            onChange={handleChange(item.course)}
+            expanded={
+              expanded === `${item.course}` || expanded === undefined
+            }
+          >            
+          <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={
                 <ExpandMoreIcon className=" dark:text-white text-black" />

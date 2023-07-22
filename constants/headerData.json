@@ -1,3 +1,33 @@
 [
+    {
+        "displayName": "Quicklinks",
+        "url":"/quicklinks?section=",
+        "sections":["ssc","medical","engineering","11th"]
+    },
+    {
+        "displayName": "PYQ",
+        "url":"/previous-year?section=",
+        "sections":["ssc","medical","engineering","11th"]
+    },
+    {
+        "displayName": "Notes",
+        "url":"/notes?section=",
+        "sections":["ssc","medical","engineering","11th"]
+    },
+    {
+        "displayName": "Quiz",
+        "url":"/quiz?section=",
+        "sections":["electrical","civil","cse"]
+    },
+    {
+        "displayName": "Courses",
+        "url":"/learn?section=",
+        "sections":["electrical","civil","cse"]
+    },
+    {
+        "displayName": "IGNOU Assignment",
+        "url":"/ignou?section=",
+        "sections":["december-2022","july-2023","december-2023"]
+    }
     
 ]

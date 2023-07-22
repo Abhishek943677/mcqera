@@ -160,7 +160,7 @@ display: block;
 }
 
 .dropdown:hover .dropdown-content {
-  @apply flex flex-col justify-center absolute top-7  text-white w-fit  bg-slate-700 z-50 ml-0 mt-1
+  @apply flex flex-col justify-center  absolute top-7  text-white w-fit  bg-slate-700 z-50 ml-0 mt-1
   /* @apply flex flex-col justify-center absolute right-0 w-full  text-white  bg-slate-700 z-50 rounded-lg */ 
   /* the above code make full width dropdown */
 
