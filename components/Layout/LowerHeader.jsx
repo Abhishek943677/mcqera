@@ -6,7 +6,7 @@ import headerData from "../../constants/headerData";
 
 export default function LowerHeader() {
   return (
-    <div className="flex mt-3 flex-wrap w-10/12 border border-b-emerald-300"> {/* main div container*/}
+    <div className="flex mt-3 flex-wrap w-11/12"> {/* main div container*/}
 
       {/* DOM for lower hearder starts*/}
       {headerData.map((item, index) => {
@@ -29,7 +29,7 @@ export default function LowerHeader() {
 
                   // link div to other pages
                   <div
-                    className=" mt-2 mx-2 flex rounded-md list-none text-center flex-wrap px-2 py-1"
+                    className=" mt-3 mx-2 flex rounded-md list-none text-center flex-wrap px-2 py-1"
                     key={i}
                   >
                     <Link href={`${item.url}${section}`} key={i}>
