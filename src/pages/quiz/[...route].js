@@ -14,6 +14,8 @@ export default function Page({
   noOfPageForPagination,
   UserBlogPage,
   courseObj,
+  serverTrade,
+  serverSubject
 }) {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
@@ -23,8 +25,6 @@ export default function Page({
   const router = useRouter();
 
   useEffect(() => {
-    console.log(JSON.parse(questions))
-
     setTrade(router.query.route[0]);
     setSubject(router.query.route[1]);
     setCourses(courseObj);
@@ -56,9 +56,9 @@ export default function Page({
     <div>
       {/* SEO .... */}
       <NextSeo
-        title={`Questions of ${JSON.parse(questions)[0].trade} ${JSON.parse(questions)[0].subject} at page ${UserBlogPage} | Mcqera | MCQs`}
-        description={`get top question of ${JSON.parse(questions)[0].trade} - ${JSON.parse(questions)[0].subject} question at page ${UserBlogPage} with answers and detailed solutions. Engage with interactive quizzes on various topics of ${JSON.parse(questions)[0].trade} ${JSON.parse(questions)[0].subject} and challenge yourself to improve your understanding and retention of key concepts.`}
-        canonical={`https://mcqera.com/quiz/${JSON.parse(questions)[0].trade}/${JSON.parse(questions)[0].subject}/${UserBlogPage}`}
+        title={`Questions of ${serverTrade} ${serverSubject} at page ${UserBlogPage} | Mcqera | MCQs`}
+        description={`get top question of ${serverTrade} - ${serverSubject} question at page ${UserBlogPage} with answers and detailed solutions. Engage with interactive quizzes on various topics of ${serverTrade} ${serverSubject} and challenge yourself to improve your understanding and retention of key concepts.`}
+        canonical={`https://mcqera.com/quiz/${serverTrade}/${serverSubject}/${UserBlogPage}`}
       />
       {/* ....SEO */}
 
@@ -88,7 +88,6 @@ export default function Page({
           color="success"
           className="w-full mx-2"
           onClick={() => {
-            console.log("clicked");
             router.push(`/quiz/${trade}/${subject}/1`);
           }}
         >
@@ -96,7 +95,7 @@ export default function Page({
         </Button>
       </div>
 
-      <h1 className="text-xl p-1 mt-2">{JSON.parse(questions)[0].subject.charAt(0).toUpperCase() + JSON.parse(questions)[0].subject.slice(1)} MCQ Question with answer</h1>
+      <h1 className="text-xl p-1 mt-2">{serverSubject.charAt(0).toUpperCase() + serverSubject.slice(1)} MCQ Question with answer</h1>
 
       <PaginationModal
         noOfPageForPagination={noOfPageForPagination}
@@ -123,7 +122,7 @@ export default function Page({
 export async function getStaticPaths() {
   const courseObj = await loadCourseObj();
 
-  const estimatedCount = Array.from({ length: 3}, (_, i) => i + 1); // console.log(estimatedCount) // [1,2,3,4......,100] change length to change the number of pages
+  const estimatedCount = Array.from({ length: 3 }, (_, i) => i + 1); // console.log(estimatedCount) // [1,2,3,4......,100] change length to change the number of pages
   // console.log(estimatedCount);
   // const url = `api/question/getQuestionLength?subject=network&trade=electrical`;
   const path = [];
@@ -172,7 +171,7 @@ export async function getStaticProps(context) {
       .limit(questionsPerPage)
       .skip(skip)
       .toArray();
-
+    // console.log(questions);
     const totalLengthOfCollection = await collection
       .find({ subject: context.params.route[1] })
       .count(); // counting number of question saved in one collection
@@ -190,13 +189,15 @@ export async function getStaticProps(context) {
     stringifiedQuestion.length === 2 ? (stringifiedQuestion = []) : ""; // if there is no question then stringifiedQuestion.length=2
     // console.log(stringifiedQuestion); // lists array in string of questions with 10 objects
 
-
+    // console.log(stringifiedQuestion);
     return {
       props: {
         questions: stringifiedQuestion,
         noOfPageForPagination,
         UserBlogPage,
         courseObj,
+        serverTrade:context.params.route[0],
+        serverSubject:context.params.route[1],
       },
       revalidate: 600,
     };
@@ -210,6 +211,8 @@ export async function getStaticProps(context) {
         courseObj,
         noOfPageForPagination: 1,
         UserBlogPage,
+        serverTrade:context.params.route[0],
+        serverSubject:context.params.route[1],
       },
       revalidate: 600,
     };

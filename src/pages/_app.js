@@ -3,6 +3,8 @@ import { useEffect, useState } from "react";
 import { SessionProvider } from "next-auth/react";
 import Seo from "../../lib/seo";
 import Layout from "../../components/Layout/Layout";
+import { Analytics } from '@vercel/analytics/react';
+
 
 export default function App({ Component, pageProps }) {
   const [showChild, setShowChild] = useState(false);
@@ -27,6 +29,7 @@ export default function App({ Component, pageProps }) {
           {/* layout */}
           <Layout>
             <Component {...pageProps} />
+            <Analytics />
           </Layout>
 
       </SessionProvider>

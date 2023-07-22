@@ -7,7 +7,7 @@
     {
         "displayName": "PYQ",
         "url":"/previous-year?section=",
-        "sections":["ssc","medical","engineering","11th"]
+        "sections":["ssc","drdo","uppcl","uprvunl"]
     },
     {
         "displayName": "Notes",
@@ -27,7 +27,7 @@
     {
         "displayName": "IGNOU Assignment",
         "url":"/ignou?section=",
-        "sections":["december-2022","july-2023","december-2023"]
+        "sections":["july-2023","december-2023"]
     }
     
 ]
