@@ -13,7 +13,7 @@ pnpm dev
 ```
 git init
 git add README.md
-git commit -m "first commit"
+git commit -m "fst commit"
 git branch -M main
 git remote add origin https://github.com/Abhishek943677/mcqera.git
 git push -u origin main

@@ -1,14 +1,12 @@
 import Link from "next/link";
 import React, { useState } from "react";
 import DownArrow from "../widgets/DownArrow";
-import { useEffect } from "react";
-import getQuickLinkData from "../../logics/getQuickLinkData";
 import { Divider } from "@mui/material";
 import headerData from "../../constants/headerData";
 
 export default function LowerHeader() {
   return (
-    <div className="flex mt-3 flex-wrap w-11/12 border border-b-emerald-300"> {/* main div container*/}
+    <div className="flex mt-3 flex-wrap w-10/12 border border-b-emerald-300"> {/* main div container*/}
 
       {/* DOM for lower hearder starts*/}
       {headerData.map((item, index) => {
