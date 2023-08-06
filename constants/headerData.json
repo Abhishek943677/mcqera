@@ -20,14 +20,9 @@
         "sections":["electrical","civil","cse"]
     },
     {
-        "displayName": "Courses",
+        "displayName": "Learn",
         "url":"/learn?section=",
         "sections":["electrical","civil","cse"]
-    },
-    {
-        "displayName": "IGNOU Assignment",
-        "url":"/ignou?section=",
-        "sections":["july-2023","december-2023"]
     }
-    
+   
 ]

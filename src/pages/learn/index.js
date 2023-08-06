@@ -3,8 +3,8 @@ import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
-import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import LocalLibraryIcon from "@mui/icons-material/LocalLibrary";
 import {
   Accordion,
@@ -29,8 +29,7 @@ const Home = ({ lessonsObj }) => {
     document.getElementById(router.query.section) &&
       document
         .getElementById(router.query.section)
-        .scrollIntoView({ behavior: "smooth" })
-       
+        .scrollIntoView({ behavior: "smooth" });
 
     setExpanded(router.query.section);
   }, [router]);
@@ -45,20 +44,37 @@ const Home = ({ lessonsObj }) => {
         additionalMetaTags={[
           {
             name: "keywords",
-            content: "learning resources, courses, education, online learning, knowledge, skills, comprehensive, high-quality, subjects",
+            content:
+              "learning resources, courses, education, online learning, knowledge, skills, comprehensive, high-quality, subjects",
           },
         ]}
       />
       {/* seo */}
 
-
       <div className="flex justify-end">
-          {expanded === "" || expanded === false  ? (
-            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
-          ) : (
-            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
-          )}
-        </div>
+        {expanded === "" || expanded === false ? (
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => setExpanded(undefined)}
+            size="small"
+          >
+            {" "}
+            <UnfoldMoreIcon />
+            Expand All
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => setExpanded("")}
+            size="small"
+          >
+            <UnfoldLessIcon />
+            Collapse All
+          </Button>
+        )}
+      </div>
 
       {JSON.parse(lessonsObj).map((item, index) => {
         return (
@@ -68,11 +84,9 @@ const Home = ({ lessonsObj }) => {
             defaultExpanded={true}
             id={item.course}
             onChange={handleChange(item.course)}
-            expanded={
-              expanded === `${item.course}` || expanded === undefined
-            }
-          >            
-          <AccordionSummary
+            expanded={expanded === `${item.course}` || expanded === undefined}
+          >
+            <AccordionSummary
               className="flex justify-center align-middle"
               expandIcon={
                 <ExpandMoreIcon className=" dark:text-white text-black" />
@@ -115,9 +129,7 @@ export const getStaticProps = async () => {
   const db = await mongoConnectLearn();
   const collection = db.collection("learnObj"); //accessing collection of trade
 
-  const data = await collection
-    .find() // finding data from trade collection with subject name
-    .toArray();
+  const data = await collection.project({ title: 1, url: 1 }).toArray(); // finding data from trade collection with subject name
 
   return {
     props: {

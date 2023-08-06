@@ -16,10 +16,6 @@
         "path":"/quicklinks"
     },
     {
-        "name":"IGNOU Assignment",
-        "path":"/ignou"
-    },
-    {
         "name":"Handwritten Notes",
         "path":"/notes"
     }
