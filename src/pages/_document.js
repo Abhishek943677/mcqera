@@ -5,10 +5,12 @@ export default function Document() {
     <Html lang="en">
       <Head>
       <link rel="manifest" href="/manifest.json" />
+     
       </Head>
       <body>
         <Main />
         <NextScript />
+        
       </body>
     </Html>
   )

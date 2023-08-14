@@ -129,7 +129,7 @@ export const getStaticProps = async () => {
   const db = await mongoConnectLearn();
   const collection = db.collection("learnObj"); //accessing collection of trade
 
-  const data = await collection.find({}).project({ title: 1, url: 1 }).toArray(); // finding data from trade collection with subject name
+  const data = await collection.find({}).toArray(); // finding data from trade collection with subject name
 
   return {
     props: {

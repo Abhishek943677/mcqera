@@ -15,7 +15,7 @@ export default function Page({
   UserBlogPage,
   courseObj,
   serverTrade,
-  serverSubject
+  serverSubject,
 }) {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
@@ -95,7 +95,10 @@ export default function Page({
         </Button>
       </div>
 
-      <h1 className="text-xl p-1 mt-2">{serverSubject.charAt(0).toUpperCase() + serverSubject.slice(1)} MCQ Question with answer</h1>
+      <h1 className="text-xl p-1 mt-2">
+        {serverSubject.charAt(0).toUpperCase() + serverSubject.slice(1)} MCQ
+        Question with answer
+      </h1>
 
       <PaginationModal
         noOfPageForPagination={noOfPageForPagination}
@@ -196,8 +199,8 @@ export async function getStaticProps(context) {
         noOfPageForPagination,
         UserBlogPage,
         courseObj,
-        serverTrade:context.params.route[0],
-        serverSubject:context.params.route[1],
+        serverTrade: context.params.route[0],
+        serverSubject: context.params.route[1],
       },
       revalidate: 600,
     };
@@ -211,70 +214,11 @@ export async function getStaticProps(context) {
         courseObj,
         noOfPageForPagination: 1,
         UserBlogPage,
-        serverTrade:context.params.route[0],
-        serverSubject:context.params.route[1],
+        serverTrade: context.params.route[0],
+        serverSubject: context.params.route[1],
       },
       revalidate: 600,
     };
   }
 }
 
-// // this code runs on server
-// export async function getServerSideProps(context) {
-//   var noOfPageForPagination, courseObj, stringifiedQuestion;
-//   var UserBlogPage = 1;
-//   try {
-//     courseObj = await loadCourseObj();
-
-//     //get userblog page from params
-//     if (context.params.route[2]) {
-//       UserBlogPage = context.params.route[2];
-//     }
-//     const skip = (UserBlogPage - 1) * 10; // how many question should skip from database for pagination purpose
-
-//     // get data from database
-//     const db = await mongoConnect(); // mongoConnect is a function which returns db
-//     const collection = db.collection(context.params.route[0]); //accessing collection of trade
-
-//     const questions = await collection
-//       .find({ subject: context.params.route[1] }) // finding data from trade collection with subject name
-//       .limit(10)
-//       .skip(skip)
-//       .toArray();
-
-//     const totalLengthOfCollection = await collection
-//       .find({ subject: context.params.route[1] })
-//       .count(); // counting number of question saved in one collection
-//     console.log(totalLengthOfCollection);
-
-//     //pagination work
-//     noOfPageForPagination = Math.ceil(totalLengthOfCollection / 10);
-//     noOfPageForPagination === 0 ? (noOfPageForPagination = 1) : ""; // if there is no documents then set pagination at 1
-//     // console.log(noOfPageForPagination);
-
-//     stringifiedQuestion = JSON.stringify(questions); // if questions in not strigified the it it giving error at getServerSideprops
-
-//     stringifiedQuestion.length === 2 ? (stringifiedQuestion = []) : ""; // if there is no question then stringifiedQuestion.length=2
-//     // console.log(stringifiedQuestion); // lists array in string of questions with 10 objects
-
-//     context.res.setHeader(
-//       "Cache-Control",
-//       "public, s-maxage=100, stale-while-revalidate=300"
-//     );
-//     return {
-//       props: {
-//         questions: stringifiedQuestion,
-//         noOfPageForPagination,
-//         UserBlogPage,
-//         courseObj,
-//       },
-//     };
-//   } catch (error) {
-//     console.log(error)
-//     courseObj = await loadCourseObj();
-//     // console.log(error)
-//     return {
-//       props: { questions: [], courseObj, noOfPageForPagination: 1 },
-//     };
-//   }
-// }
