@@ -8,7 +8,8 @@ import QuickLinks from "../../components/home/QuickLinks";
 import ChangeTrade from "../../components/question/ChangeTrade";
 import ChangeSubject from "../../components/question/ChangeSubject";
 
-const Home = ({ courseObj, quicklinks }) => {
+// const Home = ({ courseObj, quicklinks }) => {
+const Home = ({ courseObj }) => {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
@@ -70,14 +71,14 @@ const Home = ({ courseObj, quicklinks }) => {
         </Button>
       </section>
 
-      <QuickLinks data={quicklinks} />
+      {/* <QuickLinks data={quicklinks} /> */}
     </div>
   );
 };
 
 // --------------------------server side stuffs ----------------------
 export async function getStaticProps() {
-  const quicklinks = await getQuickLinkData();
+  // const quicklinks = await getQuickLinkData();
   const courseObj = await loadCourseObj();
 
   // const userDb = await mongoConnectUser();
@@ -89,7 +90,8 @@ export async function getStaticProps() {
   // console.log(userList);
 
   return {
-    props: { courseObj, quicklinks },
+    // props: { courseObj, quicklinks },
+    props: { courseObj },
     revalidate: 600,
   };
 }
