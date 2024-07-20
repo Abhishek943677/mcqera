@@ -1,18 +1,17 @@
 import React, { useEffect, useState } from "react";
-import { getSession, useSession } from "next-auth/react";
 import axios from "axios";
 import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { useRouter } from "next/router";
 import { Button } from "@mui/material";
 import AdminPanel from "../../../components/quiz-admin/AdminPanel";
 import AddQuestion from "../../../components/quiz-admin/AddQuestion";
+import { getSession, useSession } from "next-auth/react";
 
 export default function Home({ courseObj }) {
   const [showAdminPanel, setShowAdminAPanel] = useState(false);
 
   return (
     <div className={`w-full mx-auto`}>
-
       <Button
         variant="contained"
         onClick={() => setShowAdminAPanel((pre) => !pre)}
@@ -20,7 +19,6 @@ export default function Home({ courseObj }) {
         {showAdminPanel ? "Add new Question" : "Edit Your Previous Questions"}
       </Button>
 
-      
       {showAdminPanel ? (
         <AdminPanel courseObj={courseObj} />
       ) : (
@@ -34,6 +32,7 @@ export default function Home({ courseObj }) {
 export async function getServerSideProps(context) {
   // this is user authentication
   const session = await getSession({ req: context.req });
+
   if (!session) {
     return {
       redirect: {

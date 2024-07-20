@@ -8,8 +8,7 @@ import QuickLinks from "../../components/home/QuickLinks";
 import ChangeTrade from "../../components/question/ChangeTrade";
 import ChangeSubject from "../../components/question/ChangeSubject";
 
-// const Home = ({ courseObj, quicklinks }) => {
-const Home = ({ courseObj }) => {
+const Home = ({ courseObj, quicklinks }) => {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
@@ -27,7 +26,7 @@ const Home = ({ courseObj }) => {
       setCourses(courseObj);
       setTrade(() => localStorage.tradeHome);
       setSubject(() => localStorage.subjectHome);
-      setSubjects(JSON.parse(localStorage.getItem("subjectsHome")));
+      // setSubjects(JSON.parse(localStorage.getItem("subjectsHome")));
     } else {
       setCourses(courseObj);
       setSubject(courseObj[0].subjects[0]);
@@ -71,14 +70,14 @@ const Home = ({ courseObj }) => {
         </Button>
       </section>
 
-      {/* <QuickLinks data={quicklinks} /> */}
+      <QuickLinks data={quicklinks} />
     </div>
   );
 };
 
 // --------------------------server side stuffs ----------------------
 export async function getStaticProps() {
-  // const quicklinks = await getQuickLinkData();
+  const quicklinks = await getQuickLinkData();
   const courseObj = await loadCourseObj();
 
   // const userDb = await mongoConnectUser();
@@ -90,8 +89,7 @@ export async function getStaticProps() {
   // console.log(userList);
 
   return {
-    // props: { courseObj, quicklinks },
-    props: { courseObj },
+    props: { courseObj, quicklinks },
     revalidate: 600,
   };
 }

@@ -177,7 +177,7 @@ export default function AdminPanel({ courseObj }) {
                     <Link
                       href={`/admin/edit?id=${item._id}&subject=${subject}&trade=${trade}`}
                       rel="noopener noreferrer"
-                      target="_blank"
+                      // target="_blank"
                     >
                       <Button>
                         <EditIcon

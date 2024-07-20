@@ -22,23 +22,31 @@ const Index = ({ data }) => {
 
 //----------------------- server auth and admin authentication----------------------------
 export async function getServerSideProps(context) {
-  // user authentication
-  const session = await getSession({ req: context.req });
-  if (!session) {
-    return {
-      redirect: {
-        destination: "/api/auth/signin",
-        permanent: false,
-      },
-    };
-  }
-
-  // admin validation
-  try {
-    const { data } = await axios.post(`${process.env.APP_URL}/api/auth/admin`, {
-      email: session.user.email,
-    });
-    if (!data) {
+    // this is user authentication
+    const session = await getSession({ req: context.req });
+    if (!session) {
+      return {
+        redirect: {
+          destination: "/api/auth/signin",
+          permanent: false,
+        },
+      };
+    }
+  
+    // this is admin validation
+    try {
+      const { data } = await axios.post(`${process.env.APP_URL}/api/auth/admin`, {
+        email: session.user.email,
+      });
+      if (!data) {
+        return {
+          redirect: {
+            destination: "/",
+            permanent: false,
+          },
+        };
+      }
+    } catch (error) {
       return {
         redirect: {
           destination: "/",
@@ -46,14 +54,6 @@ export async function getServerSideProps(context) {
         },
       };
     }
-  } catch (error) {
-    return {
-      redirect: {
-        destination: "/",
-        permanent: false,
-      },
-    };
-  }
 
   // actual server side stuffs
   try {

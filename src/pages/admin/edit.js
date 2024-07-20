@@ -10,6 +10,8 @@ import Spinner from "../../../components/widgets/Spinner";
 import { useRouter } from "next/router";
 import ChangeTrade from "../../../components/question/ChangeTrade";
 import ChangeSubject from "../../../components/question/ChangeSubject";
+import Link from "next/link";
+
 
 export default function Edit({ singleQuestion, courseObj }) {
   const { data: session } = useSession();
@@ -103,6 +105,9 @@ export default function Edit({ singleQuestion, courseObj }) {
     <div className="flex my-6 flex-col h-full mx-auto w-full">
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
+      <Link href="/admin">
+        <Button variant="contained">Add New Question</Button>
+      </Link>
       <h1 className="text-2xl text-cyan-800 text-center">
         Update Your Question
       </h1>
@@ -174,21 +179,7 @@ export default function Edit({ singleQuestion, courseObj }) {
       </div>
     </div>
   );
-};
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+}
 
 // ----------------------------------server side stuffs --------------------------
 export async function getServerSideProps(context) {
