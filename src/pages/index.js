@@ -39,7 +39,7 @@ const Home = ({
       setCourses(courseObj);
       setTrade(() => localStorage.tradeHome);
       setSubject(() => localStorage.subjectHome);
-      // setSubjects(JSON.parse(localStorage.getItem("subjectsHome")));
+      setSubjects(JSON.parse(localStorage.getItem("subjectsHome")));
     } else {
       setCourses(courseObj);
       setSubject(courseObj[0].subjects[0]);
