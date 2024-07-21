@@ -13,7 +13,7 @@ import { useRouter } from "next/router";
 import ChangeTrade from "../question/ChangeTrade";
 import ChangeSubject from "../question/ChangeSubject";
 
-export default function AddQuestion({ courseObj }) {
+export default function AddQuestion({ courseObj, setShowAdminAPanel }) {
   const { data: session } = useSession();
 
   const [trade, setTrade] = useState("");
@@ -26,14 +26,15 @@ export default function AddQuestion({ courseObj }) {
   const [questionId, setQuestionId] = useState("");
   const router = useRouter();
 
-  const [que, setQue] = useState({
+  const initialQuestionState = {
     question: "",
     trueOpt: "",
     falseOpt1: "",
     falseOpt2: "",
     falseOpt3: "",
     detail: "",
-  });
+  };
+  const [que, setQue] = useState(initialQuestionState);
 
   useEffect(() => {
     if (
@@ -63,9 +64,16 @@ export default function AddQuestion({ courseObj }) {
       })
       .then((p) => {
         setSent(false);
-
         if (p.data.ok) {
           setOpenSuccessSnack(true);
+          document.body.scrollTop = 0;
+          document.documentElement.scrollTop = 0;
+
+          // this is important line of code to reset all the fields. actually this is Jugad
+          setShowAdminAPanel(() => true);
+          setTimeout(() => {
+            setShowAdminAPanel(() => false);
+          }, 100);
         } else {
           setOpenFailureSnack(true);
         }
@@ -83,6 +91,7 @@ export default function AddQuestion({ courseObj }) {
     // setQue({ ...que, question: e.target.value });
     setQue({ ...que, question: e });
   };
+
   const handleChangeT = (e) => {
     // setQue({ ...que, trueOpt: e.target.value });
     setQue({ ...que, trueOpt: e });
@@ -105,7 +114,6 @@ export default function AddQuestion({ courseObj }) {
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
-      {/* <form> */}
       <div className="flex  flex-col p-2 h-full mx-auto sm:w-9/12 lg:w-7/12 md:8/12 max-[640px]:w-10/12">
         <ChangeTrade
           trade={trade}
@@ -113,7 +121,6 @@ export default function AddQuestion({ courseObj }) {
           setTrade={setTrade}
           setSubject={setSubject}
           setSubjects={setSubjects}
-          S
         />
         <ChangeSubject
           subject={subject}
@@ -162,8 +169,8 @@ export default function AddQuestion({ courseObj }) {
           className="w-40 mx-auto my-5"
           disabled={sent}
           onClick={(e) => {
-            setSent(() => true);
             e.preventDefault();
+            setSent(() => true);
             handleSave();
           }}
         >
@@ -172,8 +179,14 @@ export default function AddQuestion({ courseObj }) {
         </Button>
       </div>
 
-      <p className="text-center">Details written in details section appears same as here</p>
-      <div dangerouslySetInnerHTML={{ __html: que.detail }} id="question" className="border rounded-lg lg:w-[80%] md:w-full sm:w-full mx-auto p-2"/>
+      <p className="text-center">
+        Details written in details section appears same as here
+      </p>
+      <div
+        dangerouslySetInnerHTML={{ __html: que.detail }}
+        id="question"
+        className="border rounded-lg lg:w-[80%] md:w-full sm:w-full mx-auto p-2"
+      />
     </div>
   );
 }

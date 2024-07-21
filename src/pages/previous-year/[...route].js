@@ -64,6 +64,6 @@ export async function getStaticProps(context) {
       examname: examname,
       branch: branch,
     },
-    revalidate: 600,
+    revalidate: 1200,
   };
 }

@@ -5,7 +5,8 @@ import Link from "next/link";
 import { NextSeo } from "next-seo";
 
 const Route = ({ data, topicsInChapter, chapter }) => {
-  // console.log(JSON.parse(data));
+
+  const filteredTopics = JSON.parse(topicsInChapter).filter(item => item.topicName !== JSON.parse(data)[0].topicName);
 
   return (
     <div>
@@ -51,15 +52,17 @@ const Route = ({ data, topicsInChapter, chapter }) => {
         <h1 className="text-2xl underline italic">
           More topics from {chapter} chapter
         </h1>
-        {JSON.parse(topicsInChapter).map((item, index) => {
+
+        {filteredTopics.map((item, index) => {
           return (
             <div key={index}>
               <Link href={item.url} className=" hover:opacity-50">
-                {item.topicName}
+                &nbsp;&nbsp; &nbsp; &nbsp;{item.topicName}
               </Link>
             </div>
           );
         })}
+
       </div>
     </div>
   );
@@ -120,7 +123,7 @@ export async function getStaticProps(context) {
       topicsInChapter: JSON.stringify(topicsInChapter),
       chapter,
     },
-    revalidate: 600,
+    revalidate: 1200,
   };
 }
 

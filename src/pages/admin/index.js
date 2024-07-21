@@ -22,7 +22,7 @@ export default function Home({ courseObj }) {
       {showAdminPanel ? (
         <AdminPanel courseObj={courseObj} />
       ) : (
-        <AddQuestion courseObj={courseObj} />
+        <AddQuestion courseObj={courseObj} setShowAdminAPanel={setShowAdminAPanel}/>
       )}
     </div>
   );

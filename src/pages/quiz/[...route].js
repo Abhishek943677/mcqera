@@ -171,10 +171,12 @@ export async function getStaticProps(context) {
 
     const questions = await collection
       .find({ subject: context.params.route[1] }) // finding data from trade collection with subject name
+      .sort({ _id: -1 })
       .limit(questionsPerPage)
       .skip(skip)
-      .toArray();
+      .toArray()
     // console.log(questions);
+
     const totalLengthOfCollection = await collection
       .find({ subject: context.params.route[1] })
       .count(); // counting number of question saved in one collection
@@ -202,7 +204,7 @@ export async function getStaticProps(context) {
         serverTrade: context.params.route[0],
         serverSubject: context.params.route[1],
       },
-      revalidate: 600,
+      revalidate: 1200,
     };
   } catch (error) {
     // console.log(error)
@@ -217,7 +219,7 @@ export async function getStaticProps(context) {
         serverTrade: context.params.route[0],
         serverSubject: context.params.route[1],
       },
-      revalidate: 600,
+      revalidate: 1200,
     };
   }
 }

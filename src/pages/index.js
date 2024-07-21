@@ -7,8 +7,20 @@ import getQuickLinkData from "../../logics/getQuickLinkData";
 import QuickLinks from "../../components/home/QuickLinks";
 import ChangeTrade from "../../components/question/ChangeTrade";
 import ChangeSubject from "../../components/question/ChangeSubject";
+import getPreviousYearData from "../../logics/getPreviousYearData";
+import PYQLinks from "../../components/home/PYQLinks";
+import getNotesData from "../../logics/getNotesData";
+import NotesLinks from "../../components/home/NotesLinks";
+import { getLearnData } from "../../logics/getLearnData";
+import LearnLinks from "../../components/home/LearnLinks";
 
-const Home = ({ courseObj, quicklinks }) => {
+const Home = ({
+  courseObj,
+  quicklinks,
+  previousYearLinks,
+  notesLinks,
+  learnLinks,
+}) => {
   const [trade, setTrade] = useState("");
   const [subject, setSubject] = useState("");
   const [subjects, setSubjects] = useState([]);
@@ -17,7 +29,8 @@ const Home = ({ courseObj, quicklinks }) => {
   const router = useRouter();
 
   useEffect(() => {
-    // setIsOpen(true)
+    // console.log(learnLinks);
+
     if (
       localStorage.tradeHome &&
       localStorage.subjectHome &&
@@ -71,6 +84,9 @@ const Home = ({ courseObj, quicklinks }) => {
       </section>
 
       <QuickLinks data={quicklinks} />
+      <PYQLinks data={previousYearLinks} />
+      <NotesLinks data={notesLinks} />
+      <LearnLinks data={learnLinks} />
     </div>
   );
 };
@@ -79,18 +95,19 @@ const Home = ({ courseObj, quicklinks }) => {
 export async function getStaticProps() {
   const quicklinks = await getQuickLinkData();
   const courseObj = await loadCourseObj();
-
-  // const userDb = await mongoConnectUser();
-  // const collection = userDb.collection("user-list"); //accessing collection of trade
-
-  // const userList = await collection
-  //   .find({}) // finding data from trade collection with subject name
-  //   .toArray();
-  // console.log(userList);
+  const previousYearLinks = await getPreviousYearData();
+  const notesLinks = await getNotesData();
+  const learnLinks = await getLearnData();
 
   return {
-    props: { courseObj, quicklinks },
-    revalidate: 600,
+    props: {
+      courseObj,
+      quicklinks,
+      previousYearLinks,
+      notesLinks,
+      learnLinks: JSON.stringify(learnLinks),
+    },
+    revalidate: 1200,
   };
 }
 

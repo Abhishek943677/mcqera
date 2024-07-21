@@ -118,7 +118,7 @@ export async function getStaticProps() {
   const notesData = await getNotesData();
   return {
     props: { data: notesData },
-    revalidate: 600,
+    revalidate: 1200,
   };
 }
 

@@ -135,7 +135,7 @@ export const getStaticProps = async () => {
     props: {
       lessonsObj: JSON.stringify(data),
     },
-    revalidate: 600,
+    revalidate: 1200,
   };
 };
 
