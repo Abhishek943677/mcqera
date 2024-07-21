@@ -69,7 +69,7 @@ export default function Header() {
               <Paper
                 elevation={3}
                 id="profileModal"
-                className={` list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 rounded make-com-dark`}
+                className={` z-50 list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 rounded make-com-dark`}
               >
                 <li>
                   <p>{session.user.name}</p>

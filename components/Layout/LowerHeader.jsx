@@ -16,7 +16,7 @@ export default function LowerHeader() {
           //div container for every dropdown and its content
           <div className="dropdown w-fit" key={index}>
 
-            <p className="dropbtn flex">
+            <p className="dropbtn flex select-none">
               {item.displayName} <DownArrow /> {/* this is for display name */}
             </p>
 
