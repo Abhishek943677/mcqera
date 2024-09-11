@@ -45,13 +45,14 @@ export default function Index({ questions, title, category }) {
 
 export async function getStaticPaths(context) {
   const path = [];
-  const Pathsquery = `*[_type=="quicklinks"]{category,slug}`;
+  const Pathsquery = `*[_type=="quicklinks"]{branch,slug}`;
   const pathsInitialData = await clientQuickLinks.fetch(Pathsquery);
 
-  pathsInitialData.forEach(({ category, slug }) => {
-    path.push({ params: { route: [String(category), String(slug.current)] } });
+  pathsInitialData.forEach(({ branch, slug }) => {
+    branch.forEach((item, index)=>{
+      path.push({ params: { route: [String(item), String(slug.current)] } });
+    })
   });
-
   return {
     // paths: [{ params: { route: ['uppcl','network'] } }],
     paths: path,
