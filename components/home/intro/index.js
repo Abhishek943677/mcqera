@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from "react";
 import * as THREE from "three";
-import IntroText from "./IntroText";
 
 const Intro = () => {
   const videoRef = useRef(null);
@@ -37,7 +36,6 @@ const Intro = () => {
           fontSize: "3.5rem",
         }}
       >
-        <IntroText />
       </div>
     </div>
   );
