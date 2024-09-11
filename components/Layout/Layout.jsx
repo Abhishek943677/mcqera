@@ -38,27 +38,51 @@ export default function Layout({ children }) {
 
       {/* this is side nav childs */}
       <SideNav>
-        <Header />
-        <LowerHeader />
+        <div
+          className={`${
+            router.pathname === "/" ? "fixed w-full top-2 z-50" : "mt-2"
+          }`}
+        >
+          <Header />
+          <LowerHeader />
+        </div>
 
-        <div className="flex">
-          <div className="mt-5 w-[72%] max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1">
+        <div className={`flex`}>
+          <div
+            className={`w-[72%] max-[640px]:w-full sm:w-full sm:p-1 max-[640px]:p-1`}
+          >
             {children}
 
             {/*ads for smaller screens */}
-            <div className="border border-green-600 w-full bg-gray-700 max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden">
+            <div
+              className={`${
+                router.pathname === "/"
+                  ? "hidden"
+                  : "max-[640px]:flex sm:flex w-full"
+              } border border-green-600  bg-gray-700  lg:hidden xl:hidden md:hidden `}
+            >
               <AdsSideBar />
             </div>
           </div>
 
           {/* ads for larger screen */}
-          <div className="w-[28%] mt-5 border border-black px-1 min-h-screen bg-gray-700 max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex">
+          <div
+            className={`${
+              router.pathname === "/"
+                ? "hidden"
+                : "w-[28%]  lg:flex xl:flex md:flex "
+            } border border-black px-1 h-fit bg-gray-700 max-[640px]:hidden sm:hidden mt-16  `}
+          >
             <AdsSideBar />
           </div>
+
+          
         </div>
 
-        <Share url={router.asPath}/>
+        <Share url={router.asPath} />
       </SideNav>
     </div>
   );
 }
+
+

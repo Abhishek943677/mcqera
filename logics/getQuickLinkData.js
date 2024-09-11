@@ -2,12 +2,21 @@ import { clientQuickLinks } from "../lib/sanityConnect";
 
 export default async function getQuickLinkData() {
 
-    const quicklinksUnorganised = await clientQuickLinks.fetch(`*[_type=="quicklinks"]{category,title,slug}`);
-    
-    const sorted = quicklinksUnorganised.sort((a, b) => a.category.length - b.category.length);
+    const quicklinksUnorganised = await clientQuickLinks.fetch(`*[_type=="quicklinks"]{branch,title,slug}`);
+
+    // Step 1: Flatten the branch array into individual entries
+    const flattened = quicklinksUnorganised.flatMap(item =>
+        item.branch.map(branch => ({
+            branch:branch,
+            title: item.title,
+            slug: item.slug
+        }))
+    );
+
+    const sorted = flattened.sort((a, b) => a.branch.length - b.branch.length);
 
     const gotArrayOfCategory = sorted.map((i, index) => {
-        return i.category;
+        return i.branch;
     });
 
     const uniqueArrayOfCategory = [...new Set(gotArrayOfCategory)];
@@ -15,8 +24,8 @@ export default async function getQuickLinkData() {
     var furnished = [];
 
     for (let i = 0; i < uniqueArrayOfCategory.length; i++) {
-        const category = uniqueArrayOfCategory[i];
-        const d = quicklinksUnorganised.filter((i) => i.category === category);
+        const branch = uniqueArrayOfCategory[i];
+        const d = flattened.filter((i) => i.branch === branch);
         const sorted = d.sort((a, b) => b.title.length - a.title.length);
         furnished.push(sorted);
     }

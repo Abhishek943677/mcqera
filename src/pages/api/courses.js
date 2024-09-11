@@ -1,9 +1,8 @@
 import { MongoClient } from "mongodb";
-import path from "path";
-const fs = require("fs");
 
 export default async (req, res) => {
-  const postsDirectory = path.join(process.cwd(), 'constants');
+  res.setHeader('Access-Control-Allow-Origin', '*'); // Allow requests from any origin
+
   if (req.method === "GET") {
     
     try {
@@ -15,21 +14,10 @@ export default async (req, res) => {
       
       const collection = db.collection("courses");
       const courseObj = await collection.find({}).toArray();// this is course object from databse
-      console.log(courseObj)
-      
-      //logics to save question
-      
-      const path = `${postsDirectory}/courseObj.json`;
-      var writeStream = fs.createWriteStream(`${path}`);
-      writeStream.write(`${JSON.stringify(courseObj)}`);
-      writeStream.end();
-
-
       res.status(200).json(courseObj);
       return res.end();
 
     } catch (error) {
-      console.log(error)
       res.status(200).json([]);
       return res.end();
     }

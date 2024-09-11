@@ -9,19 +9,9 @@ import DarkthemeSwitch from "../widgets/DarkthemeSwitch";
 
 export default function Header() {
   const { data: session } = useSession();
-  const [dark, setDark] = useState(null);
+  const [dark, setDark] = useState(true);
   const router = useRouter();
 
-  // this function is called inside DarkthemeSwitch
-  const toggleDarkMode = (checked) => {
-    if (checked) {
-      document.getElementsByTagName("html")[0].classList.add("dark");
-      localStorage.theme = "dark";
-    } else {
-      document.getElementsByTagName("html")[0].classList.remove("dark");
-      localStorage.theme = "light";
-    }
-  };
 
   useEffect(() => {
     // setShowProfile(false);
@@ -38,13 +28,12 @@ export default function Header() {
       document.getElementsByTagName("html")[0].classList.remove("dark");
       setDark(true);
     }
-
   }, []);
 
   return (
     <div className="flex flex-row justify-between w-full flex-wrap">
       {/* left side header icons */}
-      <div className="flex w-24 justify-between mx-4">
+      <div className="flex w-24 justify-between mx-4 my-1">
         <BiHome
           onClick={() => router.push("/")}
           className="w-8 h-fit cursor-pointer"
@@ -69,7 +58,7 @@ export default function Header() {
               <Paper
                 elevation={3}
                 id="profileModal"
-                className={` z-50 list-none absolute md:top-[3.6rem] lg:top-[3.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[6.4rem] p-4 rounded make-com-dark`}
+                className={` z-50 list-none absolute md:top-[3.6rem] lg:top-[2.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[3.2rem] p-4 rounded make-com-dark`}
               >
                 <li>
                   <p>{session.user.name}</p>
@@ -86,7 +75,6 @@ export default function Header() {
                 </li>
               </Paper>
             </div>
-
           </div>
         ) : (
           <div>
@@ -94,14 +82,6 @@ export default function Header() {
           </div>
         )}
 
-        {/* dark theme button */}
-        <DarkthemeSwitch
-          checked={!dark}
-          onChange={(e) => {
-            setDark((p) => !p);
-            toggleDarkMode(e.target.checked);
-          }}
-        />
       </div>
     </div>
   );

@@ -6,10 +6,11 @@ import Image from "next/image";
 import UrlsComponent from "../UrlsComponent";
 import { useRouter } from "next/router";
 import Share from "../Share";
+import SideMenu from "../SideMenu";
 
 const SideNav = ({ children }) => {
   const router = useRouter();
-  const [openBig, setOpenBig] = useState(false);
+  const [openBig, setOpenBig] = useState(router.pathname === '/');
   const [openSmall, setOpenSmall] = useState(false);
 
   const handlesidebarBig = () => {
@@ -31,10 +32,10 @@ const SideNav = ({ children }) => {
   return (
     <div>
       {/* ---------------------------------------------------for bigger devices------------------------------------------------------------ */}
-      <div className="flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex ">
+      <div className={`flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex `}>
 
         {/* hamburger icon and its logic */}  
-        <div className="absolute top-14 right-4">
+        <div className={`absolute top-16 right-4 ${router.pathname === '/' ? "hidden" : ""}`}>
           <p onClick={handlesidebarBig} className="cursor-pointer">
             {!openBig ? (
               <BiMenu className="w-10 h-10" />
@@ -46,8 +47,8 @@ const SideNav = ({ children }) => {
 
         {/* div for sidebar and its content for bigger devices*/}
         <div
-          className={`bg-slate-400 overflow-x-auto fixed top-0  h-full dark:bg-slate-600 z-50 ${
-            openBig ? "hidden" : "w-[18%]"
+          className={`bg-gray-100 overflow-x-auto fixed top-0  h-full text-black z-50 ${
+           openBig ? "hidden" : "w-[18%]" 
           } `}
         >
           <Image
@@ -60,14 +61,17 @@ const SideNav = ({ children }) => {
           {/*  links div for multiple pages*/}
           
           <UrlsComponent />
+          <SideMenu />
+
+
         </div>
 
         {/* this is the place where all the child components comes in */}
 
         <div
           className={` overflow-y-auto m-auto   ${
-            openBig ? "w-full ml-0" : "ml-[18%] w-full"
-          }`}
+            openBig ? "w-full ml-0" : "ml-[18%] w-full" 
+          }  `}
         >
           {children}
           <UrlsComponent alignment="true" />
@@ -105,6 +109,7 @@ const SideNav = ({ children }) => {
           />
           {/*  links div for multiple pages*/}
           <UrlsComponent />
+          <SideMenu />
         </div>
 
         {/* for footer and children */}

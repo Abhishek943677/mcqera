@@ -6,13 +6,13 @@ import linksData from "../constants/linksData";
 export default function UrlsComponent({ alignment }) {
   return (
     <div
-      className={`list-none ${alignment === "true" ? "flex" : ""} flex-wrap`}
+      className={`list-none ${alignment === "true" ? "flex bg-gradient-to-b from-blue-950 to-blue-950" : ""} flex-wrap `}
     >
       {linksData.map((link,index) => (
         <Link href={link.path} key={index}>
           <li className="mx-2 rounded-md text-lg my-2 hover:opacity-50">
             {link.name}
-            <span  className={`${alignment === "true" ? "" : ""} ml-1`}>
+            <span  className={`${alignment === "true " ? "" : ""} ml-1`}>
             <LaunchIcon fontSize="inherit" />
             </span>
           </li>

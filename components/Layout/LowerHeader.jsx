@@ -3,10 +3,12 @@ import React, { useState } from "react";
 import DownArrow from "../widgets/DownArrow";
 import { Divider } from "@mui/material";
 import headerData from "../../constants/headerData";
+import { useRouter } from "next/router";
 
 export default function LowerHeader() {
+  const router = useRouter()
   return (
-    <div className="flex mt-3 flex-wrap w-11/12"> {/* main div container*/}
+    <div className={`flex mt-3 flex-wrap w-11/12 `}> {/* main div container*/}
 
       {/* DOM for lower hearder starts*/}
       {headerData.map((item, index) => {

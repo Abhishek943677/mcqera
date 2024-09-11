@@ -1,0 +1,23 @@
+[
+    {
+        "examname":"ssc-je-electrical",
+        "branch":"electrical",
+        "category":"Engineering"
+    },
+    {
+        "examname":"uppcl-je-electrical",
+        "branch":"electrical",
+        "category":"Engineering"
+    },
+    {
+        "examname":"uppcl-je-mechanical",
+        "branch":"mechanical",
+        "category":"Engineering"
+    },
+    {
+        "examname":"ssc-je-mechanical",
+        "branch":"mechanical",
+        "category":"Engineering"
+    }
+    
+]

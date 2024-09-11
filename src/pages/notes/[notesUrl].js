@@ -56,7 +56,7 @@ export default function NotesPage({ data }) {
 
 export async function getStaticProps(context) {
   const data = await clientNotes.fetch(
-    `*[_type=="notes" && slug.current=="${context.params.notesUrl}"]`
+    `*[_type=="notes"  && slug.current=="${context.params.notesUrl}"]`
   );
   // console.log(data);
   return {

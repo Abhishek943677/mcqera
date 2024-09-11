@@ -70,10 +70,10 @@ const Index = ({ data }) => {
             className="make-com-dark my-4"
             key={i}
             defaultExpanded={true}
-            id={element[0].category}
-            onChange={handleChange(element[0].category)}
+            id={element[0].branch}
+            onChange={handleChange(element[0].branch)}
             expanded={
-              expanded === element[0].category || expanded === undefined
+              expanded === element[0].branch || expanded === undefined
             }
           >
             <AccordionSummary
@@ -84,7 +84,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element[0].category}
+                {element[0].branch}
               </h2>
             </AccordionSummary>
 

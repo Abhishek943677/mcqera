@@ -1,74 +1,101 @@
-import React from "react";
+import { useRouter } from "next/router";
+import * as React from "react";
+import Accordion from "@mui/material/Accordion";
+import AccordionDetails from "@mui/material/AccordionDetails";
+import AccordionSummary from "@mui/material/AccordionSummary";
+import Typography from "@mui/material/Typography";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 
 export default function AdsSideBar() {
+  const router = useRouter();
+
+  const [expanded, setExpanded] = React.useState(false);
+  const handleChange = (panel) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panel : false);
+  };
+
   return (
-    <div className="w-full ">
-     
-      <p>Ads section</p>
-
-      <div className="flex flex-wrap justify-center">
-        {/* 1 */}
-        {/* <a
-          href="https://www.amazon.in/Power-Subconscious-Premium-Paperback-Penguin/dp/0143453602?crid=2UVWQG4Y7UP4S&keywords=books&qid=1690008287&sprefix=boo%2Caps%2C284&sr=8-4&linkCode=li3&tag=solity.fun-21&linkId=660ec1a7748f0fe895614ce9022f5843&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
+    <div className={`bg-transparent rounded-md`}>
+      <h2 className="text-2xl text-center my-2">Reccomendation</h2>
+      <Accordion
+        expanded={expanded === "panel1"}
+        onChange={handleChange("panel1")}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1bh-content"
+          id="panel1bh-header"
         >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=0143453602&Format=_SL250_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-
-        {/* 2 */}
-        {/* <a
-          href="https://www.amazon.in/Objective-Electrical-Technology-2018-19-Session/dp/8121920973?crid=2TZP1KFIS3U0Q&keywords=electrical+engineering+objective+book&qid=1690010461&sprefix=electrical+engi%2Caps%2C550&sr=8-4&linkCode=li2&tag=solity.fun-21&linkId=aa2abec5a26a54ee8e4783282a7aafc9&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
+          <Typography sx={{ width: "80%", flexShrink: 0 }}>
+            General settings
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
+            Aliquam eget maximus est, id dignissim qua.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === "panel2"}
+        onChange={handleChange("panel2")}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2bh-content"
+          id="panel2bh-header"
         >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8121920973&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-        {/* 2 */}
-        {/* <a
-          href="https://www.amazon.in/Objective-Electrical-Technology-2018-19-Session/dp/8121920973?crid=2TZP1KFIS3U0Q&keywords=electrical+engineering+objective+book&qid=1690010461&sprefix=electrical+engi%2Caps%2C550&sr=8-4&linkCode=li2&tag=solity.fun-21&linkId=aa2abec5a26a54ee8e4783282a7aafc9&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
+          <Typography sx={{ width: "80%", flexShrink: 0 }}>Users</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Donec placerat, lectus sed mattis semper, neque lectus feugiat
+            lectus, varius pulvinar diam eros in elit. Pellentesque convallis
+            laoreet laoreet.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === "panel3"}
+        onChange={handleChange("panel3")}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel3bh-content"
+          id="panel3bh-header"
         >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8121920973&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-        {/* 2 */}
-        {/* <a
-          href="https://www.amazon.in/Objective-Electrical-Technology-2018-19-Session/dp/8121920973?crid=2TZP1KFIS3U0Q&keywords=electrical+engineering+objective+book&qid=1690010461&sprefix=electrical+engi%2Caps%2C550&sr=8-4&linkCode=li2&tag=solity.fun-21&linkId=aa2abec5a26a54ee8e4783282a7aafc9&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
+          <Typography sx={{ width: "80%", flexShrink: 0 }}>
+            Advanced settings
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
+            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion
+        expanded={expanded === "panel4"}
+        onChange={handleChange("panel4")}
+      >
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel4bh-content"
+          id="panel4bh-header"
         >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8121920973&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-        {/* 2 */}
-        {/* <a
-          href="https://www.amazon.in/Objective-Electrical-Technology-2018-19-Session/dp/8121920973?crid=2TZP1KFIS3U0Q&keywords=electrical+engineering+objective+book&qid=1690010461&sprefix=electrical+engi%2Caps%2C550&sr=8-4&linkCode=li2&tag=solity.fun-21&linkId=aa2abec5a26a54ee8e4783282a7aafc9&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
-        >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8121920973&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-        {/* 2 */}
-        {/* <a
-          href="https://www.amazon.in/Objective-Electrical-Technology-2018-19-Session/dp/8121920973?crid=2TZP1KFIS3U0Q&keywords=electrical+engineering+objective+book&qid=1690010461&sprefix=electrical+engi%2Caps%2C550&sr=8-4&linkCode=li2&tag=solity.fun-21&linkId=aa2abec5a26a54ee8e4783282a7aafc9&language=en_IN&ref_=as_li_ss_il"
-          target="_blank"
-        >
-          <img
-            border="0"
-            src="//ws-in.amazon-adsystem.com/widgets/q?_encoding=UTF8&ASIN=8121920973&Format=_SL160_&ID=AsinImage&MarketPlace=IN&ServiceVersion=20070822&WS=1&tag=solity.fun-21&language=en_IN"
-          />
-        </a> */}
-      </div>
+          <Typography sx={{ width: "80%", flexShrink: 0 }}>
+            Personal data
+          </Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Nunc vitae orci ultricies, auctor nunc in, volutpat nisl. Integer
+            sit amet egestas eros, vitae egestas augue. Duis vel est augue.
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
     </div>
   );
 }

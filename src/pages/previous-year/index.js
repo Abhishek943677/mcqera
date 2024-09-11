@@ -21,6 +21,7 @@ import { useRouter } from "next/router";
 import { useState } from "react";
 
 const Index = ({ data }) => {
+  console.log(data)
   const router = useRouter();
   const [expanded, setExpanded] = useState("");
 
@@ -70,10 +71,10 @@ const Index = ({ data }) => {
             className="make-com-dark my-4"
             key={i}
             defaultExpanded={true}
-            id={element[0].examname}
-            onChange={handleChange(element[0].examname)}
-            expanded={
-              expanded === element[0].examname || expanded === undefined
+            id={element[0].branch}
+            onChange={handleChange(element[0].branch)}
+            expanded={  
+              expanded === element[0].branch || expanded === undefined
             }
           >
               <AccordionSummary
@@ -84,7 +85,7 @@ const Index = ({ data }) => {
               >
                 <h2 className="text-xl mx-auto">
                   <SchoolIcon className="mr-3" />
-                  {element[0].examname}
+                  {element[0].branch}
                 </h2>
               </AccordionSummary>
 
@@ -95,11 +96,11 @@ const Index = ({ data }) => {
                   <AccordionDetails className="w-full" key={index}>
                     <div className="hover:opacity-50 cursor-pointer w-full">
                       <Link
-                        href={`/previous-year/${item.examname}/${item.branch}`}
+                        href={`/previous-year/${item.branch}/${item.examname}`}
                       >
                         {/*this display branch name */}
                         <LocalLibraryIcon className="mr-3" />
-                        {item.branch}
+                        {item.examname}
                       </Link>
                     </div>
                   </AccordionDetails>
@@ -119,6 +120,7 @@ const Index = ({ data }) => {
 
 export async function getStaticProps() {
   const previousYeaData = await getPreviousYearData();
+
 
   return {
     props: { data: previousYeaData },

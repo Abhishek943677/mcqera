@@ -18,5 +18,9 @@
     {
         "name":"Handwritten Notes",
         "path":"/notes"
+    },
+    {
+        "name":"Exams",
+        "path":"/exam"
     }
 ]

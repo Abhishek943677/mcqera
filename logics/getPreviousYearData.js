@@ -12,7 +12,7 @@ export default async function getPreviousYearData() {
   // console.log(result);
 
 
-  const sorted = result.sort((a, b) => a.examname.length - b.examname.length);
+  const sorted = result.sort((a, b) => a.branch.length - b.branch.length);
   // console.log(sorted);
 
   function removeDuplicates(books) {
@@ -27,7 +27,7 @@ export default async function getPreviousYearData() {
   // console.table(uniqueArray);
 
   const gotArrayOfExamname = uniqueArray.map((i, index) => {
-    return i.examname;
+    return i.branch;
   });
   const uniqueArrayOfExamname = [...new Set(gotArrayOfExamname)];
   //   console.log(uniqueArrayOfExamname);
@@ -35,9 +35,9 @@ export default async function getPreviousYearData() {
   var furnished = [];
 
   for (let i = 0; i < uniqueArrayOfExamname.length; i++) {
-    const examname = uniqueArrayOfExamname[i];
-    const d = uniqueArray.filter((i) => i.examname === examname);
-    const sorted = d.sort((a, b) => b.branch.length - a.branch.length);
+    const branch = uniqueArrayOfExamname[i];
+    const d = uniqueArray.filter((i) => i.branch === branch);
+    const sorted = d.sort((a, b) => b.examname.length - a.examname.length);
     furnished.push(sorted);
   }
   return furnished;

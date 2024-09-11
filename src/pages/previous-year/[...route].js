@@ -52,8 +52,8 @@ export async function getStaticPaths() {
 }
 
 export async function getStaticProps(context) {
-  const examname = context.params.route[0];
-  const branch = context.params.route[1];
+  const examname = context.params.route[1];
+  const branch = context.params.route[0];
 
   const query = `*[_type=="exams" && examname=="${examname}" && branch=="${branch}"]{paper,slug}`;
   const data = await clientPreviousYear.fetch(query);
