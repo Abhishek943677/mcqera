@@ -32,8 +32,8 @@ export default function Index({
             No Exam Data Available
           </h2>
           <p className="text-gray-600 text-lg mb-6">
-            It looks like there's no exam data at the moment. Please check back
-            later or explore other resources.
+            {`It looks like there's no exam data at the moment. Please check back
+            later or explore other resources.`}
           </p>
           <Link
             href="/exam"
@@ -185,4 +185,4 @@ export const getStaticProps = async (context) => {
         examData.length > 0 ? JSON.stringify(examData[0]) : JSON.stringify({}),
     },
   };
-}
+};
