@@ -10,13 +10,11 @@ import Banner from "../../components/home/Banner";
 export default function Home() {
   return (
     <main className="-m-1">
-    <Banner />
-     {/* <Intro /> */}
-     <Menu />
+      <Banner />
+      <Menu />
       <Services />
-     <Features />
-     <WhyPrepareWithUs /> 
+      <Features />
+      <WhyPrepareWithUs />
     </main>
-
   );
 }

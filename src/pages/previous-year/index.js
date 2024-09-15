@@ -19,6 +19,7 @@ import getPreviousYearData from "../../../logics/getPreviousYearData";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState } from "react";
+import { titleCase } from "../../../usefulFun/titleCase";
 
 const Index = ({ data }) => {
   console.log(data)
@@ -85,7 +86,7 @@ const Index = ({ data }) => {
               >
                 <h2 className="text-xl mx-auto">
                   <SchoolIcon className="mr-3" />
-                  {element[0].branch}
+                  {element[0].branch.toUpperCase()}
                 </h2>
               </AccordionSummary>
 
@@ -100,7 +101,7 @@ const Index = ({ data }) => {
                       >
                         {/*this display branch name */}
                         <LocalLibraryIcon className="mr-3" />
-                        {item.examname}
+                        {titleCase(item.examname.replaceAll("-" , " "))}
                       </Link>
                     </div>
                   </AccordionDetails>

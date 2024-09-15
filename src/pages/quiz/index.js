@@ -17,6 +17,7 @@ import { loadCourseObj } from "../../../logics/loadCourseObj";
 import { useState } from "react";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { titleCase } from "../../../usefulFun/titleCase";
 
 const Index = ({ data }) => {
   const router = useRouter();
@@ -86,7 +87,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element.trade}
+                {element.trade.toUpperCase()}
               </h2>
             </AccordionSummary>
 
@@ -102,7 +103,7 @@ const Index = ({ data }) => {
                     <Link href={`/quiz/${element.trade}/${subject}/1`}>
                       <p className="w-full">
                         <QuizIcon className="mr-3" />
-                        {subject}
+                        {titleCase(subject)}
                       </p>
                     </Link>
                   </div>

@@ -7,10 +7,11 @@ import UrlsComponent from "../UrlsComponent";
 import { useRouter } from "next/router";
 import Share from "../Share";
 import SideMenu from "../SideMenu";
+import axios from "axios";
 
 const SideNav = ({ children }) => {
   const router = useRouter();
-  const [openBig, setOpenBig] = useState(router.pathname === '/');
+  const [openBig, setOpenBig] = useState(router.pathname === "/");
   const [openSmall, setOpenSmall] = useState(false);
 
   const handlesidebarBig = () => {
@@ -19,23 +20,27 @@ const SideNav = ({ children }) => {
   const handlesidebarSmall = () => {
     setOpenSmall(!openSmall);
   };
- 
 
   useEffect(() => {
     router.events.on("routeChangeStart", () => {
-      setOpenSmall(false)
+      setOpenSmall(false);
     });
-    
   }, []);
+
 
 
   return (
     <div>
       {/* ---------------------------------------------------for bigger devices------------------------------------------------------------ */}
-      <div className={`flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex `}>
-
-        {/* hamburger icon and its logic */}  
-        <div className={`absolute top-16 right-4 ${router.pathname === '/' ? "hidden" : ""}`}>
+      <div
+        className={`flex max-[640px]:hidden sm:hidden lg:flex xl:flex md:flex `}
+      >
+        {/* hamburger icon and its logic */}
+        <div
+          className={`absolute top-16 right-4 ${
+            router.pathname === "/" ? "hidden" : ""
+          }`}
+        >
           <p onClick={handlesidebarBig} className="cursor-pointer">
             {!openBig ? (
               <BiMenu className="w-10 h-10" />
@@ -48,7 +53,7 @@ const SideNav = ({ children }) => {
         {/* div for sidebar and its content for bigger devices*/}
         <div
           className={`bg-gray-100 overflow-x-auto fixed top-0  h-full text-black z-50 ${
-           openBig ? "hidden" : "w-[18%]" 
+            openBig ? "hidden" : "w-[18%]"
           } `}
         >
           <Image
@@ -59,18 +64,16 @@ const SideNav = ({ children }) => {
             className="p-1 m-2"
           />
           {/*  links div for multiple pages*/}
-          
+
           <UrlsComponent />
           <SideMenu />
-
-
         </div>
 
         {/* this is the place where all the child components comes in */}
 
         <div
           className={` overflow-y-auto m-auto   ${
-            openBig ? "w-full ml-0" : "ml-[18%] w-full" 
+            openBig ? "w-full ml-0" : "ml-[18%] w-full"
           }  `}
         >
           {children}
@@ -78,8 +81,6 @@ const SideNav = ({ children }) => {
           <Footer />
         </div>
       </div>
-
-
 
       {/* ---------------------------------------------------for smaller devices -----------------------------------------------------*/}
 
@@ -98,7 +99,9 @@ const SideNav = ({ children }) => {
         {/* div for sidebar and its content for smaller devices */}
         <div
           className={`bg-slate-600 w-fit max-[290px]:w-8/12 overflow-x-auto flex-wrap ${
-            openSmall ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50" : "hidden"
+            openSmall
+              ? "h-[100vh] fixed left-0 top-0 px-5 mt-0 pt-6 z-50"
+              : "hidden"
           }`}
         >
           <Image

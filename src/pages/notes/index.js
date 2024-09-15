@@ -17,6 +17,7 @@ import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
 import { useState } from "react";
 import { useEffect } from "react";
+import { titleCase } from "../../../usefulFun/titleCase";
 
 const Index = ({ data }) => {
   const router = useRouter();
@@ -84,7 +85,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element[0].branch}
+                {element[0].branch.toUpperCase()}
               </h2>
             </AccordionSummary>
 
@@ -100,7 +101,7 @@ const Index = ({ data }) => {
                     <Link href={`/notes/${item.slug.current}`}>
                       <p className="w-full">
                         <DescriptionRoundedIcon className="mr-3" />
-                        {item.title}
+                        {titleCase(item.title)}
                       </p>
                     </Link>
                   </div>

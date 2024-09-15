@@ -4,6 +4,12 @@ import CardComponent from "./Card";
 export default function Index() {
   const config = [
     {
+      title: "Exam",
+      description:
+        "Boost your competitive exams preparation with us. Access Previous year Papers , Quizzes , Handwritten Notes  , Syllabus and Quicklinks",
+      link: "/exam",
+    },
+    {
       title: "Quizzes",
       description:
         "Boost your competitive exams preparation with free MCQs. Practice mock tests with detailed explanations to success in the exam",
@@ -38,11 +44,17 @@ export default function Index() {
   return (
     <>
       <div
-      data-aos='zoom-in-up' data-aos-duration='500'
-      // className={`flex flex-col  px-0 !mx-[-5px] bg-slate-950 pt-20 rounded-t-[30%] pb-10`}
-      className={`flex flex-col  px-0 mx-0 bg-gradient-to-b from-slate-950 to-slate-800 pt-20 rounded-t-[20rem] pb-10`}
+        data-aos="zoom-in-up"
+        data-aos-duration="500"
+        // className={`flex flex-col  px-0 !mx-[-5px] bg-slate-950 pt-20 rounded-t-[30%] pb-10`}
+        className={`flex flex-col  px-0 mx-0 bg-gradient-to-b from-slate-950 to-slate-800 pt-20 rounded-t-[20rem] pb-10`}
+        id="services"
       >
-        <p className={` text-4xl mx-auto text-center font-extrabold mb-4`} data-aos="fade-up" data-aos-duration='300'>
+        <p
+          className={` text-4xl mx-auto text-center font-extrabold mb-4`}
+          data-aos="fade-up"
+          data-aos-duration="300"
+        >
           Services
         </p>
         <div class="w-[80%] mx-auto h-1 bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
@@ -53,7 +65,6 @@ export default function Index() {
           ))}
         </div>
       </div>
-
     </>
   );
 }

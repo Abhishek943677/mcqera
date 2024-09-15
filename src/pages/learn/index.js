@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
 import Link from "next/link";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
@@ -16,6 +15,8 @@ import {
 import { NextSeo } from "next-seo";
 import { useEffect } from "react";
 import { useRouter } from "next/router";
+import { getLearnData } from "../../../logics/getLearnData";
+import { titleCase } from "../../../usefulFun/titleCase";
 
 const Home = ({ lessonsObj }) => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const Home = ({ lessonsObj }) => {
         )}
       </div>
 
-      {JSON.parse(lessonsObj).map((item, index) => {
+      {lessonsObj.map((item, index) => {
         return (
           <Accordion
             className="make-com-dark my-4"
@@ -94,7 +95,7 @@ const Home = ({ lessonsObj }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {item.course}
+                {item.course.toUpperCase()}
               </h2>
             </AccordionSummary>
 
@@ -110,7 +111,7 @@ const Home = ({ lessonsObj }) => {
                     <Link href={`learn/${item.course}/${subject.subject}`}>
                       <p className="w-full">
                         <LocalLibraryIcon className="mr-3" />
-                        {subject.subject}
+                        {titleCase(subject.subject)}
                       </p>
                     </Link>
                   </div>
@@ -126,14 +127,11 @@ const Home = ({ lessonsObj }) => {
 
 //server side things
 export const getStaticProps = async () => {
-  const db = await mongoConnectLearn();
-  const collection = db.collection("learnObj"); //accessing collection of trade
-
-  const data = await collection.find({}).toArray(); // finding data from trade collection with subject name
-
+  const lessonsObj = await getLearnData();
+  
   return {
     props: {
-      lessonsObj: JSON.stringify(data),
+      lessonsObj,
     },
     revalidate: 1200,
   };

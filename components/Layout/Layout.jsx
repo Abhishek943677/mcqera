@@ -13,6 +13,8 @@ export default function Layout({ children }) {
   const [urlChange, setUrlChange] = useState(false);
 
   useEffect(() => {
+    console.log(router.pathname)
+
     setUrlChange(false);
     router.events.on("routeChangeStart", () => {
       setUrlChange(true);
@@ -21,6 +23,7 @@ export default function Layout({ children }) {
       setUrlChange(false);
     });
   }, []);
+
 
   return (
     <div className="">

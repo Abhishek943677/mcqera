@@ -3,6 +3,7 @@ import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
 import { Paper } from "@mui/material";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { getLearnData } from "../../../logics/getLearnData";
 
 const Route = ({ data, course, subject }) => {
   // console.log(JSON.parse(data));
@@ -17,7 +18,7 @@ const Route = ({ data, course, subject }) => {
         additionalMetaTags={[
           {
             name: "keywords",
-            content:`${course}, ${subject}, Educational content,E-learning,Learning resources,Education platform            `
+            content: `${course}, ${subject}, Educational content,E-learning,Learning resources,Education platform            `,
           },
         ]}
       />
@@ -29,7 +30,7 @@ const Route = ({ data, course, subject }) => {
         JSON.parse(data).map((element, i) => {
           return (
             <Paper className="make-com-dark p-3 my-1" key={i}>
-              <h1 className="text-2xl text-center">{element[0].chapter}</h1>
+              <h1 className="text-2xl text-center">{element[0].chapter.toUpperCase()}</h1>
               {element.map((item, index) => {
                 return (
                   <div
@@ -56,12 +57,7 @@ const Route = ({ data, course, subject }) => {
 //server side stuffs
 // ----------------defining paths --------------
 export async function getStaticPaths() {
-  const db = await mongoConnectLearn();
-  const collection = db.collection("learnObj"); //accessing collection of trade
-
-  const lessonsObj = await collection
-    .find() // finding data from trade collection with subject name
-    .toArray();
+  const lessonsObj = await getLearnData();
 
   const path = [];
 
@@ -97,6 +93,17 @@ export const getStaticProps = async (context) => {
     .find({ course, subject }) // finding data from trade collection with subject name
     .project({ chapter: 1, topicName: 1, url: 1 })
     .toArray();
+
+  if (dataUnorganised.length === 0) {
+    return {
+      props: {
+        data: JSON.stringify([]),
+        course,
+        subject,
+      },
+      revalidate: 1200,
+    };
+  }
 
   // organization fo data for best viewing
   const sorted = dataUnorganised.sort((a, b) => a.url.length - b.url.length);

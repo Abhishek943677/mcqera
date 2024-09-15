@@ -6,7 +6,7 @@ import { NextSeo } from "next-seo";
 export default function Course({ data, examname, branch }) {
 
   if (data.length === 0) {
-    return <div className="">Papers Coming soon</div>;
+    return <div className="">Not Found</div>;
   }
   return (
     <div className="mt-10">

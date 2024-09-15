@@ -1,11 +1,10 @@
 import React, { useEffect } from "react";
 import {
+  clientMenu,
   clientNotes,
   clientPreviousYear,
   clientQuickLinks,
 } from "../../../lib/sanityConnect";
-import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
-import { mongoConnect } from "../../../lib/mongoConnect";
 import PyqList from "../../../components/exam/PyqCard";
 import NotesList from "../../../components/exam/NotesCard";
 import QuickLinksList from "../../../components/exam/QuickLinkCard";
@@ -13,6 +12,7 @@ import LearnList from "../../../components/exam/LearnList";
 import QuizList from "../../../components/exam/QuizList";
 import { mongoConnectExam } from "../../../lib/mongoConnectExam";
 import ExamPage from "../../../components/exam/ExamPage";
+import Link from "next/link";
 
 export default function Index({
   pyqData,
@@ -24,18 +24,89 @@ export default function Index({
 }) {
   return (
     <div>
-      <ExamPage examData={JSON.parse(examData)} />
-      <NotesList notesData={notesData} />
-      <PyqList pyqData={pyqData} />
-      <QuickLinksList quickLinksData={quickLinksData} />
-      <LearnList learnData={JSON.parse(learnData)} />
-      <QuizList quizData={JSON.parse(quizData)} />
+      {Object.keys(JSON.parse(examData)).length > 0 ? (
+        <ExamPage examData={JSON.parse(examData)} />
+      ) : (
+        <div className="flex flex-col items-center justify-center rounded-md min-h-screen text-center bg-gray-50 py-10">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">
+            No Exam Data Available
+          </h2>
+          <p className="text-gray-600 text-lg mb-6">
+            It looks like there's no exam data at the moment. Please check back
+            later or explore other resources.
+          </p>
+          <Link
+            href="/exam"
+            className="text-blue-600 hover:text-blue-800 underline text-lg"
+          >
+            Go Back to Home
+          </Link>
+        </div>
+      )}
+      {pyqData.length > 0 ? <PyqList pyqData={pyqData} /> : <div>No data</div>}
+
+      {notesData.length > 0 ? (
+        <NotesList notesData={notesData} />
+      ) : (
+        <div>no data</div>
+      )}
+
+      {JSON.parse(learnData).length > 0 ? (
+        <LearnList learnData={JSON.parse(learnData)} />
+      ) : (
+        <div>No data</div>
+      )}
+
+      {JSON.parse(quizData).length > 0 ? (
+        <QuizList quizData={JSON.parse(quizData)} />
+      ) : (
+        <div>No data</div>
+      )}
+
+      {quickLinksData.length > 0 ? (
+        <QuickLinksList quickLinksData={quickLinksData} />
+      ) : (
+        <div>No data</div>
+      )}
     </div>
   );
 }
 
+//server side stuffs
+// ----------------defining paths --------------
+export async function getStaticPaths() {
+  const rawBranchData = await clientMenu.fetch(
+    `*[_type=="exam"]{examname , branch->{title}}`
+  );
+  const branchData = rawBranchData.map(({ branch, examname }) => {
+    return {
+      examname: examname,
+      branch: branch.title.replaceAll(" ", "-"),
+    };
+  });
+
+  const path = [];
+
+  branchData.map((item) => {
+    const { branch, examname } = item;
+
+    path.push({
+      params: { route: [String(branch), String(examname)] },
+    });
+  });
+
+  // console.log("end");
+  console.log(path[0].params.route);
+
+  return {
+    // paths: [{ params: { route: ['electrical','network'] } },{ params: { route: ['electrical','network'] } }],
+    paths: path,
+    fallback: "blocking",
+  };
+}
+
 // ---------defining props ----------
-export async function getServerSideProps(context) {
+export const getStaticProps = async (context) => {
   const branch = context.params.route[0];
   const examname = context.params.route[1];
 
@@ -53,22 +124,46 @@ export async function getServerSideProps(context) {
     `*[_type=="quicklinks" && "${examname}" in examname]{title , branch , slug}`
   );
 
-  const learnDb = await mongoConnectLearn();
-  const learnCollection = learnDb.collection("learnObj"); //accessing collection of trade
+  const rawLearnData = await clientMenu.fetch(
+    `*[_type=="branch" && title == "${branch}"]{title , subjects[]->{name , chapters}}`
+  );
 
-  const learnData = await learnCollection
-    .find(
-      { course: branch } // Query condition
-    )
-    .toArray();
+  // Function to transform the array
+  const learnData = rawLearnData.map((item, index) => {
+    // Define a new _id starting from 2 (to match the output format)
+    const _id = index + 1;
 
-  const quizdb = await mongoConnect(); // mongoConnect is a function which returns db
-  const quizCollection = quizdb.collection("courses"); //accessing collection of trade
-  const quizData = await quizCollection
-    .find(
-      { trade: branch } // Query condition
-    )
-    .toArray();
+    // Map over the subjects to convert them into an array of strings
+    const subjectArray = item.subjects.map(({ name, chapters }) => {
+      return { subject: name, chapterArray: chapters };
+    });
+
+    // Return the new object with _id, trade (from title), and subjects
+    return {
+      _id: _id,
+      course: item.title, // use 'title' as 'trade'
+      subjectArray,
+    };
+  });
+
+  const rawQuizData = await clientMenu.fetch(
+    `*[_type=="branch" && title=="${branch}" ]{title , subjects[]->{name}}`
+  );
+
+  const quizData = rawQuizData.map((item, index) => {
+    // Define a new _id starting from 2 (to match the output format)
+    const _id = index + 1;
+
+    // Map over the subjects to convert them into an array of strings
+    const subjects = item.subjects.map((subject) => subject.name);
+
+    // Return the new object with _id, trade (from title), and subjects
+    return {
+      _id: _id,
+      trade: item.title, // use 'title' as 'trade'
+      subjects: subjects,
+    };
+  });
 
   const examDb = await mongoConnectExam();
   const examCollection = examDb.collection("exams");
@@ -77,6 +172,8 @@ export async function getServerSideProps(context) {
     .limit(1)
     .toArray();
 
+  console.log(examData.length);
+
   return {
     props: {
       pyqData,
@@ -84,7 +181,8 @@ export async function getServerSideProps(context) {
       quickLinksData,
       learnData: JSON.stringify(learnData),
       quizData: JSON.stringify(quizData),
-      examData: JSON.stringify(examData[0]),
+      examData:
+        examData.length > 0 ? JSON.stringify(examData[0]) : JSON.stringify({}),
     },
   };
 }

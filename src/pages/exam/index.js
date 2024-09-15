@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
-import { mongoConnectExam } from "../../../lib/mongoConnectExam";
 import Link from "next/link";
+import { clientMenu } from "../../../lib/sanityConnect";
 
 const Home = ({ examObj }) => {
   const router = useRouter();
@@ -30,7 +30,7 @@ const Home = ({ examObj }) => {
           return (
             <div key={index} className="max-w-sm rounded overflow-hidden shadow-lg bg-white p-2 m-4 w-80">
               <div className="px-6 py-4">
-                <Link href={`exam/${item.branch}/${item.examname}`}>
+                <Link href={`exam/${item.branch.replaceAll(" ","-")}/${item.examname.replaceAll(" ","-")}`}>
                   <div className="font-bold text-xl mb-2 text-gray-800">
                     {item.examname.replaceAll("-", " ").toUpperCase()}
                   </div>
@@ -46,14 +46,17 @@ const Home = ({ examObj }) => {
 
 //server side things
 export const getStaticProps = async () => {
-  const db = await mongoConnectExam();
-  const collection = db.collection("examObj"); //accessing collection of trade
-
-  const data = await collection.find({}).project({ examname: 1 , branch : 1 }).toArray(); // finding data from trade collection with subject name
+  const rawBranchData = await clientMenu.fetch(`*[_type=="exam"]{examname , branch->{title}}`);
+  const branchData = rawBranchData.map(({branch,  examname }) => {
+    return {
+      examname: examname,
+      branch: branch.title,
+    };
+  });
 
   return {
     props: {
-      examObj: JSON.stringify(data),
+      examObj: JSON.stringify(branchData),
     },
     revalidate: 1200,
   };

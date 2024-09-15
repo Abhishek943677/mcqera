@@ -1,6 +1,5 @@
 import axios from "axios";
 import { getSession } from "next-auth/react";
-import { mongoConnectLearn } from "../../../lib/mongoConnectLearn";
 import React, { useState, useEffect } from "react";
 import { Button, MenuItem, Select, TextField } from "@mui/material";
 import SunEditorPanel from "../../../components/learn/SunEditorPanel";
@@ -8,6 +7,7 @@ import SuccessSnackBar from "../../../components/widgets/SuccessSnackBar";
 import FailureSnackBar from "../../../components/widgets/FailureSnackBar";
 import Spinner from "../../../components/widgets/Spinner";
 import { useRouter } from "next/router";
+import { getLearnData } from "../../../logics/getLearnData";
 
 export default function Edit({ topicData, data }) {
   //   console.log(JSON.parse(data));
@@ -238,13 +238,9 @@ export async function getServerSideProps(context) {
   // actual server side stuffs
   // this is to get learObj from server
   try { 
-    const db = await mongoConnectLearn();
-    const collection = db.collection("learnObj"); //accessing collection of trade
+   
 
-    const learnObj = await collection
-      .find() // finding data from trade collection with subject name
-      .toArray();
-
+    const learnObj = await getLearnData()
     // this is to get topicsData from server
     const res = await fetch(
       `${process.env.APP_URL}/api/learn/editTopic?id=${context.query.id}`

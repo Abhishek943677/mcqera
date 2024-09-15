@@ -15,6 +15,7 @@ import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
 import getQuickLinkData from "../../../logics/getQuickLinkData";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
+import { titleCase } from "../../../usefulFun/titleCase";
 
 const Index = ({ data }) => {
   const router = useRouter();
@@ -76,7 +77,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element[0].branch}
+                {element[0].branch.toUpperCase()}
               </h2>
             </AccordionSummary>
 
@@ -94,7 +95,7 @@ const Index = ({ data }) => {
                     >
                       <p className="w-full">
                         <DescriptionRoundedIcon className="mr-3" />
-                        {item.title}
+                        {titleCase(item.title)}
                       </p>
                     </Link>
                   </div>
