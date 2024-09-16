@@ -47,7 +47,6 @@ export default function LowerHeader() {
   useEffect(async () => {
     const branchData = await fetchHeaderBranch();
     const examData = await fetchHeaderExam();
-    console.log(examData);
 
     setBranchData(branchData);
     setExamData(examData);

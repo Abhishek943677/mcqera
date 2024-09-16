@@ -7,8 +7,8 @@ import {
   Divider,
 } from "@mui/material";
 import Link from "next/link";
-import UnfoldMoreIcon from '@mui/icons-material/UnfoldMore';
-import UnfoldLessIcon from '@mui/icons-material/UnfoldLess';
+import UnfoldMoreIcon from "@mui/icons-material/UnfoldMore";
+import UnfoldLessIcon from "@mui/icons-material/UnfoldLess";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import SchoolIcon from "@mui/icons-material/School";
 import DescriptionRoundedIcon from "@mui/icons-material/DescriptionRounded";
@@ -28,13 +28,12 @@ const Index = ({ data }) => {
   };
 
   useEffect(() => {
-    document.getElementById(router.query.section) &&
+    router.query.section && document.getElementById(router.query.section.split("/")[1]) &&
       document
-        .getElementById(router.query.section)
-        .scrollIntoView({ behavior: "smooth" })
-       
+        .getElementById(router.query.section.split("/")[1])
+        .scrollIntoView({ behavior: "smooth" });
 
-    setExpanded(router.query.section);
+        router.query.section && setExpanded(router.query.section.split("/")[1]);
   }, [router]);
 
   return (
@@ -47,7 +46,8 @@ const Index = ({ data }) => {
         additionalMetaTags={[
           {
             name: "keywords",
-            content: "Handwritten notes, study materials, notes for exams, exam preparation, subject-wise notes, comprehensive notes, visual notes, study resources, revision notes, hand-drawn diagrams, note-taking techniques, effective study notes, class notes, lecture notes, exam tips and tricks, topic-wise notes, high-quality notes, detailed explanations, visual aids, study guides",
+            content:
+              "Handwritten notes, study materials, notes for exams, exam preparation, subject-wise notes, comprehensive notes, visual notes, study resources, revision notes, hand-drawn diagrams, note-taking techniques, effective study notes, class notes, lecture notes, exam tips and tricks, topic-wise notes, high-quality notes, detailed explanations, visual aids, study guides",
           },
         ]}
       />
@@ -56,14 +56,29 @@ const Index = ({ data }) => {
       <h1>Handwritten Notes</h1>
 
       <div className="flex justify-end">
-          {expanded === "" || expanded === false  ? (
-            <Button variant="outlined" color="inherit" onClick={() => setExpanded(undefined)} size="small"> <UnfoldMoreIcon />Expand All</Button>
-          ) : (
-            <Button variant="outlined" color="inherit" onClick={() => setExpanded("")} size="small"><UnfoldLessIcon />Collapse All</Button>
-          )}
-        </div>
-
-
+        {expanded === "" || expanded === false ? (
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => setExpanded(undefined)}
+            size="small"
+          >
+            {" "}
+            <UnfoldMoreIcon />
+            Expand All
+          </Button>
+        ) : (
+          <Button
+            variant="outlined"
+            color="inherit"
+            onClick={() => setExpanded("")}
+            size="small"
+          >
+            <UnfoldLessIcon />
+            Collapse All
+          </Button>
+        )}
+      </div>
 
       {data.map((element, i) => {
         return (
@@ -71,10 +86,10 @@ const Index = ({ data }) => {
             className="make-com-dark my-4"
             key={i}
             defaultExpanded={true}
-            id={element[0].branch}
-            onChange={handleChange(element[0].branch)}
+            id={element[0].examname}
+            onChange={handleChange(element[0].examname)}
             expanded={
-              expanded === element[0].branch || expanded === undefined
+              expanded === element[0].examname || expanded === undefined
             }
           >
             <AccordionSummary
@@ -85,7 +100,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element[0].branch.toUpperCase()}
+                {element[0].examname.toUpperCase()}
               </h2>
             </AccordionSummary>
 

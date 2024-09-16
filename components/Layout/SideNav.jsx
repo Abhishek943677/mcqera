@@ -25,7 +25,9 @@ const SideNav = ({ children }) => {
     router.events.on("routeChangeStart", () => {
       setOpenSmall(false);
     });
-  }, []);
+
+
+  }, [router]);
 
 
 

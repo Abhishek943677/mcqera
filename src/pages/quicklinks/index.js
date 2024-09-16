@@ -18,6 +18,7 @@ import { useRouter } from "next/router";
 import { titleCase } from "../../../usefulFun/titleCase";
 
 const Index = ({ data }) => {
+  console.log(data)
   const router = useRouter();
   const [expanded, setExpanded] = useState("");
 
@@ -26,13 +27,12 @@ const Index = ({ data }) => {
   };
 
   useEffect(() => {
-    document.getElementById(router.query.section) &&
+    router.query.section && document.getElementById(router.query.section.split("/")[1]) &&
       document
-        .getElementById(router.query.section)
-        .scrollIntoView({ behavior: "smooth" })
-       
+        .getElementById(router.query.section.split("/")[1])
+        .scrollIntoView({ behavior: "smooth" });
 
-    setExpanded(router.query.section);
+        router.query.section && setExpanded(router.query.section.split("/")[1]);
   }, [router]);
 
   return (
@@ -63,10 +63,10 @@ const Index = ({ data }) => {
             className="make-com-dark my-4"
             key={i}
             defaultExpanded={true}
-            id={element[0].branch}
-            onChange={handleChange(element[0].branch)}
+            id={element[0].examname}
+            onChange={handleChange(element[0].examname)}
             expanded={
-              expanded === element[0].branch || expanded === undefined
+              expanded === element[0].examname || expanded === undefined
             }
           >
             <AccordionSummary
@@ -77,7 +77,7 @@ const Index = ({ data }) => {
             >
               <h2 className="text-xl mx-auto">
                 <SchoolIcon className="mr-3" />
-                {element[0].branch.toUpperCase()}
+                {element[0].examname.toUpperCase()}
               </h2>
             </AccordionSummary>
 
@@ -91,7 +91,7 @@ const Index = ({ data }) => {
                     key={index}
                   >
                     <Link
-                      href={`/quicklinks/${item.branch}/${item.slug.current}`}
+                      href={`/quicklinks/${item.branch[0]}/${item.slug.current}`}
                     >
                       <p className="w-full">
                         <DescriptionRoundedIcon className="mr-3" />

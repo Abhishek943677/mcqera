@@ -31,7 +31,7 @@ export default function Header() {
   }, []);
 
   return (
-    <div className="flex flex-row justify-between w-full flex-wrap">
+    <div className="flex flex-row justify-between flex-wrap">
       {/* left side header icons */}
       <div className="flex w-24 justify-between mx-4 my-1">
         <BiHome
@@ -58,7 +58,7 @@ export default function Header() {
               <Paper
                 elevation={3}
                 id="profileModal"
-                className={` z-50 list-none absolute md:top-[3.6rem] lg:top-[2.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[3.2rem] p-4 rounded make-com-dark`}
+                className={`z-50 list-none absolute md:top-[3.6rem] lg:top-[2.6rem] sm:top-[2.6rem] max-[640px]:top-[2.6rem] right-[3.2rem] p-4 rounded make-com-dark`}
               >
                 <li>
                   <p>{session.user.name}</p>
