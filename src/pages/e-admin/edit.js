@@ -7,13 +7,14 @@ import SuccessSnackBar from "../../../components/widgets/SuccessSnackBar";
 import FailureSnackBar from "../../../components/widgets/FailureSnackBar";
 import Spinner from "../../../components/widgets/Spinner";
 import { useRouter } from "next/router";
-import { mongoConnectExam } from "../../../lib/mongoConnectExam";
+import { clientMenu } from "../../../lib/sanityConnect";
+import Link from "next/link";
 
-export default function Edit({ examData , examObj }) {
-  console.log(examData)
-  const [editorContent, setEditorContent] = useState("");
+export default function Edit({ examData, examObj }) {
+  const [editorContent, setEditorContent] = useState(JSON.parse(examData).syllabus);
 
   const [examname, setExamName] = useState("");
+  const [branch, setBranch] = useState("");
   const [notification, setNotification] = useState("");
   const [updates, setUpdates] = useState("");
 
@@ -25,24 +26,29 @@ export default function Edit({ examData , examObj }) {
   useEffect(() => {
     setNotification(JSON.parse(examData).notification);
     setExamName(JSON.parse(examData).examname);
-    setEditorContent(JSON.parse(examData).syllabus);
+    setBranch(JSON.parse(examData).branch);
     setUpdates(JSON.parse(examData).updates);
+    setEditorContent(() => JSON.parse(examData).syllabus);
   }, []);
 
   const handleSave = () => {
-    const branch = JSON.parse(examObj).find((i) => (i.examname = examname)).branch;
+    const branch = JSON.parse(examObj).find(
+      (i) => (i.examname = examname)
+    ).branch;
 
     axios
-      .post("/api/exam/editTopic" , {
-        branch,
-        examname,
-        notification,
-        updates,
-        syllabus: editorContent,
-        id: router.query.id
-      },
-      {timeout:10000}
-    )
+      .post(
+        "/api/exam/editTopic",
+        {
+          branch,
+          examname,
+          notification,
+          updates,
+          syllabus: editorContent,
+          id: router.query.id,
+        },
+        { timeout: 10000 }
+      )
       .then((p) => {
         setSent(false);
         console.log(p.data);
@@ -52,10 +58,10 @@ export default function Edit({ examData , examObj }) {
           setOpenFailureSnack(true);
         }
       })
-      .catch((err)=>{
+      .catch((err) => {
         setSent(false);
         setOpenFailureSnack(true);
-      })
+      });
   };
 
   const handleChange = (content) => {
@@ -67,8 +73,12 @@ export default function Edit({ examData , examObj }) {
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
 
-      {/* examname */}
+      <Link href="/e-admin">
+        <Button variant="contained">Add New Exam</Button>
+      </Link>
 
+
+      {/* examname */}
       <Select
         variant="outlined"
         name="examname"
@@ -162,8 +172,6 @@ export async function getServerSideProps(context) {
       email: session.user.email,
     });
 
-    
-
     if (!data) {
       return {
         redirect: {
@@ -191,12 +199,15 @@ export async function getServerSideProps(context) {
 
     const { examData } = await res.json();
 
-    const db = await mongoConnectExam(); //connection to MongoDB instance
-    const collection = db.collection("examObj"); //accessing collection of learnObj
-
-    const examObj = await collection
-      .find() // finding data from trade collection with subject name
-      .toArray();
+    const rawExamData = await clientMenu.fetch(
+      `*[_type=="exam"]{examname , branch->{title}}`
+    );
+    const examObj = rawExamData.map(({ branch, examname }) => {
+      return {
+        examname: examname.replaceAll(" ", "-"),
+        branch: branch.title,
+      };
+    });
 
     if (!examData || examData.author !== session.user.email) {
       return {

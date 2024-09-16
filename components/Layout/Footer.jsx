@@ -16,9 +16,10 @@ export default function Footer() {
       elevation={3}
       class={`text-center text-white  w-full mx-auto sm:w-full sm:mx-auto bg-blue-950 `}
     >
+
       {/* for urls to other pages */}
       <div class="container pt-9 mx-auto sm:mx-auto sm:w-full">
-          <p className='bold font-bold text-center mb-4'>Follow Us On &nbsp;</p>
+        <p className="bold font-bold text-center mb-4">Follow Us On &nbsp;</p>
         <div class="flex justify-center " id="social-media">
           <a href="#!" class="mx-4 text-neutral-800 dark:text-white">
             {/* <svg

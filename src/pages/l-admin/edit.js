@@ -8,6 +8,7 @@ import FailureSnackBar from "../../../components/widgets/FailureSnackBar";
 import Spinner from "../../../components/widgets/Spinner";
 import { useRouter } from "next/router";
 import { getLearnData } from "../../../logics/getLearnData";
+import Link from "next/link";
 
 export default function Edit({ topicData, data }) {
   //   console.log(JSON.parse(data));
@@ -80,6 +81,10 @@ export default function Edit({ topicData, data }) {
     <div>
       <SuccessSnackBar open={openSuccessSnack} setOpen={setOpenSuccessSnack} />
       <FailureSnackBar open={openFailureSnack} setOpen={setOpenFailureSnack} />
+
+      <Link href="/l-admin">
+        <Button variant="contained">Add New topic</Button>
+      </Link>
 
       {/* change course */}
       <Select

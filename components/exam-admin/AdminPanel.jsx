@@ -150,8 +150,8 @@ export default function AdminPanel({ data }) {
                     </Button>
                     <Link
                       href={`/e-admin/edit?id=${item._id}`}
-                      rel="noopener noreferrer"
-                      target="_blank"
+                      // rel="noopener noreferrer"
+                      // target="_blank"
                     >
                       <Button>
                         <EditIcon
