@@ -63,10 +63,11 @@ export async function getServerSideProps(context) {
     );
     const data = rawExamData.map(({ branch, examname }) => {
       return {
-        examname: examname,
+        examname: examname.replaceAll(" ","-"),
         branch: branch.title,
       };
     });
+    console.log(data)
 
     // return data for frontend
     return {
