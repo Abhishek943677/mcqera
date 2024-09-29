@@ -25,11 +25,7 @@ const SideNav = ({ children }) => {
     router.events.on("routeChangeStart", () => {
       setOpenSmall(false);
     });
-
-
   }, [router]);
-
-
 
   return (
     <div>
@@ -88,7 +84,7 @@ const SideNav = ({ children }) => {
 
       <div className="flex max-[640px]:flex sm:flex lg:hidden xl:hidden md:hidden relative">
         {/* hamburger icon and its logic */}
-        <div className="absolute top-10 right-4">
+        <div className={`absolute top-16 right-4 ${ router.pathname === "/" ? "hidden" : ""}`}>
           <p onClick={handlesidebarSmall} className="cursor-pointer">
             {!openSmall ? (
               <BiMenu className="w-10 h-10" />

@@ -202,35 +202,18 @@ textarea {
   @apply list-disc px-4 py-2 bg-gray-50 rounded-lg shadow-md;
 } */
 #examPage {
-  @apply list-disc px-4 py-2 bg-gradient-to-b from-gray-100 to-slate-400 rounded-lg shadow-md;
-}
-
-#examPage ul li {
-  @apply list-disc ml-8 mb-2 leading-relaxed text-gray-800;
-}
-
-#examPage ol li {
-  @apply list-decimal ml-8 mb-2 leading-relaxed text-gray-800;
-}
-
-#examPage a {
-  @apply text-red-600 font-bold underline hover:text-red-800 transition-colors duration-300;
-}
-
-#examPage blockquote {
-  @apply border-l-4 border-blue-500 bg-blue-100 p-4 italic text-gray-600 rounded-lg;
+  @apply list-disc px-2 -m-3 py-2 bg-gradient-to-b from-gray-100 to-slate-400 rounded-lg shadow-md overflow-x-hidden;
 }
 
 #examPage table {
-  @apply border-collapse w-full bg-white rounded-lg shadow-lg;
+  @apply overflow-x-auto w-full  bg-white rounded-lg shadow-lg block;
 }
-
 #examPage th {
-  @apply border-b-2 p-4 bg-gray-100 text-gray-700 font-semibold;
+  @apply border-b-2 p-4 bg-gray-100 text-gray-700 font-semibold overflow-x-auto;
 }
 
 #examPage td {
-  @apply border-b p-4 text-gray-600;
+  @apply border-b p-4 text-gray-600 overflow-x-auto;
 }
 
 #examPage h1 {
@@ -259,6 +242,22 @@ textarea {
 
 #examPage p {
   @apply text-lg text-gray-600 mb-1 mt-1;
+}
+
+#examPage ul li {
+  @apply list-disc ml-8 mb-2 leading-relaxed text-gray-800;
+}
+
+#examPage ol li {
+  @apply list-decimal ml-8 mb-2 leading-relaxed text-gray-800;
+}
+
+#examPage a {
+  @apply text-red-600 font-bold underline hover:text-red-800 transition-colors duration-300;
+}
+
+#examPage blockquote {
+  @apply border-l-4 border-blue-500 bg-blue-100 p-4 italic text-gray-600 rounded-lg;
 }
 
 /* under lined */

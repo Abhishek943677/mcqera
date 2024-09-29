@@ -2,9 +2,10 @@ import React from "react";
 import { clientPreviousYear } from "../../../../lib/sanityConnect";
 import { NextSeo } from "next-seo";
 import SingleQuestion from "../../../../components/question/SingleQuestion";
+import PortableText from "react-portable-text";
 
 export default function Exam({ data }) {
-  // console.log(data);
+  console.log(data);
 
   if (!data) {
     return <div>Not found</div>;
@@ -21,6 +22,12 @@ export default function Exam({ data }) {
       {/*  seo*/}
 
       <h1 className="mx-auto text-lg">{data.paper.toUpperCase()}</h1>
+
+      {/* details about the exam */}
+      <div className="blogpost my-3" >
+      {data.details && <PortableText content={data.details} />}
+      </div>
+
       {data.questions ? (
         data.questions.map((i, index) => {
           return (
@@ -48,7 +55,7 @@ export default function Exam({ data }) {
 
 export async function getStaticProps(context) {
   const data = await clientPreviousYear.fetch(
-    `*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions}[0]`
+    `*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions,details}[0]`
   );
 
   return {

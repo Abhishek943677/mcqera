@@ -14,7 +14,6 @@ export default function Edit({ examData, examObj }) {
   const [editorContent, setEditorContent] = useState(JSON.parse(examData).syllabus);
 
   const [examname, setExamName] = useState("");
-  const [branch, setBranch] = useState("");
   const [notification, setNotification] = useState("");
   const [updates, setUpdates] = useState("");
 
@@ -26,16 +25,16 @@ export default function Edit({ examData, examObj }) {
   useEffect(() => {
     setNotification(JSON.parse(examData).notification);
     setExamName(JSON.parse(examData).examname);
-    setBranch(JSON.parse(examData).branch);
     setUpdates(JSON.parse(examData).updates);
     setEditorContent(() => JSON.parse(examData).syllabus);
   }, []);
 
   const handleSave = () => {
     const branch = JSON.parse(examObj).find(
-      (i) => (i.examname = examname)
+      (i) => (i.examname === examname)
     ).branch;
 
+    setSent(false)
     axios
       .post(
         "/api/exam/editTopic",

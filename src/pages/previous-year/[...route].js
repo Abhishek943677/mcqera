@@ -2,15 +2,34 @@ import React, { useState } from "react";
 import { clientPreviousYear } from "../../../lib/sanityConnect";
 import Link from "next/link";
 import { NextSeo } from "next-seo";
+import { titleCase } from "../../../usefulFun/titleCase";
+
+function PyqCard({ paper, slug }) {
+  return (
+    <div className="rounded-lg overflow-hidden shadow-lg bg-gradient-to-br from-[#8edaba] to-[#0f3443] p-4 m-4 h-52">
+      <div className="px-2 py-2 flex flex-col justify-around h-full">
+        <div className="font-bold text-xl mb-2 text-gray-800">
+          {titleCase(paper)}
+        </div>
+        <p>
+          <Link
+            href={`/previous-year/paper/${slug.current}`}
+            className=" text-white  bg-indigo-500 hover:bg-indigo-600 font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
+          >
+            View Paper
+          </Link>
+        </p>
+      </div>
+    </div>
+  );
+}
 
 export default function Course({ data, examname, branch }) {
-
   if (data.length === 0) {
     return <div className="">Not Found</div>;
   }
   return (
     <div className="mt-10">
-      
       {/* seo */}
       <NextSeo
         title={`Previous year papers of ${examname} ${branch} `}
@@ -19,17 +38,24 @@ export default function Course({ data, examname, branch }) {
       />
       {/* seo */}
 
-      {data.map((ele, i) => {
-        return (
-          <div key={i} className="my-3 mx-auto">
-            <p className="text-center">
-              <Link href={`/previous-year/paper/${ele.slug.current}`}>
-                {ele.paper}
-              </Link>
-            </p>
+      <section className=" p-2">
+        <h2 className="text-4xl font-bold bg-clip-text text-transparent mb-1 tracking-wide drop-shadow-lg animate-pulse bg-gradient-to-r from-[#34e89e] to-[#0f3443]">
+          Previous Year Papers for <br/>
+          {examname.replaceAll("-" ," ").toUpperCase()}
+        </h2>{" "}
+        <p className="text-lg">
+          Access a comprehensive collection of previous year papers to boost
+          your exam preparation. Practice with real questions and understand the
+          exam pattern to enhance your confidence and performance.
+        </p>
+        <div className="w-full flex flex-wrap ">
+        {data.map((ele, i) => {
+          return (
+              <PyqCard key={i} paper={ele.paper} slug={ele.slug} />
+            );
+          })}
           </div>
-        );
-      })}
+      </section>
     </div>
   );
 }
@@ -45,7 +71,6 @@ export async function getStaticPaths() {
   });
 
   return {
-    // paths: [{ params: { route: ['uppcl','network'] } }],
     paths: path,
     fallback: "blocking",
   };

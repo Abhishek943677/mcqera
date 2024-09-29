@@ -6,11 +6,26 @@ import { useRouter } from "next/router";
 import {
   fetchHeaderBranch,
   fetchHeaderExam,
+  fetchPYQdata,
 } from "../../logics/fetchHeaderData";
+
+
 
 export default function LowerHeader() {
   const [examData, setExamData] = useState([]);
   const [branchData, setBranchData] = useState([]);
+  const [pyqData, setPyqData] = useState([]);
+
+
+  useEffect(async () => {
+    const branchData = await fetchHeaderBranch();
+    const examData = await fetchHeaderExam();
+    const PYQdata = await fetchPYQdata();
+
+    setPyqData(PYQdata);
+    setBranchData(branchData);
+    setExamData(examData);
+  }, []);
 
   const headerData = [
     {
@@ -21,7 +36,7 @@ export default function LowerHeader() {
     {
       displayName: "PYQ",
       url: "/previous-year/",
-      sections: examData,
+      sections: pyqData,
     },
     {
       displayName: "Handwritten Notes",
@@ -44,13 +59,9 @@ export default function LowerHeader() {
       sections: examData,
     },
   ];
-  useEffect(async () => {
-    const branchData = await fetchHeaderBranch();
-    const examData = await fetchHeaderExam();
 
-    setBranchData(branchData);
-    setExamData(examData);
-  }, []);
+  // console.log(headerData);
+  
 
   const router = useRouter();
   return (

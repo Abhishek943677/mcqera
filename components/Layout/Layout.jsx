@@ -4,7 +4,7 @@ import Scrolltotop from "../widgets/ScrolltoTop";
 import { useRouter } from "next/router";
 import { LinearProgress } from "@mui/material";
 import SideNav from "./SideNav";
-import AdsSideBar from "../AdsSideBar";
+import Reccomendation from "../recommendation/Reccomendation";
 import LowerHeader from "./LowerHeader";
 import Share from "../Share";
 
@@ -62,9 +62,9 @@ export default function Layout({ children }) {
                 router.pathname === "/"
                   ? "hidden"
                   : "max-[640px]:flex sm:flex w-full"
-              } border border-green-600  bg-gray-700  lg:hidden xl:hidden md:hidden `}
+              } border border-green-600 rounded-md  bg-gray-700  lg:hidden xl:hidden md:hidden `}
             >
-              <AdsSideBar />
+              <Reccomendation />
             </div>
           </div>
 
@@ -74,9 +74,9 @@ export default function Layout({ children }) {
               router.pathname === "/"
                 ? "hidden"
                 : "w-[28%]  lg:flex xl:flex md:flex "
-            } border border-black px-1 h-fit bg-gray-700 max-[640px]:hidden sm:hidden mt-16  `}
+            }  px-1 h-fit bg-gray-700 rounded-md max-[640px]:hidden sm:hidden mt-16  `}
           >
-            <AdsSideBar />
+            <Reccomendation />
           </div>
 
           
