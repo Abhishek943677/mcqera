@@ -49,12 +49,12 @@ const Home = ({ examObj }) => {
       </h1>{" "}
       {/* body */}
       <p className="text-lg">
-        {`Boost your exam preparation with our carefully curated resources
+        Boost your exam preparation with our carefully curated resources
         including <strong>PYQs</strong>, <strong>Handwritten Notes</strong>,{" "}
         <strong>Learning Material</strong>, <strong>Quizzes</strong>, and{" "}
-        <strong>Quicklinks to Questions</strong>. Whether it's engineering,
+        <strong>Quicklinks to Questions</strong>. Whether it is engineering,
         medical, or civil services exams, we provide everything you need to
-        excel.`}
+        excel.
       </p>
       {/* exams */}
       <h2 className="text-2xl font-semibold my-4">Available Exams</h2>

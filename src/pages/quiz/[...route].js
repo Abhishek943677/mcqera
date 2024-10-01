@@ -107,7 +107,7 @@ export default function Page({
 
       {questions && questions.length === 0 ? (
         <div className="">
-          <p className="text-lg text-center p-1">{` kuchh na h yha`}</p>
+          <p className="text-lg text-center p-1">{` No Questions Uploaded, Please try again later......`}</p>
         </div>
       ) : (
         <AllQuestions questions={questions} />
@@ -124,31 +124,75 @@ export default function Page({
 // paths defining
 export async function getStaticPaths() {
   const courseObj = await loadCourseObj();
+  const db = await mongoConnect();
 
-  const estimatedCount = Array.from({ length: 3 }, (_, i) => i + 1); // console.log(estimatedCount) // [1,2,3,4......,100] change length to change the number of pages
-  // console.log(estimatedCount);
-  // const url = `api/question/getQuestionLength?subject=network&trade=electrical`;
-  const path = [];
-  courseObj.map((item) => {
-    const { trade, subjects } = item;
-    subjects.map(async (subject) => {
-      estimatedCount.map(async (count) => {
-        path.push({
-          params: { route: [String(trade), String(subject), String(count)] },
-        });
-      });
-    });
-  });
+  const paths = [];
 
-  // console.log("end")
-  // console.log(path)
+  // Use Promise.all to handle async operations within map
+  await Promise.all(
+    courseObj.map(async (item) => {
+      const { trade, subjects } = item;
+
+      // For each subject, perform async operations
+      await Promise.all(
+        subjects.map(async (subject) => {
+          const collection = db.collection(trade);
+          // Get the count of documents that match the subject query
+          const estimatedNumberOfQuestions = await collection.countDocuments();
+          
+          const totalPages = Math.ceil(estimatedNumberOfQuestions / 10);
+          const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+          // Map through the estimated page counts and create paths
+          pagesArray.map((count) => {
+            paths.push({
+              params: {
+                route: [String(trade), String(subject), String(count)],
+              },
+            });
+          });
+        })
+      );
+    })
+  );
+
 
   return {
-    // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
-    paths: path,
-    fallback: "blocking",
+    paths,
+    fallback: "blocking", // Choose appropriate fallback behavior
   };
 }
+
+// // paths defining
+// export async function getStaticPaths() {
+//   const courseObj = await loadCourseObj();
+//   const db = await mongoConnect();
+
+//   const estimatedCount = Array.from({ length: 3 }, (_, i) => i + 1); // console.log(estimatedCount) // [1,2,3,4......,100] change length to change the number of pages
+//   console.log(estimatedCount);
+//   // const url = `api/question/getQuestionLength?subject=network&trade=electrical`;
+//   const path = [];
+//   courseObj.map((item) => {
+//     const { trade, subjects } = item;
+
+//     subjects.map(async (subject) => {
+//       estimatedCount.map(async (count) => {
+//         path.push({
+//           params: { route: [String(trade), String(subject), String(count)] },
+//         });
+//       });
+//     });
+//   });
+
+//   // console.log("end")
+//   // console.log(path)
+
+//   return {
+//     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
+//     paths: path,
+//     fallback: "blocking",
+//   };
+// }
 
 // this code runs on server
 export async function getStaticProps(context) {
@@ -174,13 +218,11 @@ export async function getStaticProps(context) {
       .sort({ _id: -1 })
       .limit(questionsPerPage)
       .skip(skip)
-      .toArray()
+      .toArray();
     // console.log(questions);
 
-    const totalLengthOfCollection = await collection
-      .find({ subject: context.params.route[1] })
-      .count(); // counting number of question saved in one collection
-    // console.log(totalLengthOfCollection);
+ 
+    const totalLengthOfCollection = await collection.countDocuments({subject:context.params.route[1]})
 
     //pagination work
     noOfPageForPagination = Math.ceil(
@@ -223,4 +265,3 @@ export async function getStaticProps(context) {
     };
   }
 }
-
