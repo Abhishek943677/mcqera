@@ -138,7 +138,7 @@ export async function getStaticPaths() {
         subjects.map(async (subject) => {
           const collection = db.collection(trade);
           // Get the count of documents that match the subject query
-          const estimatedNumberOfQuestions = await collection.countDocuments();
+          const estimatedNumberOfQuestions = await collection.countDocuments({subject});
           
           const totalPages = Math.ceil(estimatedNumberOfQuestions / 10);
           const pagesArray = Array.from({ length: totalPages }, (_, i) => i + 1);
