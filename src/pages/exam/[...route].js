@@ -172,8 +172,6 @@ export const getStaticProps = async (context) => {
     .limit(1)
     .toArray();
 
-  console.log(examData.length);
-
   return {
     props: {
       pyqData,
@@ -184,5 +182,6 @@ export const getStaticProps = async (context) => {
       examData:
         examData.length > 0 ? JSON.stringify(examData[0]) : JSON.stringify({}),
     },
+    revalidate: 1200,
   };
 };
