@@ -97,7 +97,7 @@ export default function Page({
 
       <h1 className="text-xl p-1 mt-2">
         {serverSubject.charAt(0).toUpperCase() + serverSubject.slice(1)} MCQ
-        Question with answer
+        Question with answer and explanation
       </h1>
 
       <PaginationModal

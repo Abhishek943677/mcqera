@@ -13,6 +13,7 @@ import QuizList from "../../../components/exam/QuizList";
 import { mongoConnectExam } from "../../../lib/mongoConnectExam";
 import ExamPage from "../../../components/exam/ExamPage";
 import Link from "next/link";
+import { NextSeo } from "next-seo";
 
 export default function Index({
   pyqData,
@@ -21,9 +22,26 @@ export default function Index({
   learnData,
   quizData,
   examData,
+  branch,
+  examname,
 }) {
   return (
     <div>
+      {/* seo */}
+      <NextSeo
+        title={`${examname} | Mcqera`}
+        description={`Access comprehensive handwritten notes ${branch} , providing detailed study materials and resources. Enhance your understanding of ${branch} exam concepts with visually appealing and well-organized notes of ${examname}.`}
+        canonical={`https://mcqera.com/exam/${branch}/${examname}`}
+        additionalMetaTags={[
+          {
+            name: "keywords",
+            content:
+              "Handwritten notes, study materials, notes for exams, exam preparation, subject-wise notes, comprehensive notes, visual notes, study resources, revision notes, hand-drawn diagrams, note-taking techniques, effective study notes, class notes, lecture notes, exam tips and tricks, topic-wise notes, high-quality notes, detailed explanations, visual aids, study guides",
+          },
+        ]}
+      />
+
+      {/*  seo*/}
       {Object.keys(JSON.parse(examData)).length > 0 ? (
         <ExamPage examData={JSON.parse(examData)} />
       ) : (
@@ -179,8 +197,9 @@ export const getStaticProps = async (context) => {
       quickLinksData,
       learnData: JSON.stringify(learnData),
       quizData: JSON.stringify(quizData),
-      examData:
-        examData.length > 0 ? JSON.stringify(examData[0]) : JSON.stringify({}),
+      examData:examData.length > 0 ? JSON.stringify(examData[0]) : JSON.stringify({}),
+      branch: branch,
+      examname: examname,
     },
     revalidate: 1200,
   };

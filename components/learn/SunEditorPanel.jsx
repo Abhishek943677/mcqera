@@ -7,8 +7,7 @@ const SunEditor = dynamic(() => import("suneditor-react"), {
   ssr: false,
 });
 
-export default function SunEditorPanel({handleChange,editorContent}) {
-
+export default function SunEditorPanel({ handleChange, editorContent }) {
   return (
     <div className="caret-red-800 cursor-copy ">
       <SunEditor
@@ -28,12 +27,12 @@ export default function SunEditorPanel({handleChange,editorContent}) {
             ["table", "horizontalRule"],
             ["link", "image", "video", "audio"],
             ["fullScreen", "showBlocks", "codeView"],
-            "/",
             ["preview", "print"],
           ],
-          minHeight:"200px",
           defaultTag: "div",
-          showPathLabel: false,
+          height:"fit-content",
+          minHeight:"150px",
+          showPathLabel: true,
         }}
       />
     </div>

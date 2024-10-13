@@ -9,11 +9,12 @@ export default function ChangeTrade({
   setTrade,
 }) {
   return (
-    <div className=" flex w-full my-auto justify-evenly">
-     <p className="w-fit px-4 text-xl my-auto text-gray-900 pt-[0.5rem]">
+    <div className=" flex w-full my-auto justify-evenly mt-10">
+     <p className="w-fit px-4 text-xl my-auto text-[#e1b671] font-bold pt-[0.5rem]">
         {`Course:`}
       </p>
-      <Select
+      <Select 
+      sx={{ color: "#616147", backgroundColor: "#e1b671" }}
         name="trade"
         variant="outlined"
         className="my-auto w-full h-12"

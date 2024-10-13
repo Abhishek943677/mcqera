@@ -91,7 +91,7 @@ export default function LowerHeader() {
                       href={`${item.url}${section.path}`}
                       key={i}
                     >
-                      <h3 className="text-lg my-auto">{section.displayName}</h3>
+                      <h3 className="text-sm my-auto">{section.displayName}</h3>
                       <Divider className="bg-white" />
                     </Link>
                   </div>

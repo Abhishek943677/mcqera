@@ -29,14 +29,14 @@ const Home = ({ examObj }) => {
     <div>
       {/* seo */}
       <NextSeo
-        title="Exam | mcqera | Prapare for dream exam"
-        description="Access a wide range of comprehensive learning resources and courses on various subjects. Enhance your knowledge and skills with high-quality educational content."
-        canonical="https://mcqera.com/learn"
+        title="Government Exam Preparation | mcqera "
+        description="Prepare for top government exams with our comprehensive resources. Access previous year questions (PYQs), handwritten notes, quizzes, and subject-wise learning materials. Stay updated with the latest exam patterns and tips for success in exams like UPSC, SSC, Banking, Railways, and more. Start your preparation today!"
+        canonical="https://mcqera.com/exam"
         additionalMetaTags={[
           {
             name: "keywords",
             content:
-              "learning resources, courses, education, online learning, knowledge, skills, comprehensive, high-quality, subjects",
+              "government exams, competitive exams, exam preparation, previous year questions, PYQs, study materials, handwritten notes, quizzes, mock tests, online learning, exam resources, learning subjects, education, knowledge, skills, comprehensive courses, SSC, UPSC, banking exams, railway exams, state exams, high-quality preparation, syllabus, practice tests, govt job preparation",
           },
         ]}
       />
@@ -55,7 +55,6 @@ const Home = ({ examObj }) => {
       </p>
       {/* exams */}
       <h2 className="text-2xl font-semibold my-4">Available Exams</h2>
-
       <section className="flex flex-wrap my-3">
         {JSON.parse(examObj).map((item, index) => {
           return <ExamCard item={item} key={index} />;

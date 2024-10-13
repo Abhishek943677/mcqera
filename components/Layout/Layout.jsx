@@ -62,7 +62,7 @@ export default function Layout({ children }) {
                 router.pathname === "/"
                   ? "hidden"
                   : "max-[640px]:flex sm:flex w-full"
-              } border border-green-600 rounded-md  bg-gray-700  lg:hidden xl:hidden md:hidden `}
+              }rounded-md  bg-gray-700  lg:hidden xl:hidden md:hidden `}
             >
               <Reccomendation />
             </div>
