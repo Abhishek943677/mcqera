@@ -68,7 +68,8 @@ export default function SingleQuestion({
         setShowDetails={setShowDetails}
       />
       <OptionButton
-        text={Object.values(opt[4])[0]}
+        // text={Object.values(opt[4])[0] || ""}
+        text={opt[4] ? Object.values(opt[4])[0] || "" : ""}
         trueOpt={trueOpt}
         setShowDetails={setShowDetails}
       />

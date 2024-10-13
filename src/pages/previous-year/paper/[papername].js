@@ -57,6 +57,7 @@ export async function getStaticProps(context) {
   const data = await clientPreviousYear.fetch(
     `*[_type=="exams" && slug.current=="${context.params.papername}"]{paper,questions,details}[0]`
   );
+  // console.log(data)
 
   return {
     props: {
