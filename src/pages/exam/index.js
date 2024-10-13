@@ -12,10 +12,7 @@ function ExamCard({ item }) {
       </h3>
       <p>
         <Link
-          href={`exam/${item.branch.replaceAll(
-            " ",
-            "-"
-          )}/${item.examname.replaceAll(" ", "-")}`}
+          href={`exam/${item.branch}/${item.examname}`}
           className=" text-white  bg-indigo-500 hover:bg-indigo-600 font-semibold py-2 px-4 rounded-lg transition-colors duration-300"
         >
           Start Preparation

@@ -94,6 +94,17 @@ textarea {
   @apply text-xs
 }
 
+#question table {
+  @apply overflow-x-auto w-full my-1 block;
+}
+#question th {
+  @apply  p-3 bg-gray-400 text-gray-700 font-semibold overflow-x-auto;
+}
+
+#question td {
+  @apply  p-3  overflow-x-auto;
+}
+
 /* -------------------blogpost styling------------------ */
 .blogpost {
   @apply list-disc px-1

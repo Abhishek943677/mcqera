@@ -58,10 +58,10 @@ const SideMenu = () => {
               {groupedExams[category].map((exam, examIndex) => (
                 <Link 
                   key={examIndex} 
-                  href={`/exam/${exam.branch.title}/${exam.examname.replaceAll(" ", "-")}`}
+                  href={`/exam/${exam.branch.title}/${exam.examname}`}
                 >
                   <p className="block text-blue-600 hover:underline mb-1">
-                    {exam.examname.replaceAll("-", " ").toUpperCase()}
+                    {exam.examname.toUpperCase()}
                   </p>
                 </Link>
               ))}

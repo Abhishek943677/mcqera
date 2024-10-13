@@ -203,7 +203,7 @@ export async function getServerSideProps(context) {
     );
     const examObj = rawExamData.map(({ branch, examname }) => {
       return {
-        examname: examname.replaceAll(" ", "-"),
+        examname: examname,
         branch: branch.title,
       };
     });

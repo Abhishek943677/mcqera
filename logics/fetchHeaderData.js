@@ -36,7 +36,7 @@ const fetchPYQdata = async () => {
       const key = `${item.examname}-${item.branch}`;
       if (!uniqueExams.has(key)) {
         uniqueExams.set(key, {
-          displayName: item.examname.replaceAll("-"," "),
+          displayName: item.examname,
           path: `${item.branch}/${item.examname}`
         });
       }

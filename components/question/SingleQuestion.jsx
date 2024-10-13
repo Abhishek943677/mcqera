@@ -38,7 +38,7 @@ export default function SingleQuestion({
     >
       <div className="flex">
         {/* index of question */}
-        <p className="lg:text-sm sm:textsm">{`${index}.`}</p>
+        <p className="lg:text-base sm:textsm font-semibold text-red-700">{`${index}.`}</p>
         &nbsp;
         <p className="lg:text-sm sm:textsm flex">
           {/* question is displayed here */}
@@ -47,7 +47,6 @@ export default function SingleQuestion({
       </div>
 
       {/* option buttons here */}
-
       <OptionButton
         text={Object.values(opt[0])[0]}
         trueOpt={trueOpt}
@@ -68,12 +67,28 @@ export default function SingleQuestion({
         trueOpt={trueOpt}
         setShowDetails={setShowDetails}
       />
+      <OptionButton
+        text={Object.values(opt[4])[0]}
+        trueOpt={trueOpt}
+        setShowDetails={setShowDetails}
+      />
 
       {/* details  */}
       <div className="flex justify-between py-2 px-1">
         {/* side bar button */}
+       
+        {/* details button */}
+        <Button
+          variant="contained"
+          size="small"
+          className="p-2 cursor-pointer w-fit border border-blue-300"
+          onClick={() => setShowDetails((p) => !p)}
+        >
+          Explanation
+        </Button>
+
         <div className="flex">
-          <Tooltip title="save question">
+          {/* <Tooltip title="save question">
             <p className="mx-4 cursor-pointer">
               <FavoriteBorderSharpIcon />
             </p>
@@ -83,18 +98,9 @@ export default function SingleQuestion({
             <p className="cursor-pointer">
               <ReportGmailerrorredSharpIcon />
             </p>
-          </Tooltip>
+          </Tooltip> */}
         </div>
 
-        {/* details button */}
-        <Button
-          variant="contained"
-          size="small"
-          className="p-2 cursor-pointer w-fit border border-blue-300"
-          onClick={() => setShowDetails((p) => !p)}
-        >
-          details
-        </Button>
       </div>
 
       {/* showing detials on button click or option click */}

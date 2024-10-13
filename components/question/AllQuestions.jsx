@@ -21,6 +21,7 @@ export default function AllQuestions({ questions }) {
                   { falseOpt1: i.que.falseOpt1 },
                   { falseOpt2: i.que.falseOpt2 },
                   { falseOpt3: i.que.falseOpt3 },
+                  { falseOpt4: i.que.falseOpt4 },
                 ]}
                 index={index + 1 + (router.query.route[2] - 1) * 10}// change 10 for correct indexing
               />

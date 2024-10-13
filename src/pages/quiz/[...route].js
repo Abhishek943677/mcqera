@@ -163,36 +163,6 @@ export async function getStaticPaths() {
   };
 }
 
-// // paths defining
-// export async function getStaticPaths() {
-//   const courseObj = await loadCourseObj();
-//   const db = await mongoConnect();
-
-//   const estimatedCount = Array.from({ length: 3 }, (_, i) => i + 1); // console.log(estimatedCount) // [1,2,3,4......,100] change length to change the number of pages
-//   console.log(estimatedCount);
-//   // const url = `api/question/getQuestionLength?subject=network&trade=electrical`;
-//   const path = [];
-//   courseObj.map((item) => {
-//     const { trade, subjects } = item;
-
-//     subjects.map(async (subject) => {
-//       estimatedCount.map(async (count) => {
-//         path.push({
-//           params: { route: [String(trade), String(subject), String(count)] },
-//         });
-//       });
-//     });
-//   });
-
-//   // console.log("end")
-//   // console.log(path)
-
-//   return {
-//     // paths: [{ params: { route: ['electrical','network','1'] } },{ params: { route: ['electrical','network','2'] } }],
-//     paths: path,
-//     fallback: "blocking",
-//   };
-// }
 
 // this code runs on server
 export async function getStaticProps(context) {

@@ -88,7 +88,7 @@ export default function LowerHeader() {
                     key={i}
                   >
                     <Link
-                      href={`${item.url}${section.path.replaceAll(" ", "-")}`}
+                      href={`${item.url}${section.path}`}
                       key={i}
                     >
                       <h3 className="text-lg my-auto">{section.displayName}</h3>
