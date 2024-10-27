@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Link from "next/link";
 import useSWR from "swr";
 import { clientMenu } from "../lib/sanityConnect";
+import DownArrow from "./widgets/DownArrow";
 
 // Custom fetcher for SWR
 const fetcher = async () => {
@@ -16,9 +17,9 @@ const fetcher = async () => {
 
 const SideMenu = () => {
   const { data: examData = [], error } = useSWR("examData", fetcher, {
-    revalidateOnFocus: false,  // Do not revalidate on focus
-    dedupingInterval: 1800000,  // Cache data for 30 minutes
-    refreshInterval: 0          // Disable auto-refresh
+    revalidateOnFocus: false, // Do not revalidate on focus
+    dedupingInterval: 1800000, // Cache data for 30 minutes
+    refreshInterval: 0, // Disable auto-refresh
   });
 
   const [openCategory, setOpenCategory] = useState(null); // Track open category
@@ -28,6 +29,7 @@ const SideMenu = () => {
 
   // Group exams by category
   const groupedExams = examData.reduce((acc, exam) => {
+    console.log(exam);
     exam.category.forEach((cat) => {
       const categoryTitle = cat.title;
 
@@ -44,23 +46,26 @@ const SideMenu = () => {
   };
 
   return (
-    <div className="bg-gray-100 w-full h-full">
+    <div className="">
       {Object.keys(groupedExams).map((category, index) => (
         <div key={index} className="mb-2 border border-gray-300 rounded-lg">
-          <h2 
-            className="text-lg font-semibold text-gray-800 mb-2 cursor-pointer bg-gray-200 p-2 rounded-t-lg" 
+          <h2
+            className="mb-1 cursor-pointer p-2 rounded-t-lg"
             onClick={() => toggleCategory(category)} // Handle click
           >
-            {category.toUpperCase()} {/* Display the category title */}
+            <span className="flex flex-row">
+              {category.toUpperCase()} <DownArrow />{" "}
+              {/* Display the category title */}
+            </span>
           </h2>
           {openCategory === category && ( // Render exams only if the category is open
-            <div className="ml-4 p-2 rounded-b-lg">
+            <div className="ml-4 rounded-b-lg">
               {groupedExams[category].map((exam, examIndex) => (
-                <Link 
-                  key={examIndex} 
+                <Link
+                  key={examIndex}
                   href={`/exam/${exam.branch.title}/${exam.examname}`}
                 >
-                  <p className="block text-blue-600 hover:underline mb-1">
+                  <p className="block text-blue-400 hover:underline mb-1 w-40">
                     {exam.examname.toUpperCase()}
                   </p>
                 </Link>
@@ -75,10 +80,6 @@ const SideMenu = () => {
 
 export default SideMenu;
 
-
-
-
-
 // import React, { useState, useEffect } from "react";
 // import Link from "next/link";
 // import { titleCase } from "../usefulFun/titleCase";
@@ -92,8 +93,8 @@ export default SideMenu;
 //     const fetchData = async () => {
 //       const rawExamData = await clientMenu.fetch(
 //         `*[_type=="exam"]{
-//           examname, 
-//           branch->{title}, 
+//           examname,
+//           branch->{title},
 //           category[]->{title}
 //         }`
 //       );
@@ -126,8 +127,8 @@ export default SideMenu;
 //     <div className=" bg-gray-100 w-full h-full">
 //       {Object.keys(groupedExams).map((category, index) => (
 //         <div key={index} className="mb-2 border border-gray-300 rounded-lg">
-//           <h2 
-//             className="text-lg font-semibold text-gray-800 mb-2 cursor-pointer bg-gray-200 p-2 rounded-t-lg" 
+//           <h2
+//             className="text-lg font-semibold text-gray-800 mb-2 cursor-pointer bg-gray-200 p-2 rounded-t-lg"
 //             onClick={() => toggleCategory(category)} // Handle click
 //           >
 //             {category.toUpperCase()} {/* Display the category title */}
@@ -135,8 +136,8 @@ export default SideMenu;
 //           {openCategory === category && ( // Render exams only if the category is open
 //             <div className="ml-4 p-2 rounded-b-lg">
 //               {groupedExams[category].map((exam, examIndex) => (
-//                 <Link 
-//                   key={examIndex} 
+//                 <Link
+//                   key={examIndex}
 //                   href={`/exam/${exam.branch.title}/${exam.examname.replaceAll(" ", "-")}`}
 //                 >
 //                   <p className="block text-blue-600 hover:underline mb-1">
@@ -153,5 +154,3 @@ export default SideMenu;
 // };
 
 // export default SideMenu;
-
-

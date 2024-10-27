@@ -42,6 +42,11 @@ textarea {
 }
 
 /* ---------------question styling------------- */
+#question{
+  @apply text-lg space-y-2
+}
+
+
 #question ul li {
   @apply list-disc ml-7
 }

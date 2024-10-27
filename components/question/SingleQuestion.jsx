@@ -38,7 +38,7 @@ export default function SingleQuestion({
     >
       <div className="flex">
         {/* index of question */}
-        <p className="lg:text-base sm:textsm font-semibold text-red-700">{`${index}.`}</p>
+        <p className="text-lg font-semibold text-red-700">{`${index}. `} &nbsp;</p>
         &nbsp;
         <p className="lg:text-sm sm:textsm flex">
           {/* question is displayed here */}
@@ -107,8 +107,8 @@ export default function SingleQuestion({
       {/* showing detials on button click or option click */}
       {showDetails ? (
         <div className="p-1 ">
-          <section className="text-sm flex">
-            {`Correct Answer is `}
+          <section className="text-lg flex">
+            {`The Correct Answer is `}
             <span className="text-sm dark:text-green-300 text-green-500">
               {/* {`${trueOpt}`} */}
               <div

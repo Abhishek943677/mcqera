@@ -42,7 +42,7 @@ export default function Index() {
   ];
 
   return (
-    <>
+    
       <div
         data-aos="zoom-in-up"
         data-aos-duration="500"
@@ -65,6 +65,6 @@ export default function Index() {
           ))}
         </div>
       </div>
-    </>
+    
   );
 }

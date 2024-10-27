@@ -63,7 +63,7 @@ export default function Page({
       {/* ....SEO */}
 
       {/* <div className="sm:w-3/4 lg:w-4/12 mx-auto mt-20 px-4 justify-center"> */}
-      <div className="sm:w-3/4 lg:w-6/12 mx-auto px-4 justify-center">
+      <div className="sm:w-4/4 lg:w-7/12 mx-auto px-4 justify-center overflow-auto">
         {/* div for trade and subject*/}
         {/* html for change trade */}
         <ChangeTrade
