@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import { NextSeo } from "next-seo";
 import { useRouter } from "next/router";
@@ -31,7 +32,7 @@ const Home = ({ examObj }) => {
       <NextSeo
         title="Government Exam Preparation | mcqera "
         description="Prepare for top government exams with our comprehensive resources. Access previous year questions (PYQs), handwritten notes, quizzes, and subject-wise learning materials. Stay updated with the latest exam patterns and tips for success in exams like UPSC, SSC, Banking, Railways, and more. Start your preparation today!"
-        canonical="https://mcqera.com/exam"
+        canonical="https://mcqera.in/exam"
         additionalMetaTags={[
           {
             name: "keywords",

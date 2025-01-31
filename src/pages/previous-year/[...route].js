@@ -34,7 +34,7 @@ export default function Course({ data, examname, branch }) {
       <NextSeo
         title={`Previous year papers of ${examname} ${branch} `}
         description={`Access a comprehensive collection of previous year papers for ${examname} ${branch}. Practice with authentic exam questions, test your knowledge, and enhance your exam readiness with these valuable resources.`}
-        canonical={`https://mcqera.com/previous-year-papers/${examname}/${branch}`}
+        canonical={`https://mcqera.in/previous-year-papers/${examname}/${branch}`}
       />
       {/* seo */}
 

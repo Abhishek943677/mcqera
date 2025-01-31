@@ -42,7 +42,7 @@ const Index = ({ data }) => {
       <NextSeo
         title="Handwritten Notes | Comprehensive Study Materials and Resources | mcqera"
         description="Explore a wide collection of handwritten notes offering comprehensive study materials and resources. Access well-organized and visually appealing notes to enhance your learning experience."
-        canonical="https://mcqera.com/notes/handwritten"
+        canonical="https://mcqera.in/notes/handwritten"
         additionalMetaTags={[
           {
             name: "keywords",

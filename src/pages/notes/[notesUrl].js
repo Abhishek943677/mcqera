@@ -18,7 +18,7 @@ export default function NotesPage({ data }) {
       <NextSeo
         title={`${data.title} | Mcqera`}
         description={`Access comprehensive handwritten notes ${data.title} , providing detailed study materials and resources. Enhance your understanding of ${data.category} exam concepts with visually appealing and well-organized notes of ${data.title}.`}
-        canonical={`https://mcqera.com/notes/${data.slug.current}`}
+        canonical={`https://mcqera.in/notes/${data.slug.current}`}
         additionalMetaTags={[
           {
             name: "keywords",

@@ -16,7 +16,7 @@ export default function Exam({ data }) {
       <NextSeo 
       title={`${data.paper} question paper with solution | mcqera`} 
       description={`Access a comprehensive collection of previous year question papers of ${data.paper} with solutions . Enhance your exam preparation with solved question papers and improve your understanding of exam patterns and question types.`}
-      canonical={`https://mcqera.com/previos-year/paper/${data.paper}`}
+      canonical={`https://mcqera.in/previos-year/paper/${data.paper}`}
       />
 
       {/*  seo*/}

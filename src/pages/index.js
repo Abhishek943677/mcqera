@@ -15,7 +15,7 @@ export default function Home() {
       <NextSeo
         title={`Home | Mcqera : One-Stop Solution for Govt Exam Preparation | PYQs, Notes & Mock Tests`}
         description={`Mcqera offers a comprehensive platform for government exam preparation with previous year questions (PYQs), detailed handwritten notes, quizzes, and mock tests. Explore high-quality learning resources for SSC, UPSC, Banking, Railways, and more. Start your journey to success with expertly curated study materials and exam tips`}
-        canonical={`https://mcqera.com/`}
+        canonical={`https://mcqera.in/`}
         additionalMetaTags={[
           {
             name: "keywords",

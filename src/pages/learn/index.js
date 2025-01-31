@@ -41,7 +41,7 @@ const Home = ({ lessonsObj }) => {
       <NextSeo
         title="Learn | mcqera | Comprehensive Learning Resources and Courses"
         description="Access a wide range of comprehensive learning resources and courses on various subjects. Enhance your knowledge and skills with high-quality educational content."
-        canonical="https://mcqera.com/learn"
+        canonical="https://mcqera.in/learn"
         additionalMetaTags={[
           {
             name: "keywords",

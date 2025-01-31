@@ -42,7 +42,7 @@ const Index = ({ data }) => {
       <NextSeo
         title="Quiz | MCQs | Mcqera"
         description="Boost your competitive exams preparation with free MCQs. Practice mock tests with detailed explanations to success in the exam"
-        canonical="https://mcqera.com/quiz"
+        canonical="https://mcqera.in/quiz"
         additionalMetaTags={[
           {
             name: "keywords",

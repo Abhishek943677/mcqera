@@ -1,3 +1,4 @@
+
 // pages/[collectionName]/[questionId].js
 import { ObjectId } from "mongodb";
 import SingleQuestion from "../../../../components/question/SingleQuestion";
@@ -51,7 +52,7 @@ const QuestionPage = ({ questionData, quizData, collectionName }) => {
       <NextSeo
         title={`Question: ${cleanQuestion}`} // Use cleaned question text for SEO
         description={`Question: ${cleanQuestion}. Correct Answer: ${cleanTrueOpt}. Details: ${cleanDetails}`} // Cleaned description
-        canonical={`https://mcqera.com/question/${questionData._id}`}
+        canonical={`https://mcqera.in/question/${questionData._id}`}
         additionalMetaTags={[
           {
             name: "keywords",

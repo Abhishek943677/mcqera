@@ -58,7 +58,7 @@ export default function Page({
       <NextSeo
         title={`Questions of ${serverTrade} ${serverSubject} at page ${UserBlogPage} | Mcqera | MCQs`}
         description={`get top question of ${serverTrade} - ${serverSubject} question at page ${UserBlogPage} with answers and detailed solutions. Engage with interactive quizzes on various topics of ${serverTrade} ${serverSubject} and challenge yourself to improve your understanding and retention of key concepts.`}
-        canonical={`https://mcqera.com/quiz/${serverTrade}/${serverSubject}/${UserBlogPage}`}
+        canonical={`https://mcqera.in/quiz/${serverTrade}/${serverSubject}/${UserBlogPage}`}
       />
       {/* ....SEO */}
 

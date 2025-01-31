@@ -47,7 +47,7 @@ const Index = ({ data }) => {
       <NextSeo
         title="Previous Year MCQ Papers | mcqera"
         description="Access a wide collection of previous year MCQ papers for comprehensive exam preparation. Practice with real exam questions, test your knowledge, and enhance your exam readiness with these valuable resources."
-        canonical="https://mcqera.com/previous-year"
+        canonical="https://mcqera.in/previous-year"
         additionalLinkTags={{
           name: "keywords",
           content:"Previous year MCQ papers, exam preparation resources, practice papers, exam question bank, mock tests, exam practice, test your knowledge, exam readiness, question papers with answers, exam pattern, exam syllabus, practice quizzes, exam simulation, exam practice questions, exam revision, exam tips and tricks, exam strategies, exam study materials, online test series, exam success tips"

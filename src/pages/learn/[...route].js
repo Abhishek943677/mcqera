@@ -14,7 +14,7 @@ const Route = ({ data, course, subject }) => {
       <NextSeo
         title={`${course} | ${subject} | mcqera | Comprehensive Learning Resources`}
         description={`Access in-depth learning resources and tutorials on ${subject} subjects of ${course} course . Enhance your understanding and problem-solving abilities in this critical field of study.`}
-        canonical={`https://mcqera.com/learn/${course}/${subject}`}
+        canonical={`https://mcqera.in/learn/${course}/${subject}`}
         additionalMetaTags={[
           {
             name: "keywords",

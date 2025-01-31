@@ -31,7 +31,7 @@ export default function Index({
       <NextSeo
         title={`${examname} | Mcqera`}
         description={`Access comprehensive handwritten notes ${branch} , providing detailed study materials and resources. Enhance your understanding of ${branch} exam concepts with visually appealing and well-organized notes of ${examname}.`}
-        canonical={`https://mcqera.com/exam/${branch}/${examname}`}
+        canonical={`https://mcqera.in/exam/${branch}/${examname}`}
         additionalMetaTags={[
           {
             name: "keywords",

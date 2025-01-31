@@ -41,7 +41,7 @@ const Index = ({ data }) => {
       <NextSeo
         title="Quick Links to MCQs | Access a Wide Range of Multiple Choice Questions | mcqera"
         description="Explore a comprehensive collection of quick links to multiple choice questions (MCQs) on various topics. Access a wide range of MCQs to test your knowledge and prepare for exams or assessments. All questions are with detailed answers"
-        canonical="https://mcqera.com/quicklinks"
+        canonical="https://mcqera.in/quicklinks"
       />
       {/* seo */}
 

@@ -12,7 +12,7 @@ export default function Index({ questions, title, category }) {
       <NextSeo
         title={title}
         description={`Get top questions of ${category} of topic ${title} with answer and detailed solutions. Boost your exam preparation and test your knowledge with our comprehensive MCQ website. Access a vast collection of multiple-choice questions covering topic ${title}`}
-        canonical={`https://mcqera.com/quicklinks/${category}/${title}`}
+        canonical={`https://mcqera.in/quicklinks/${category}/${title}`}
       />
       {/*...SEO  */}
 

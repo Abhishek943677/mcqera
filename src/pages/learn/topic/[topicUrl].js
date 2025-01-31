@@ -14,7 +14,7 @@ const Route = ({ data, topicsInChapter, chapter }) => {
       <NextSeo
         title={`${JSON.parse(data)[0].topicName} | Understanding the Basics of ${chapter}`}
         description={`Explore the ${JSON.parse(data)[0].topicName} with our comprehensive introduction. Learn about ${chapter}. Enhance your understanding of ${chapter} chapter with high-quality educational content.`}
-        canonical={`https://mcqera.com/learn/topic/${JSON.parse(data)[0].topicName}`}
+        canonical={`https://mcqera.in/learn/topic/${JSON.parse(data)[0].topicName}`}
         additionalMetaTags={[
           {
             name: "keywords",
