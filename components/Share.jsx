@@ -10,7 +10,7 @@ export default function Share({ url, title, description }) {
     text:
       description ||
       "Discover a comprehensive collection of multiple choice questions (MCQs) on our Mcqera",
-    url: `https://mcqera.vercel.app${url}`,
+    url: `https://mcqera.in${url}`,
   };
 
   return (
@@ -28,7 +28,7 @@ export default function Share({ url, title, description }) {
           onClick={async () => {
             try {
               await navigator.clipboard.writeText(
-                `https://mcqera.vercel.com${url}`
+                `https://mcqera.in${url}`
               );
               setLinkCopied(true);
               setTimeout(() => {
@@ -57,7 +57,7 @@ export default function Share({ url, title, description }) {
 
       {/* share social main component */}
       <ShareSocial
-        url={`https://mcqera.vercel.app${url}`}
+        url={`https://mcqera.in${url}`}
         socialTypes={[
           "facebook",
           "whatsapp",

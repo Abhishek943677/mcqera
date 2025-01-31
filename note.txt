@@ -1,0 +1,2 @@
+if you change the domain name then you also have to change from sanity for content loading (using github login).
+change google cloud login credentials in mcqera > solity.
